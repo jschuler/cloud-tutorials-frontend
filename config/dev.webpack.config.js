@@ -7,15 +7,6 @@ const { config: webpackConfig, plugins } = config({
   useFileHash: false,
 });
 
-plugins.push(
-  require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-    {
-      root: resolve(__dirname, '../'),
-      useFileHash: false,
-    }
-  )
-);
-
 module.exports = {
   ...webpackConfig,
   plugins,

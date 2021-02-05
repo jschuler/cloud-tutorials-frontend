@@ -88,11 +88,11 @@
     "webpack-cli": "4.5.0"
   },
   "insights": {
-    "appname": "cloud_tutorials"
+    "appname": "cloud-tutorials"
   },
   "routes": {
     "prefix": "mosaic",
-    "appname": "cloud_tutorials",
+    "appname": "cloud-tutorials",
     "samplePage": "/sample",
     "oops": "/oops",
     "noPermissions": "/no-permissions"
