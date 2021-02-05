@@ -50,7 +50,7 @@ const SamplePage = () => {
     <React.Fragment>
       <PageHeader>
         <PageHeaderTitle title="Sample Insights App" />
-        <p> This is page header text </p>
+        <p> hello world This is page header text </p>
       </PageHeader>
       <Main>
         <Stack hasGutter>

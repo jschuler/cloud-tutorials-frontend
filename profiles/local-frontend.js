@@ -1,6 +1,6 @@
-const { routes: packageRoutes } = require('../package.json');
-const SECTION = packageRoutes.prefix;
-const APP_ID = packageRoutes.appname;
+// const { routes: packageRoutes } = require('../package.json');
+const SECTION = 'mosaic'; //packageRoutes.prefix;
+const APP_ID = 'cloud-tutorials'; //packageRoutes.appname;
 const FRONTEND_PORT = 8002;
 const routes = {};
 

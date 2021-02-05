@@ -16,6 +16,9 @@ const NoPermissionsPage = lazy(() =>
     /* webpackChunkName: "NoPermissionsPage" */ './Routes/NoPermissionsPage/NoPermissionsPage'
   )
 );
+const Integr8ly = lazy(() =>
+  import(/* webpackChunkName: "Integr8ly" */ './Routes/Integr8ly/Integr8ly')
+);
 
 /**
  * the Switch component changes routes depending on the path.
@@ -37,6 +40,7 @@ export const Routes = () => (
       <Route path={paths.samplePage} component={SamplePage} />
       <Route path={paths.oops} component={OopsPage} />
       <Route path={paths.noPermissions} component={NoPermissionsPage} />
+      <Route path={paths.integr8ly} component={Integr8ly} />
       {/* Finally, catch all unmatched routes */}
       <Route>
         <Redirect to={paths.samplePage} />

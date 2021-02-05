@@ -95,6 +95,7 @@
     "appname": "cloud-tutorials",
     "samplePage": "/sample",
     "oops": "/oops",
-    "noPermissions": "/no-permissions"
+    "noPermissions": "/no-permissions",
+    "integr8ly": "/integr8ly"
   }
 }
