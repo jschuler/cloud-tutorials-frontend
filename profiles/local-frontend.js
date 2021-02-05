@@ -1,5 +1,6 @@
-const SECTION = 'insights';
-const APP_ID = 'starter';
+const { routes: packageRoutes } = require('../package.json');
+const SECTION = packageRoutes.prefix;
+const APP_ID = packageRoutes.appname;
 const FRONTEND_PORT = 8002;
 const routes = {};
 
