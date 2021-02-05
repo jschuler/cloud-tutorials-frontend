@@ -33,6 +33,12 @@ const App = (props) => {
     setDrawerOpen(false);
   }
 
+  const [panelWidth, setPanelWidth] = React.useState();
+
+  const onResize = (newWidth, id) => {
+    setPanelWidth(newWidth);
+  };
+
   const panelContent = (
     <DrawerPanelContent>
       <DrawerHead>
