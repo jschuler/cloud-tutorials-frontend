@@ -8,7 +8,7 @@ import redHatLogo from '../../img/Logo-RedHat-A-Reverse-RGB.svg';
 import managedIntegrationLogo from '../../img/Logo-Red_Hat-Managed_Integration-A-Reverse-RGB.svg';
 import pfBackgroundImage from '../../img/PF4DownstreamBG.svg';
 
-const pkgJson = require('../../../package.json');
+const pkgJson = require('../../../../../package.json');
 
 class AboutModal extends React.Component {
   constructor(props) {

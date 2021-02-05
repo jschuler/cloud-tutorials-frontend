@@ -45,14 +45,25 @@
     "@redhat-cloud-services/frontend-components": "^3.0.3",
     "@redhat-cloud-services/frontend-components-notifications": "^3.0.3",
     "@redhat-cloud-services/frontend-components-utilities": "^3.0.2",
+    "@rh-uxd/appservices-patternfly-core": "^1.0.5",
     "classnames": "2.2.6",
+    "client-oauth2": "^4.3.3",
+    "detect-browser": "^5.2.0",
+    "https-browserify": "^1.0.0",
+    "js-cookie": "^2.2.1",
+    "lodash.get": "^4.4.2",
+    "mustache": "^4.1.0",
+    "path-browserify": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-redux": "7.2.2",
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
-    "redux-promise-middleware": "6.1.2"
+    "redux-promise-middleware": "6.1.2",
+    "redux-thunk": "^2.3.0",
+    "sha.js": "^2.4.11",
+    "stream-http": "^3.1.1"
   },
   "devDependencies": {
     "@babel/core": "7.12.13",
@@ -70,6 +81,7 @@
     "babel-plugin-dual-import": "1.2.1",
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-imports": "^2.0.0",
+    "copy-webpack-plugin": "^7.0.0",
     "cross-fetch": "^3.0.6",
     "css-loader": "5.0.1",
     "enzyme": "3.11.0",
@@ -80,12 +92,16 @@
     "jest": "26.6.3",
     "npm-run-all": "4.1.5",
     "prop-types": "15.7.2",
+    "react-i18next": "^11.8.5",
     "stylelint": "13.9.0",
     "stylelint-config-recommended-scss": "4.2.0",
     "stylelint-scss": "3.18.0",
     "webpack": "5.20.0",
     "webpack-bundle-analyzer": "4.4.0",
     "webpack-cli": "4.5.0"
+  },
+  "peerDependencies": {
+    "asciidoctor.js": "1.5.7"
   },
   "insights": {
     "appname": "cloud-tutorials"
