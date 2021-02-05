@@ -16,7 +16,7 @@ const App = (props) => {
     insights.chrome.init();
 
     // TODO change this to your appname
-    insights.chrome.identifyApp('mosaic');
+    insights.chrome.identifyApp('cloud-tutorials');
     return insights.chrome.on('APP_NAVIGATION', (event) =>
       this.props.history.push(`/${event.navId}`)
     );
