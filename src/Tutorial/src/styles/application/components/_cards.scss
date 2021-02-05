@@ -1,0 +1,15 @@
+.integr8ly-c-card {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__info {
+    display: contents;
+  }
+
+  /* stylelint-disable selector-class-pattern */
+  .pf-c-progress__bar[aria-valuenow="100"] .pf-c-progress__indicator {
+    background-color: var(--pf-global--success-color--100);
+  }
+  /* stylelint-enable */
+}

@@ -15,6 +15,7 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
+import TutorialPage from '../../Tutorial/src/pages/tutorial/tutorial';
 
 const SampleComponent = lazy(() =>
   import('../../Components/SampleComponent/sample-component')
@@ -53,39 +54,7 @@ const SamplePage = () => {
         <p> hello world This is page header text </p>
       </PageHeader>
       <Main>
-        <Stack hasGutter>
-          <StackItem>
-            <Title headingLevel="h2" size="3xl">
-              {' '}
-              Alerts{' '}
-            </Title>
-            <Button variant="primary" onClick={handleAlert}>
-              {' '}
-              Dispatch alert{' '}
-            </Button>
-          </StackItem>
-          <StackItem>
-            <Suspense fallback={<Spinner />}>
-              <SampleComponent />
-            </Suspense>
-          </StackItem>
-          <StackItem>
-            <Stack hasGutter>
-              <StackItem>
-                <Title headingLevel="h2" size="3xl">
-                  {' '}
-                  Links{' '}
-                </Title>
-              </StackItem>
-              <StackItem>
-                <Link to="/oops"> How to handle 500s in app </Link>
-              </StackItem>
-              <StackItem>
-                <Link to="/no-permissions"> How to handle 403s in app </Link>
-              </StackItem>
-            </Stack>
-          </StackItem>
-        </Stack>
+        <TutorialPage />
       </Main>
     </React.Fragment>
   );

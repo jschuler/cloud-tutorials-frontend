@@ -1,0 +1,33 @@
+/*!
+ * Integreatly Tutorial Web App
+ * License - https://github.com/integr8ly/tutorial-web-app/blob/master/LICENSE (Apache License 2.0)
+ */
+
+@import "./application/variables";
+
+// PatternFly 4
+/* stylelint-disable */
+// Prevent stylelint from checking imported code
+
+// PatternFly 4 Base & Components
+@import '../node_modules/@patternfly/patternfly/patternfly.scss';
+
+// PatternFly 4 Add-ons
+@import '../node_modules/@patternfly/patternfly/patternfly-addons.scss';
+
+// Font Awesome 5 icons
+// Import Font Awesome 5, but ignore any inherited stylelint issues
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/v4-shims.scss";
+/* stylelint-enable */
+
+// Utilities
+@import "./application/utilities";
+
+// Components
+@import "./application/components";
+
+// Pages
+@import "./application/pages";
