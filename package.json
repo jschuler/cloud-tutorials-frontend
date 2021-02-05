@@ -50,17 +50,19 @@
     "client-oauth2": "^4.3.3",
     "detect-browser": "^5.2.0",
     "https-browserify": "^1.0.0",
+    "i18next": "11.6.0",
+    "i18next-xhr-backend": "1.5.1",
     "js-cookie": "^2.2.1",
     "lodash.get": "^4.4.2",
     "mustache": "^4.1.0",
     "path-browserify": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-redux": "7.2.2",
+    "react-redux": "5.0.6",
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
-    "redux-promise-middleware": "6.1.2",
+    "redux-promise-middleware": "5.1.1",
     "redux-thunk": "^2.3.0",
     "sha.js": "^2.4.11",
     "stream-http": "^3.1.1"
@@ -92,16 +94,14 @@
     "jest": "26.6.3",
     "npm-run-all": "4.1.5",
     "prop-types": "15.7.2",
-    "react-i18next": "^11.8.5",
+    "react-i18next": "8.3.8",
     "stylelint": "13.9.0",
     "stylelint-config-recommended-scss": "4.2.0",
     "stylelint-scss": "3.18.0",
     "webpack": "5.20.0",
     "webpack-bundle-analyzer": "4.4.0",
-    "webpack-cli": "4.5.0"
-  },
-  "peerDependencies": {
-    "asciidoctor.js": "1.5.7"
+    "webpack-cli": "4.5.0",
+    "asciidoctor": "2.2.1"
   },
   "insights": {
     "appname": "cloud-tutorials"

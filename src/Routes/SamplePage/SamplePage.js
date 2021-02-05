@@ -15,7 +15,7 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/redux';
-import TutorialPage from '../../Tutorial/src/pages/tutorial/tutorial';
+import LandingPage from '../../Tutorial/src/pages/landing/landingPage';
 
 const SampleComponent = lazy(() =>
   import('../../Components/SampleComponent/sample-component')

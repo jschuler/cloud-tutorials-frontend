@@ -40,6 +40,8 @@ webpackConfig.resolve.fallback = {
   "http": require.resolve("stream-http"),
   "path": require.resolve("path-browserify")
 };
+webpackConfig.resolve.alias = {'asciidoctor.js': 'asciidoctor'};
+webpackConfig.entry = './src/Tutorial/src/index.js';
 
 module.exports = {
     ...webpackConfig,

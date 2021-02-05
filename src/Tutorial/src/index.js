@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '@patternfly/react-core/dist/styles/base.css';
-import './styles/.css/index.css';
+//import './styles/.css/index.css';
 
 import App from './App';
 import { baseName } from './routes';
