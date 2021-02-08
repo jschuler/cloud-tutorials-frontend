@@ -2,8 +2,13 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import React, { Suspense, lazy } from 'react';
-import { routes as paths } from '../package.json';
 import { Bullseye, Spinner } from '@patternfly/react-core';
+const paths = {
+  "appname": "cloud-tutorials",
+  "samplePage": "/sample",
+  "oops": "/oops",
+  "noPermissions": "/no-permissions"
+};
 
 const SamplePage = lazy(() =>
   import(/* webpackChunkName: "SamplePage" */ './Routes/SamplePage/SamplePage')

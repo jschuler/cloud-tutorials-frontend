@@ -105,12 +105,5 @@
   },
   "insights": {
     "appname": "cloud-tutorials"
-  },
-  "routes": {
-    "prefix": "mosaic",
-    "appname": "cloud-tutorials",
-    "samplePage": "/sample",
-    "oops": "/oops",
-    "noPermissions": "/no-permissions"
   }
 }

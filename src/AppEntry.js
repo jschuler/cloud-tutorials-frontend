@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { init } from './store';
+import { init } from './redux';
 import App from './App';
-import { getBaseName } from '@redhat-cloud-services/frontend-components-utilities/helpers';
+
+window.OPENSHIFT_CONFIG = {
+  mockData: {}
+};
 
 const AppEntry = ({ logger }) => (
   <Provider store={(logger ? init(logger) : init()).getStore()}>
-    <Router basename={getBaseName(window.location.pathname)}>
+    <Router basename="/mosaic/cloud-tutorials">
       <App />
     </Router>
   </Provider>

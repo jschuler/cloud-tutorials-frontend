@@ -3,9 +3,9 @@ const config = require('@redhat-cloud-services/frontend-components-config');
 const CopyPlugin = require("copy-webpack-plugin");
 const { readFileSync } = require('fs');
 
-const chromePath = resolve(__dirname, '../../../crc/standalone-crc/packages/insights-chrome/build'); 
-const landingPath = resolve(__dirname, '../../../crc/standalone-crc/packages/landing-page-frontend/dist');
-const configPath = resolve(__dirname, '../../../crc/cloud-services-config'); 
+const chromePath = resolve(__dirname, '../../standalone-crc/packages/insights-chrome/build'); 
+const landingPath = resolve(__dirname, '../../standalone-crc/packages/landing-page-frontend/dist');
+const configPath = resolve(__dirname, '../../cloud-services-config'); 
 const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
     debug: true,
@@ -41,7 +41,6 @@ webpackConfig.resolve.fallback = {
   "path": require.resolve("path-browserify")
 };
 webpackConfig.resolve.alias = {'asciidoctor.js': 'asciidoctor'};
-webpackConfig.entry = './src/Tutorial/src/index.js';
 
 module.exports = {
     ...webpackConfig,
