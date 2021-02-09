@@ -21,20 +21,20 @@ const { config: webpackConfig, plugins } = config({
     ]
 });
 webpackConfig.devServer.proxy = [
-  {
-    context: ['/api', '!/api/mosaic'],
-    target: 'http://localhost:3000',
-    secure: false,
-    changeOrigin: true
-  },
-  {
+ {
     context: ['/api/mosaic/cloud-tutorials'],
     target: 'http://localhost:5001',
     secure: false,
     pathRewrite: { '^/api/mosaic/cloud-tutorials': '' },
     changeOrigin: true
-  }
-];
+  },
+  {
+    context: ['/api'],
+    target: 'http://localhost:3000',
+    secure: false,
+    changeOrigin: true
+  },
+ ];
 plugins.push(new CopyPlugin({
   patterns: [
     { from: chromePath, to: 'apps/chrome' },
