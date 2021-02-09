@@ -1,23 +1,12 @@
 /* eslint-disable no-shadow */
 const express = require('express');
 const path = require('path');
-const url = require('url');
 const fs = require('fs');
 const asciidoctor = require('asciidoctor');
 const Mustache = require('mustache');
-const { requireRoles } = require('./server_middleware');
-const giteaClient = require('./gitea_client');
-const gitClient = require('./git_client');
 const bodyParser = require('body-parser');
-const uuid = require('uuid');
-const promMid = require('express-prometheus-middleware');
-const Prometheus = require('prom-client');
-const querystring = require('querystring');
 const flattenDeep = require('lodash.flattendeep');
-const proxy = require('express-http-proxy');
 const { sync, closeConnection, getUserWalkthroughs, setUserWalkthroughs, validUrl } = require('./model');
-
-const OPENSHIFT_PROXY_PATH = '/proxy/openshift';
 
 const app = express();
 
@@ -45,7 +34,6 @@ const LOCAL_DEV_INSTALLED_SERVICES = {
   },
   ups: {
     Host: 'https://ups-unifiedpush-proxy-redhat-rhmi-ups.apps.demo.com',
-    Version: '2.3.2'
   },
   'user-rhsso': {
     Host: 'https://keycloak-edge-redhat-rhmi-user-sso.apps.demo.com',
@@ -55,26 +43,6 @@ const LOCAL_DEV_INSTALLED_SERVICES = {
 const CROSS_CONSOLE_ENABLED = false;
 
 app.use(bodyParser.json());
-app.use(
-  OPENSHIFT_PROXY_PATH,
-  proxy(`https://${process.env.OPENSHIFT_API}`, {
-    proxyReqOptDecorator(proxyReqOpts, _) {
-      proxyReqOpts.rejectUnauthorized = false;
-      return proxyReqOpts;
-    }
-  })
-);
-
-// prometheus metrics endpoint
-app.use(
-  promMid({
-    metricsPath: '/metrics',
-    collectDefaultMetrics: true,
-    requestDurationBuckets: [0.1, 0.5, 1, 1.5]
-  })
-);
-
-const openshiftVersion = process.env.OPENSHIFT_VERSION || '3';
 const port = process.env.PORT || 5001;
 const configPath = process.env.SERVER_EXTRA_CONFIG_FILE || '/etc/webapp/customServerConfig.json';
 
@@ -83,15 +51,11 @@ const DEFAULT_CUSTOM_CONFIG_DATA = {
 };
 
 const walkthroughLocations =
-  process.env.WALKTHROUGH_LOCATIONS ||
-  (process.env.NODE_ENV === 'production'
-    ? 'https://github.com/integr8ly/tutorial-web-app-walkthroughs'
-    : '../tutorial-web-app-walkthroughs/walkthroughs');
+  process.env.WALKTHROUGH_LOCATIONS || path.join(__dirname, 'walkthroughs');
 
 const CONTEXT_PREAMBLE = 'preamble';
 const CONTEXT_PARAGRAPH = 'paragraph';
 const LOCATION_SEPARATOR = ',';
-const TMP_DIR = process.env.TMP_DIR || '/tmp';
 
 // Types of walkthrough location that can be provided.
 const WALKTHROUGH_LOCATION_TYPE_GIT = 'git';
@@ -133,13 +97,6 @@ app.get('/customWalkthroughs', (req, res) => {
   res.status(200).json(walkthroughs);
 });
 
-// metric endpoint
-app.get('/metrics', (req, res) => {
-  res.set('Content-Type', Prometheus.register.contentType);
-  res.end(Prometheus.register.metrics());
-});
-
-
 // Get all user defined walkthrough repositories
 app.get('/user_walkthroughs', (req, res) =>
   getUserWalkthroughs()
@@ -158,7 +115,7 @@ app.get('/user_walkthroughs', (req, res) =>
 
 // Insert new user defined walkthrough repositories
 // This requires cluster- or dedicated admin permissions
-app.post('/user_walkthroughs', requireRoles(backendRequiredRoles), (req, res) => {
+app.post('/user_walkthroughs', (req, res) => {
   const { data } = req.body;
   return setUserWalkthroughs(data)
     .then(({ value }) => res.json(value))
@@ -166,16 +123,6 @@ app.post('/user_walkthroughs', requireRoles(backendRequiredRoles), (req, res) =>
       console.error(err);
       return res.sendStatus(500);
     });
-});
-
-// Dynamic configuration for openshift API calls
-app.get('/config.js', (req, res) => {
-  if (!process.env.OPENSHIFT_HOST) {
-    console.warn('OPENSHIFT_HOST not set. Using service URLs from env vars');
-    res.send(getMockConfigData());
-  } else {
-    res.send(getConfigData(req));
-  }
 });
 
 app.get('/customConfig', (req, res) => {
@@ -317,19 +264,10 @@ function injectUserWalkthroughRepos(locations) {
  * @returns {Promise<any[]>}
  */
 function resolveWalkthroughLocations(locations) {
-  function isGitRepo(p) {
-    if (!p) {
-      return false;
-    }
-    const parsed = url.parse(p);
-    return parsed.host && parsed.protocol;
-  }
-
   function isPath(p) {
     return p && fs.existsSync(p);
   }
 
-  const tmpDirPrefix = uuid.v4();
   const mappedLocations = locations.map(location =>
     new Promise((resolve, reject) => {
       const locationResultTemplate = { origin: location };
@@ -349,59 +287,9 @@ function resolveWalkthroughLocations(locations) {
           { local: location }
         );
         return resolve(locationResult);
-      } else if (isGitRepo(location)) {
-        const clonePath = path.join(TMP_DIR, tmpDirPrefix);
-
-        // Need to parse out query params for walkthroughs, e.g custom directory
-        const cloneUrl = generateCloneUrlFromLocation(location);
-        const repoName = getWalkthroughRepoNameFromLocation(location);
-        const walkthroughParams = querystring.parse(url.parse(location).query);
-
-        console.log(`Importing walkthrough from git ${cloneUrl}`);
-        return gitClient
-          .cloneRepo(cloneUrl, clonePath)
-          .then(cloned => {
-            gitClient.latestLog(cloned.localDir).then(log => {
-              getWalkthroughHeader(cloned.localDir)
-                .then(head => {
-                  let wtHeader;
-                  if (head === null) {
-                    wtHeader = null;
-                  } else {
-                    wtHeader = head.prettyName;
-                  }
-                  const walkthroughFolders = [];
-                  if (!Array.isArray(walkthroughParams.walkthroughsFolder)) {
-                    walkthroughFolders.push(walkthroughParams.walkthroughsFolder || 'walkthroughs');
-                  } else {
-                    walkthroughFolders.push(...walkthroughParams.walkthroughsFolder);
-                  }
-                  // Get the folders to import in the repository.
-                  const walkthroughInfos = walkthroughFolders.map(folder => {
-                    const walkthroughLocationInfo = Object.assign({}, WALKTHROUGH_LOCATION_DEFAULT, {
-                      type: WALKTHROUGH_LOCATION_TYPE_GIT,
-                      commitHash: log.latest.hash,
-                      commitDate: log.latest.date,
-                      remote: cloned.repoName,
-                      directory: folder,
-                      header: wtHeader
-                    });
-
-                    return Object.assign({}, locationResultTemplate, {
-                      parentId: `${repoName}-${path.basename(folder)}`,
-                      walkthroughLocationInfo,
-                      local: path.join(cloned.localDir, folder)
-                    });
-                  });
-                  resolve(walkthroughInfos);
-                })
-                .catch(reject);
-            });
-          })
-          .catch(reject);
       }
 
-      return reject(new Error(`${location} is neither a path nor a git repo`));
+      return reject(new Error(`${location} is not a path`));
     }).catch(err => {
       console.error(err);
       return undefined;
@@ -412,26 +300,6 @@ function resolveWalkthroughLocations(locations) {
     // Ignore all locations that could not be resolved
     flattenDeep(promises.filter(p => !!p))
   );
-}
-
-/**
- * Given a URL to a repository, strip the query and rebuild the URL
- * @param {String} location
- */
-function generateCloneUrlFromLocation(location) {
-  const locationParsed = url.parse(location);
-
-  // Need to nullify query params since these are just used by us
-  locationParsed.search = locationParsed.query = null;
-
-  return url.format(locationParsed);
-}
-
-function getWalkthroughRepoNameFromLocation(location) {
-  const locationParsed = url.parse(location);
-
-  // Return the repository name, i.e the highest-level identifier
-  return path.basename(locationParsed.path.split('?')[0]);
 }
 
 /**
@@ -518,196 +386,6 @@ function getCustomConfigData(configPath) {
     });
   });
 }
-
-// Function to get the header of the repo-based walkthroughs
-function getWalkthroughHeader(basePath) {
-  const jsonPath = path.join(basePath, 'walkthroughs-config.json');
-  return new Promise(resolve => {
-    if (!fs.existsSync(jsonPath)) {
-      console.log(`FAIL: walkthroughs-config.json is not included in the following directory: ${basePath}`);
-      return resolve(null);
-    }
-    console.log(`SUCCESS: Found walkthroughs-config.json in the following directory: ${basePath}`);
-    fs.readFile(jsonPath, 'utf8', (err, data) => {
-      if (err) {
-        console.error(`Failed to read header: ${err}`);
-        return resolve(null);
-      }
-      console.log(`getWalkthroughHeader returning: ${data}`);
-      return resolve(JSON.parse(data));
-    });
-  });
-}
-
-function isOpenShift4() {
-  return `${process.env.OPENSHIFT_VERSION}` === '4';
-}
-
-function getMockConfigData() {
-  return `window.OPENSHIFT_CONFIG = {
-    masterUri: 'mock-openshift-console-url',
-    integreatlyVersion: '${process.env.INTEGREATLY_VERSION || ''}',
-    openshiftVersion: ${openshiftVersion},
-    threescaleWildcardDomain: '${process.env.THREESCALE_WILDCARD_DOMAIN || ''}',
-    optionalWatchServices: [],
-    optionalProvisionServices: [],
-    mockData: {
-      serviceInstances: [
-        {
-          spec: {
-            clusterServiceClassExternalName: 'amq-online-standard'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: '3scale'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'fuse'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'fuse-managed'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'fuse-managed'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'rhsso'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'launcher'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'codeready'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'apicurito-rhmi'
-          },
-          status: {
-            dashboardURL:'${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'user-rhsso'
-          },
-          status: {
-            dashboardURL: '${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        },
-        {
-          spec: {
-            clusterServiceClassExternalName: 'unifiedpush'
-          },
-          status: {
-            dashboardURL: '${process.env.OPENSHIFT_URL}',
-            conditions: [{ status: 'True' }]
-          }
-        }
-      ]
-    }
-  };`;
-}
-
-function getConfigData(req) {
-  let redirectHost = null;
-  if (req.headers['x-forwarded-proto'] && req.headers['x-forwarded-host']) {
-    redirectHost = `${req.headers['x-forwarded-proto']}://${req.headers['x-forwarded-host']}`;
-  } else {
-    redirectHost = `https://${req.headers.host}`;
-  }
-  let logoutRedirectUri = null;
-  if (process.env.NODE_ENV === 'production') {
-    logoutRedirectUri = redirectHost;
-  } else {
-    logoutRedirectUri = 'http://localhost:3006';
-  }
-  if (!process.env.OPENSHIFT_OAUTH_HOST) {
-    console.warn(
-      'OPENSHIFT_OAUTH_HOST not set, using OPENSHIFT_HOST instead. This is okay on OCP 3.11, but will not work on 4.x, see INTLY-2791.'
-    );
-    process.env.OPENSHIFT_OAUTH_HOST = process.env.OPENSHIFT_HOST;
-  }
-
-  const masterUri = isOpenShift4() ? OPENSHIFT_PROXY_PATH : `https://${process.env.OPENSHIFT_HOST}`;
-  const wssMasterUri = isOpenShift4() ? OPENSHIFT_PROXY_PATH : `wss://${process.env.OPENSHIFT_HOST}`;
-  const ssoLogoutUri = isOpenShift4()
-    ? '/'
-    : `https://${
-        process.env.SSO_ROUTE
-      }/auth/realms/openshift/protocol/openid-connect/logout?redirect_uri=${logoutRedirectUri}`;
-
-  const installedServices = process.env.INSTALLED_SERVICES || '{}';
-  return `window.OPENSHIFT_CONFIG = {
-    openshiftHost: 'https://${process.env.OPENSHIFT_HOST}',
-    clientId: '${process.env.OPENSHIFT_OAUTHCLIENT_ID}',
-    accessTokenUri: 'https://${process.env.OPENSHIFT_OAUTH_HOST}/oauth/token',
-    authorizationUri: 'https://${process.env.OPENSHIFT_OAUTH_HOST}/oauth/authorize',
-    redirectUri: '${redirectHost}/oauth/callback',
-    scopes: ['user:full'],
-    masterUri: '${masterUri}',
-    wssMasterUri: '${wssMasterUri}',
-    ssoLogoutUri: '${ssoLogoutUri}',
-    threescaleWildcardDomain: '${process.env.THREESCALE_WILDCARD_DOMAIN || ''}',
-    integreatlyVersion: '${process.env.INTEGREATLY_VERSION || ''}',
-    clusterType: '${process.env.CLUSTER_TYPE || ''}',
-    installationType: '${process.env.INSTALLATION_TYPE || ''}',
-    optionalWatchServices: ${JSON.stringify(arrayFromString(process.env.OPTIONAL_WATCH_SERVICES || '', ','))},
-    optionalProvisionServices: ${JSON.stringify(arrayFromString(process.env.OPTIONAL_PROVISION_SERVICES || '', ','))},
-    openshiftVersion: ${openshiftVersion},
-    provisionedServices: ${installedServices}
-  };`;
-}
-
-const arrayFromString = (data, sep) => data.split(sep).filter(item => item !== '');
 
 function getWalkthroughInfoFromAdoc(parentId, id, dirName, doc) {
   // Retrieve the short description. There must be a gap between the document title and the short description.

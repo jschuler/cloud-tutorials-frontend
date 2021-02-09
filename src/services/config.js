@@ -12,13 +12,15 @@ const authHeader = () => {
   };
 };
 
-const serviceConfig = (passedConfig = {}, auth = true) =>
-  Object.assign(
+const serviceConfig = (passedConfig = {}, auth = true) => {
+  passedConfig.url = '/api/mosaic/cloud-tutorials' + passedConfig.url;
+  return Object.assign(
     {
       headers: auth ? authHeader() : {},
-      timeout: process.env.REACT_APP_AJAX_TIMEOUT
+      timeout: process.env.REACT_APP_AJAX_TIMEOUT,
     },
     passedConfig
   );
+}
 
 export { serviceConfig as default };
