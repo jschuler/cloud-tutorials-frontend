@@ -106,14 +106,14 @@ class TutorialPage extends React.Component {
 
       return (
         <AppDrawerContext.Consumer>
-          {({ setDrawerOpen, setDrawerContent, setDrawerTitle, drawerOpen }) => {
+          {({ setDrawerOpen, setDrawerContent, setDrawerTitle, drawerOpen, drawerTitle }) => {
             const handleClick = (appTitle, content) => {
               const contentWithSuspense = (
                 <React.Suspense fallback={<Spinner />}>{content}</React.Suspense>
               );
               setDrawerContent(contentWithSuspense);
               setDrawerTitle(appTitle);
-              setDrawerOpen(!drawerOpen);
+              setDrawerOpen(appTitle === drawerTitle ? !drawerOpen : true);
             };
             return (
               <Page className="pf-u-h-100vh">
