@@ -18,7 +18,7 @@ export const Routes = () => (
   >
     <Switch>
       <Route path="/sample" component={SamplePage} />
-      <Route path="/tutorial/:id" component={TutorialPage} />
+      <Route path="/tutorial/:id" exact component={TutorialPage} />
       <Route path="/tutorial/:id/task/:task/:step?" component={TaskPage} />
       {/* Finally, catch all unmatched routes */}
       <Route>
