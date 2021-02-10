@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import Asciidoctor from 'asciidoctor.js';
+import Asciidoctor from 'asciidoctor';
 import { translate } from 'react-i18next';
 import { ClipboardCopy, ClipboardCopyVariant } from '@patternfly/react-core';
 

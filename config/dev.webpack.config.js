@@ -24,7 +24,7 @@ const { config: webpackConfig, plugins } = config({
 });
 webpackConfig.devServer.proxy = [
  {
-    context: ['/api/mosaic/cloud-tutorials'],
+    context: ['/api/mosaic/cloud-tutorials', '/walkthroughs'],
     target: 'http://localhost:5001',
     secure: false,
     pathRewrite: { '^/api/mosaic/cloud-tutorials': '' },
@@ -60,7 +60,6 @@ webpackConfig.resolve.fallback = {
   "http": require.resolve("stream-http"),
   "path": require.resolve("path-browserify")
 };
-webpackConfig.resolve.alias = {'asciidoctor.js': 'asciidoctor'};
 webpackConfig.entry = resolve(__dirname, '../src/entry.js');
 
 module.exports = {

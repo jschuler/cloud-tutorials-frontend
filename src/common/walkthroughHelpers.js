@@ -1,4 +1,4 @@
-import asciidoctor from 'asciidoctor.js';
+import asciidoctor from 'asciidoctor';
 
 const CONTEXT_SECTION = 'section';
 const CONTEXT_DOCUMENT = 'document';
