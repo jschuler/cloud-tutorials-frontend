@@ -15,6 +15,7 @@
     "prod": "NODE_ENV=production webpack serve --config config/dev.webpack.config.js",
     "server:ctr": "node src/server/generateServerKey.js",
     "start": "NODE_ENV=development webpack serve --config config/dev.webpack.config.js",
+    "start:backend": "node src/backend/server.js",
     "test": "jest --verbose",
     "verify": "npm-run-all build lint test"
   },
@@ -50,17 +51,19 @@
     "client-oauth2": "^4.3.3",
     "detect-browser": "^5.2.0",
     "https-browserify": "^1.0.0",
+    "i18next": "11.6.0",
+    "i18next-xhr-backend": "1.5.1",
     "js-cookie": "^2.2.1",
     "lodash.get": "^4.4.2",
     "mustache": "^4.1.0",
     "path-browserify": "^1.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-redux": "7.2.2",
+    "react-redux": "5.0.6",
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
-    "redux-promise-middleware": "6.1.2",
+    "redux-promise-middleware": "5.1.1",
     "redux-thunk": "^2.3.0",
     "sha.js": "^2.4.11",
     "stream-http": "^3.1.1"
@@ -76,11 +79,13 @@
     "@redhat-cloud-services/eslint-config-redhat-cloud-services": "^1.0.0",
     "@redhat-cloud-services/frontend-components-config": "3.0.0-beta18",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "asciidoctor": "2.2.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "26.6.3",
     "babel-plugin-dual-import": "1.2.1",
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-imports": "^2.0.0",
+    "body-parser": "^1.19.0",
     "copy-webpack-plugin": "^7.0.0",
     "cross-fetch": "^3.0.6",
     "css-loader": "5.0.1",
@@ -92,7 +97,9 @@
     "jest": "26.6.3",
     "npm-run-all": "4.1.5",
     "prop-types": "15.7.2",
-    "react-i18next": "^11.8.5",
+    "react-i18next": "8.3.8",
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.1",
     "stylelint": "13.9.0",
     "stylelint-config-recommended-scss": "4.2.0",
     "stylelint-scss": "3.18.0",
@@ -100,18 +107,7 @@
     "webpack-bundle-analyzer": "4.4.0",
     "webpack-cli": "4.5.0"
   },
-  "peerDependencies": {
-    "asciidoctor.js": "1.5.7"
-  },
   "insights": {
     "appname": "cloud-tutorials"
-  },
-  "routes": {
-    "prefix": "mosaic",
-    "appname": "cloud-tutorials",
-    "samplePage": "/sample",
-    "oops": "/oops",
-    "noPermissions": "/no-permissions",
-    "integr8ly": "/integr8ly"
   }
 }

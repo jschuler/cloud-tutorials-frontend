@@ -5,9 +5,9 @@ const ModuleFederationPlugin = require("webpack").container
 const CopyPlugin = require("copy-webpack-plugin");
 const { readFileSync } = require('fs');
 
-const chromePath = resolve(__dirname, '../../../crc/standalone-crc/packages/insights-chrome/build'); 
-const landingPath = resolve(__dirname, '../../../crc/standalone-crc/packages/landing-page-frontend/dist');
-const configPath = resolve(__dirname, '../../../crc/cloud-services-config'); 
+const chromePath = resolve(__dirname, '../../standalone-crc/packages/insights-chrome/build'); 
+const landingPath = resolve(__dirname, '../../standalone-crc/packages/landing-page-frontend/dist');
+const configPath = resolve(__dirname, '../../cloud-services-config'); 
 const { config: webpackConfig, plugins } = config({
     rootFolder: resolve(__dirname, '../'),
     debug: true,
@@ -23,17 +23,25 @@ const { config: webpackConfig, plugins } = config({
     ]
 });
 webpackConfig.devServer.proxy = [
+ {
+    context: ['/api/mosaic/cloud-tutorials'],
+    target: 'http://localhost:5001',
+    secure: false,
+    pathRewrite: { '^/api/mosaic/cloud-tutorials': '' },
+    changeOrigin: true
+  },
   {
     context: ['/api'],
     target: 'http://localhost:3000',
     secure: false,
     changeOrigin: true
-  }
-];
+  },
+ ];
 plugins.push(new CopyPlugin({
   patterns: [
     { from: chromePath, to: 'apps/chrome' },
     { from: landingPath, to: '' },
+    { from: resolve(__dirname, '../public'), to: '' },
     { from: configPath, to: 'config' },
   ]
 }));
@@ -52,6 +60,8 @@ webpackConfig.resolve.fallback = {
   "http": require.resolve("stream-http"),
   "path": require.resolve("path-browserify")
 };
+webpackConfig.resolve.alias = {'asciidoctor.js': 'asciidoctor'};
+webpackConfig.entry = resolve(__dirname, '../src/entry.js');
 
 module.exports = {
     ...webpackConfig,

@@ -3,19 +3,12 @@ import React, { Fragment, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Routes } from "./Routes";
-import "./App.scss";
-
-import { getRegistry } from "@redhat-cloud-services/frontend-components-utilities/Registry";
-import NotificationsPortal from "@redhat-cloud-services/frontend-components-notifications/NotificationPortal";
-import { notificationsReducer } from "@redhat-cloud-services/frontend-components-notifications/redux";
-
 import { Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, DrawerHead, DrawerActions, DrawerCloseButton } from "@patternfly/react-core";
 import { AppDrawerContext } from './AppDrawerContext';
+import "./App.scss";
 
 const App = (props) => {
   useEffect(() => {
-    const registry = getRegistry();
-    registry.register({ notifications: notificationsReducer });
     insights.chrome.init();
 
     // TODO change this to your appname
@@ -32,12 +25,6 @@ const App = (props) => {
     setDrawerTitle('');
     setDrawerOpen(false);
   }
-
-  const [panelWidth, setPanelWidth] = React.useState();
-
-  const onResize = (newWidth, id) => {
-    setPanelWidth(newWidth);
-  };
 
   const panelContent = (
     <DrawerPanelContent>
@@ -59,7 +46,6 @@ const App = (props) => {
     <Drawer isExpanded={drawerOpen} isInline>
       <DrawerContent panelContent={panelContent}>
         <DrawerContentBody>
-          <NotificationsPortal />
           <Routes childProps={props} />
         </DrawerContentBody>
       </DrawerContent>
