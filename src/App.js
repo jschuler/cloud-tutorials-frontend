@@ -18,7 +18,14 @@ const App = (props) => {
     );
   }, []);
 
-  const { drawerTitle, drawerOpen, drawerContent, setDrawerOpen, setDrawerContent, setDrawerTitle } = useContext(AppDrawerContext);
+  const { 
+    drawerTitle, 
+    drawerOpen, 
+    drawerContent, 
+    setDrawerOpen, 
+    setDrawerContent, 
+    setDrawerTitle
+  } = useContext(AppDrawerContext);
 
   const closeDrawer = () => {
     setDrawerContent(null);
@@ -27,7 +34,11 @@ const App = (props) => {
   }
 
   const panelContent = (
-    <DrawerPanelContent>
+    <DrawerPanelContent
+      isResizable
+      defaultSize="450px"
+      minSize="200px"
+    >
       <DrawerHead>
         <span>
           {drawerTitle}

@@ -20,7 +20,14 @@ const AppEntry = () => {
       <Provider store={store}>
         <Router basename="/mosaic/cloud-tutorials">
           <AppDrawerContext.Provider
-            value={{ drawerOpen, setDrawerOpen, drawerContent, setDrawerContent, drawerTitle, setDrawerTitle }}
+            value={{
+              drawerOpen,
+              setDrawerOpen,
+              drawerContent,
+              setDrawerContent,
+              drawerTitle,
+              setDrawerTitle
+            }}
           >
             <App />
           </AppDrawerContext.Provider>

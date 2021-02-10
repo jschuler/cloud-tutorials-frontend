@@ -106,19 +106,19 @@ class TutorialPage extends React.Component {
 
       return (
         <AppDrawerContext.Consumer>
-          {({ setDrawerOpen, setDrawerContent, setDrawerTitle }) => {
+          {({ setDrawerOpen, setDrawerContent, setDrawerTitle, drawerOpen }) => {
             const handleClick = (appTitle, content) => {
               const contentWithSuspense = (
                 <React.Suspense fallback={<Spinner />}>{content}</React.Suspense>
               );
               setDrawerContent(contentWithSuspense);
               setDrawerTitle(appTitle);
-              setDrawerOpen(true);
+              setDrawerOpen(!drawerOpen);
             };
             return (
               <Page className="pf-u-h-100vh">
                 <SkipToContent href="#main-content">Skip to content</SkipToContent>
-                <RoutedConnectedMasthead />
+                {/* <RoutedConnectedMasthead /> */}
                 <PageSection variant="light">
                   <Breadcrumb
                     threadName={parsedThread.title}
@@ -129,7 +129,7 @@ class TutorialPage extends React.Component {
                 </PageSection>
                 <PageSection className="integr8ly-landing-page-tutorial-dashboard-section">
                   <Grid hasGutter>
-                    <GridItem sm={12} md={9} className="integr8ly-task-container">
+                    <GridItem sm={12} md={drawerOpen ? 12 : 9} className="integr8ly-task-container">
                       <Card className="integr8ly-c-card--content pf-u-p-lg pf-u-mb-xl">
                         <TextContent>
                           <div className="integr8ly-task-dashboard-header">
@@ -208,7 +208,7 @@ class TutorialPage extends React.Component {
                       </Card>
                     </GridItem>
                     <GridItem
-                      md={3}
+                      md={drawerOpen ? 12 : 3}
                       rowSpan={2}
                       className="integr8ly-module-frame pf-u-display-none pf-u-display-block-on-md"
                     >
