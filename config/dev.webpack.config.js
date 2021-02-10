@@ -39,6 +39,7 @@ plugins.push(new CopyPlugin({
   patterns: [
     { from: chromePath, to: 'apps/chrome' },
     { from: landingPath, to: '' },
+    { from: resolve(__dirname, '../public'), to: '' },
     { from: configPath, to: 'config' },
   ]
 }));
@@ -48,6 +49,7 @@ webpackConfig.resolve.fallback = {
   "path": require.resolve("path-browserify")
 };
 webpackConfig.resolve.alias = {'asciidoctor.js': 'asciidoctor'};
+webpackConfig.entry = resolve(__dirname, '../src/entry.js');
 
 module.exports = {
     ...webpackConfig,

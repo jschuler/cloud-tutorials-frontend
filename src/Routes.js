@@ -3,33 +3,11 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React, { Suspense, lazy } from 'react';
 import { Bullseye, Spinner } from '@patternfly/react-core';
-const paths = {
-  "appname": "cloud-tutorials",
-  "samplePage": "/sample",
-  "oops": "/oops",
-  "noPermissions": "/no-permissions"
-};
 
-const SamplePage = lazy(() =>
-  import(/* webpackChunkName: "SamplePage" */ './Routes/SamplePage/SamplePage')
-);
-const OopsPage = lazy(() =>
-  import(/* webpackChunkName: "OopsPage" */ './Routes/OopsPage/OopsPage')
-);
-const NoPermissionsPage = lazy(() =>
-  import(
-    /* webpackChunkName: "NoPermissionsPage" */ './Routes/NoPermissionsPage/NoPermissionsPage'
-  )
-);
+const SamplePage = lazy(() => import('./pages/SamplePage/SamplePage'));
+const TutorialPage = lazy(() => import('./pages/tutorial/tutorial'));
+const TaskPage = lazy(() => import('./pages/tutorial/task/task'));
 
-/**
- * the Switch component changes routes depending on the path.
- *
- * Route properties:
- *      exact - path must match exactly,
- *      path - https://prod.foo.redhat.com:1337/insights/advisor/rules
- *      component - component to be rendered when a route has been chosen.
- */
 export const Routes = () => (
   <Suspense
     fallback={
@@ -39,12 +17,12 @@ export const Routes = () => (
     }
   >
     <Switch>
-      <Route path={paths.samplePage} component={SamplePage} />
-      <Route path={paths.oops} component={OopsPage} />
-      <Route path={paths.noPermissions} component={NoPermissionsPage} />
+      <Route path="/sample" component={SamplePage} />
+      <Route path="/tutorial/:id" component={TutorialPage} />
+      <Route path="/tutorial/:id/task/:task/:step?" component={TaskPage} />
       {/* Finally, catch all unmatched routes */}
       <Route>
-        <Redirect to={paths.samplePage} />
+        <Redirect to="/sample" />
       </Route>
     </Switch>
   </Suspense>
