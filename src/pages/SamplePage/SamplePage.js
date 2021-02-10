@@ -26,7 +26,7 @@ const SamplePage = () => {
     <React.Fragment>
       <PageHeader>
         <PageHeaderTitle title="Sample Insights App" />
-        <p> hello world This is page header text </p>
+        <p>This is page header text </p>
       </PageHeader>
       <Main>
         <LandingPage />
