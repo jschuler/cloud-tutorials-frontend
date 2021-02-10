@@ -1,5 +1,7 @@
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
+const ModuleFederationPlugin = require("webpack").container
+  .ModuleFederationPlugin;
 const CopyPlugin = require("copy-webpack-plugin");
 const { readFileSync } = require('fs');
 
@@ -43,6 +45,16 @@ plugins.push(new CopyPlugin({
     { from: configPath, to: 'config' },
   ]
 }));
+plugins.push(
+  new ModuleFederationPlugin({
+    name: "app1",
+    remotes: {
+      app2: "app2@http://localhost:3002/remoteEntry.js",
+      mkUiFrontend: "mkUiFrontend@http://localhost:9000/remoteEntry.js"
+    },
+    shared: ["react", "react-dom"],
+  }),
+)
 webpackConfig.resolve.fallback = {
   "https": require.resolve("https-browserify"),
   "http": require.resolve("stream-http"),

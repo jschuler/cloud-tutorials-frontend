@@ -15,7 +15,8 @@ import {
   Page,
   PageSection,
   SkipToContent,
-  TextContent
+  TextContent,
+  Spinner
 } from '@patternfly/react-core';
 import { ClockIcon } from '@patternfly/react-icons';
 import { connect, reduxActions } from '../../redux';
@@ -26,6 +27,10 @@ import { parseWalkthroughAdoc } from '../../common/walkthroughHelpers';
 import { getDocsForWalkthrough, getDefaultAdocAttrs } from '../../common/docsHelpers';
 import { RoutedConnectedMasthead } from '../../components/masthead/masthead';
 import Breadcrumb from '../../components/breadcrumb/breadcrumb';
+import { AppDrawerContext } from "../../AppDrawerContext";
+const AppOne = React.lazy(() => import("app2/AppOne"));
+const AppTwo = React.lazy(() => import("app2/AppTwo"));
+const AppThree = React.lazy(() => import("app2/AppThree"));
 
 class TutorialPage extends React.Component {
   componentDidMount() {
@@ -100,104 +105,125 @@ class TutorialPage extends React.Component {
       const parsedThread = parseWalkthroughAdoc(thread.data, parsedAttrs);
 
       return (
-        <React.Fragment>
-          <Page className="pf-u-h-100vh">
-            <SkipToContent href="#main-content">Skip to content</SkipToContent>
-            <RoutedConnectedMasthead />
-            <PageSection variant="light">
-              <Breadcrumb
-                threadName={parsedThread.title}
-                isAllSolutionPattern
-                threadId={id}
-                homeClickedCallback={() => {}}
-              />
-            </PageSection>
-            <PageSection className="integr8ly-landing-page-tutorial-dashboard-section">
-              <Grid hasGutter>
-                <GridItem sm={12} md={9} className="integr8ly-task-container">
-                  <Card className="integr8ly-c-card--content pf-u-p-lg pf-u-mb-xl">
-                    <TextContent>
-                      <div className="integr8ly-task-dashboard-header">
-                        <h1 id="main-content">{parsedThread.title}</h1>
-                        <Button
-                          id="get-started-01"
-                          variant="primary"
-                          type="button"
-                          onClick={e => this.getStarted(e, id)}
-                          aria-label="Get Started"
-                        >
-                          {t('tutorial.getStarted')}
-                        </Button>
-                      </div>
-                      {this.renderPrereqs(thread)}
-                      <div dangerouslySetInnerHTML={{ __html: parsedThread.preamble }} />
-                      <h2 className="pf-u-mt-xl">
-                        {t('tutorial.tasksToComplete')}
-                        <div className="pull-right pf-u-mr-lg integr8ly-task-dashboard-time-to-completion">
-                          <ClockIcon className="pf-u-mr-xs" />
-                          {parsedThread.time}
-                          <span className="integr8ly-task-dashboard-time-to-completion_minutes">
-                            {t('tutorial.minutes')}
-                          </span>
-                        </div>
-                      </h2>
-                      <DataList
-                        className="pf-u-pl-0"
-                        aria-label="Task to complete this walkthrough"
-                        id="tasks-to-complete-walkthrough"
-                      >
-                        {parsedThread.tasks.map((task, i) => (
-                          <DataListItem key={i} aria-labelledby={`tasks-to-complete-walkthrough-${i}`}>
-                            <DataListItemRow>
-                              <DataListItemCells
-                                dataListCells={[
-                                  <DataListCell key="primary content">
-                                    <span id={`tasks-to-complete-walkthrough-${i}`}>{`${task.title}`}</span>
-                                  </DataListCell>,
-                                  <DataListCell key="secondary content" className="pf-u-text-align-right">
-                                    <div className="integr8ly-task-dashboard-estimated-time">
-                                      <ClockIcon className="pf-u-mr-xs" />
-                                      {task.time}
-                                      <span className="integr8ly-task-dashboard-estimated-time_minutes">
-                                        {t('tutorial.minutes')}
-                                      </span>
-                                    </div>
-                                  </DataListCell>
-                                ]}
-                              />
-                            </DataListItemRow>
-                          </DataListItem>
-                        ))}
-                      </DataList>
-                      <div className="integr8ly-task-dashboard-time-to-completion pf-u-mb-lg">
-                        <Button
-                          id="get-started-02"
-                          variant="primary"
-                          type="button"
-                          onClick={e => this.getStarted(e, id)}
-                          aria-label="Get Started"
-                        >
-                          {t('tutorial.getStarted')}
-                        </Button>
-                      </div>
-                    </TextContent>
-                  </Card>
-                </GridItem>
-                <GridItem
-                  md={3}
-                  rowSpan={2}
-                  className="integr8ly-module-frame pf-u-display-none pf-u-display-block-on-md"
-                >
-                  <ConnectedWalkthroughDetails className="integr8ly-landing-page-tutorial-dashboard-section-right" />
-                  <WalkthroughResources
-                    className="integr8ly-landing-page-tutorial-dashboard-section-right"
-                    resources={parsedThread.resources}
+        <AppDrawerContext.Consumer>
+          {({ setDrawerOpen, setDrawerContent, setDrawerTitle }) => {
+            const handleClick = (appTitle, content) => {
+              const contentWithSuspense = (
+                <React.Suspense fallback={<Spinner />}>{content}</React.Suspense>
+              );
+              setDrawerContent(contentWithSuspense);
+              setDrawerTitle(appTitle);
+              setDrawerOpen(true);
+            };
+            return (
+              <Page className="pf-u-h-100vh">
+                <SkipToContent href="#main-content">Skip to content</SkipToContent>
+                <RoutedConnectedMasthead />
+                <PageSection variant="light">
+                  <Breadcrumb
+                    threadName={parsedThread.title}
+                    isAllSolutionPattern
+                    threadId={id}
+                    homeClickedCallback={() => {}}
                   />
-                </GridItem>
-              </Grid>
-            </PageSection>
-          </Page>
-        </React.Fragment>
+                </PageSection>
+                <PageSection className="integr8ly-landing-page-tutorial-dashboard-section">
+                  <Grid hasGutter>
+                    <GridItem sm={12} md={9} className="integr8ly-task-container">
+                      <Card className="integr8ly-c-card--content pf-u-p-lg pf-u-mb-xl">
+                        <TextContent>
+                          <div className="integr8ly-task-dashboard-header">
+                            <h1 id="main-content">{parsedThread.title}</h1>
+                            <Button
+                              id="get-started-01"
+                              variant="primary"
+                              type="button"
+                              onClick={e => this.getStarted(e, id)}
+                              aria-label="Get Started"
+                            >
+                              {t('tutorial.getStarted')}
+                            </Button>
+                            <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App One", <AppOne />)}>
+                              Launch App One
+                            </Button>
+                            <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App Two", <AppTwo />)}>
+                              Launch App Two
+                            </Button>
+                            <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App Three", <AppThree />)}>
+                              Launch App Three
+                            </Button>
+                          </div>
+                          {this.renderPrereqs(thread)}
+                          <div dangerouslySetInnerHTML={{ __html: parsedThread.preamble }} />
+                          <h2 className="pf-u-mt-xl">
+                            {t('tutorial.tasksToComplete')}
+                            <div className="pull-right pf-u-mr-lg integr8ly-task-dashboard-time-to-completion">
+                              <ClockIcon className="pf-u-mr-xs" />
+                              {parsedThread.time}
+                              <span className="integr8ly-task-dashboard-time-to-completion_minutes">
+                                {t('tutorial.minutes')}
+                              </span>
+                            </div>
+                          </h2>
+                          <DataList
+                            className="pf-u-pl-0"
+                            aria-label="Task to complete this walkthrough"
+                            id="tasks-to-complete-walkthrough"
+                          >
+                            {parsedThread.tasks.map((task, i) => (
+                              <DataListItem key={i} aria-labelledby={`tasks-to-complete-walkthrough-${i}`}>
+                                <DataListItemRow>
+                                  <DataListItemCells
+                                    dataListCells={[
+                                      <DataListCell key="primary content">
+                                        <span id={`tasks-to-complete-walkthrough-${i}`}>{`${task.title}`}</span>
+                                      </DataListCell>,
+                                      <DataListCell key="secondary content" className="pf-u-text-align-right">
+                                        <div className="integr8ly-task-dashboard-estimated-time">
+                                          <ClockIcon className="pf-u-mr-xs" />
+                                          {task.time}
+                                          <span className="integr8ly-task-dashboard-estimated-time_minutes">
+                                            {t('tutorial.minutes')}
+                                          </span>
+                                        </div>
+                                      </DataListCell>
+                                    ]}
+                                  />
+                                </DataListItemRow>
+                              </DataListItem>
+                            ))}
+                          </DataList>
+                          <div className="integr8ly-task-dashboard-time-to-completion pf-u-mb-lg">
+                            <Button
+                              id="get-started-02"
+                              variant="primary"
+                              type="button"
+                              onClick={e => this.getStarted(e, id)}
+                              aria-label="Get Started"
+                            >
+                              {t('tutorial.getStarted')}
+                            </Button>
+                          </div>
+                        </TextContent>
+                      </Card>
+                    </GridItem>
+                    <GridItem
+                      md={3}
+                      rowSpan={2}
+                      className="integr8ly-module-frame pf-u-display-none pf-u-display-block-on-md"
+                    >
+                      <ConnectedWalkthroughDetails className="integr8ly-landing-page-tutorial-dashboard-section-right" />
+                      <WalkthroughResources
+                        className="integr8ly-landing-page-tutorial-dashboard-section-right"
+                        resources={parsedThread.resources}
+                      />
+                    </GridItem>
+                  </Grid>
+                </PageSection>
+              </Page>
+            );
+          }}
+        </AppDrawerContext.Consumer>
       );
     }
     return null;
