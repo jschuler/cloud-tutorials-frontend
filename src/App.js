@@ -3,9 +3,10 @@ import React, { Fragment, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Routes } from "./Routes";
-import { Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, DrawerHead, DrawerActions, DrawerCloseButton } from "@patternfly/react-core";
+import { Tooltip, Button, Drawer, DrawerContent, DrawerContentBody, DrawerPanelContent, DrawerHead, DrawerActions, DrawerCloseButton } from "@patternfly/react-core";
 import { AppDrawerContext } from './AppDrawerContext';
 import "./App.scss";
+import ExpandIcon from '@patternfly/react-icons/dist/js/icons/expand-icon';
 
 const App = (props) => {
   useEffect(() => {
@@ -33,6 +34,36 @@ const App = (props) => {
     setDrawerOpen(false);
   }
 
+  const [fullScreen, setFullScreen] = React.useState(false);
+
+  const handleEscapePress = React.useCallback(event => {
+    const { key, keyCode } = event;
+
+    if (keyCode === 27) {
+      toggleFullScreen(event, false);
+    }
+  }, []);
+
+  const toggleFullScreen = (event, disable) => {
+    const isFullScreen = disable !== undefined ? disable : !fullScreen
+    setFullScreen(isFullScreen);
+    if (isFullScreen) {
+      document.querySelector('.pf-c-page__sidebar').style.display = "none";
+      document.querySelector('.pf-c-page__header').style.display = "none";
+    } else {
+      document.querySelector('.pf-c-page__sidebar').style.display = "block";
+      document.querySelector('.pf-c-page__header').style.display = "block";
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleEscapePress);
+  
+    return () => {
+      window.removeEventListener('keydown', handleEscapePress);
+    };
+  }, [handleEscapePress]);
+
   const panelContent = (
     <DrawerPanelContent
       isResizable
@@ -45,6 +76,13 @@ const App = (props) => {
         </span>
         <DrawerActions>
           <DrawerCloseButton onClick={closeDrawer} />
+          <Tooltip
+            content="Toggle fullscreen"
+          >
+            <Button variant="plain" aria-label="Expand toggle" onClick={toggleFullScreen}>
+              <ExpandIcon />
+            </Button>
+          </Tooltip>
         </DrawerActions>
       </DrawerHead>
       <div style={{ padding: '15px' }}>
