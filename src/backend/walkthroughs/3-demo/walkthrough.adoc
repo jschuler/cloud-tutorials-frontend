@@ -1,0 +1,76 @@
+:walkthrough: Demo
+
+[id='demo']
+= {walkthrough}
+
+This solution pattern will walk you through the creation of a kafka stream, and will also have you create a topic and connect it to the stream.
+
+This Solution Pattern consists of the following components:
+
+* Red Hat OpenShift Streams for Apache Kafka (RHOSAK)
+* RHOSAK CLI
+
+
+[type=walkthroughResource,serviceName=rhosak]
+.Red Hat OpenShift Streams for Apache Kafka (RHOSAK)
+****
+* link:https://cloud.redhat.com[Console, window="_blank"]
+****
+
+[type=walkthroughResource,serviceName=rhosak-cli]
+.RHOSAK CLI
+****
+* link:https://cloud.redhat.com[Console, window="_blank"]
+****
+
+
+[time=5]
+
+[id='creating-kafka']
+
+
+:sectnums:
+
+
+==  Creating a kafka stream
+
+For this task, you will create a kafka stream.
+
+. Start the [.app-launch-container]#kafka creator#.
+. Enter the following as the name:
++
+[subs="attributes+", role="clipboard"]
+----
+My first kafka stream
+----
+.. Or [.copy-to-drawer]#click here# to copy it directly into the form.
+
+[type=verification]
+Is the name field filled out correctly?
+
+[type=verificationFail]
+Verify that you followed each step in the procedure above. If you are still having issues, contact your administrator.
+
+
+[time=5]
+==  Creating a kafka topic
+
+For this task, you will create a kafka topic.
+
+[type=verification]
+Is the kafka topic created?
+
+[type=verificationFail]
+Verify that you followed each step in the procedure above. If you are still having issues, contact your administrator.
+
+
+[time=5]
+== Connecting to a topic
+
+For this task, you will connect a topic to the kafka stream.
+
+[type=verification]
+Did you connect the topic to the kafka stream?
+
+[type=verificationFail]
+Verify that you followed each step in the procedure above.  If you are still having issues, contact your administrator.

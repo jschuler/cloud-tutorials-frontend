@@ -84,7 +84,7 @@ To route messages from the Order Entry System to the Order Management System, cr
 .. Click the  *Create Address* button to start the *Create new address* wizard.
 .. Enter the following as the name:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 work-queue-requests
 ----
@@ -125,13 +125,13 @@ Create a table to store orders.
 . Select the *Terminal* tab on the Pod details screen.
 . Log in to the *orders* database using the command:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 psql -U {user-username} -W -d orders
 ----
 . Enter the following when prompted:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 password
 ----
@@ -141,7 +141,7 @@ Paste the password then press the *Enter* key.
 
 . Paste the following as SQL to create the `received_orders` table:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 CREATE TABLE received_orders (
   id serial PRIMARY KEY,
@@ -204,7 +204,7 @@ This OpenAPI (swagger) file defines the API for querying and creating orders in 
 . When prompted with *Review/Edit Connector Details*:
 .. Enter the following in the *Name* field:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 Order System REST API Connector
 ----
@@ -287,21 +287,21 @@ To allow Fuse Online to consume messages placed on the queue by the Order Entry 
 
 . Enter the connection URI relating to {enmasse}:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 amqp://{enmasse-broker-url}:5672?amqp.saslMechanisms=PLAIN
 ----
 
 . Enter the username for {enmasse}:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {enmasse-credentials-username}
 ----
 
 . Enter the password for {enmasse}:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {enmasse-credentials-password}
 ----
@@ -312,7 +312,7 @@ amqp://{enmasse-broker-url}:5672?amqp.saslMechanisms=PLAIN
 
 . Click *Next* and enter a name for the connection, for example:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 Incoming Order Queue Connection
 ----
@@ -360,7 +360,7 @@ To use the Fuse connections, create an integration in Red Hat Fuse Online:
 
 . When prompted for a *Destination name*, enter:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 work-queue-requests
 ----
@@ -371,7 +371,7 @@ work-queue-requests
 .. Select *JSON Schema* as the type.
 .. Enter the following in the *Definition* field:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
@@ -410,7 +410,7 @@ work-queue-requests
 . Click *Publish*.
 . When prompted, enter a name, for example:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 Walkthrough 1A
 ----
