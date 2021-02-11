@@ -230,7 +230,7 @@ If you see the dashboard but not the *NEW PRODUCT* button, contact your administ
 // TODO: dynamic fuse aggregation app name based on user id/email. "Only ASCII letters, numbers, dashes and underscores are allowed" for System name. e.g. fuse-aggregation-app-test01-example-com
 . Enter the following as the *Name* and *System name*:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -239,7 +239,7 @@ If you see the dashboard but not the *NEW PRODUCT* button, contact your administ
 // The 'fuse-aggregation-app-url' should be the url of the Fuse Aggregation App e.g. https://fuse-flights-aggregator-ak49.cluster-lfa3xlh.opentry.me/
 . In the *Private Base URL* field, enter:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {route-fuse-flights-aggregator-host}
 ----
@@ -252,7 +252,7 @@ If you see the dashboard but not the *NEW PRODUCT* button, contact your administ
 . Click *New Product*.
 . Enter the following as the *Name* and *System name*:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -265,7 +265,7 @@ If you see the dashboard but not the *NEW PRODUCT* button, contact your administ
 // The '{fuse-aggregation-app-apicast-route-url}' shoudl be the apicast-staging route url for this specific user. It can be looked up or deterministicly set.
 . In the *Staging Public Base URL*, enter:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 https://wt2-{user-sanitized-username}-3scale.{openshift-app-host}
 ----
@@ -286,7 +286,7 @@ https://wt2-{user-sanitized-username}-3scale.{openshift-app-host}
 .. Click *Create Application Plan*.
 .. Enter the following for *Name* and *System name*:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -312,7 +312,7 @@ https://wt2-{user-sanitized-username}-3scale.{openshift-app-host}
 .. Select the *{fuse-flights-aggregator-app-name}* Plan in the *Application plan* dropdown.
 .. Enter the following for *Name* and *Description*:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -323,7 +323,7 @@ https://wt2-{user-sanitized-username}-3scale.{openshift-app-host}
 .. Click the green pencil icon beside the *User Key*
 .. In the *Set Custom User Key* modal dialog, enter:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -361,7 +361,7 @@ Verify that you followed each step in the procedure above.  If you are still hav
 
 . Enter the following for *Name* and *System name*:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -532,7 +532,7 @@ Verify that you followed each step in the procedure above.  If you are still hav
 
 . In the *user_key* field, enter:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----
@@ -555,7 +555,7 @@ Verify that you followed each step in the procedure above.  If you are still hav
 
 . In the *user_key* field, enter:
 +
-[subs="attributes+"]
+[subs="attributes+", role="clipboard"]
 ----
 {fuse-flights-aggregator-app-name}
 ----

@@ -378,9 +378,9 @@ class Walkthrough {
 
 const getNumberedTitle = block => {
   if (block.context === CONTEXT_DOCUMENT || block.parent.context === CONTEXT_DOCUMENT) {
-    return `${block.numbered ? block.number : null}`;
+    return `${block.numbered ? block.getNumeral() : null}`;
   }
-  return `${getNumberedTitle(block.parent)}.${block.numbered ? block.number : null}`;
+  return `${getNumberedTitle(block.parent)}.${block.numbered ? block.getNumeral() : null}`;
 };
 
 const parseWalkthroughAdoc = (rawAdoc, attrs) => {
