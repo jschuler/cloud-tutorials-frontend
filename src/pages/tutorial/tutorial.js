@@ -143,7 +143,7 @@ class TutorialPage extends React.Component {
                             >
                               {t('tutorial.getStarted')}
                             </Button>
-                            <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App One", <AppOne />)}>
+                            {/* <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App One", <AppOne />)}>
                               Launch App One
                             </Button>
                             <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App Two", <AppTwo />)}>
@@ -151,7 +151,7 @@ class TutorialPage extends React.Component {
                             </Button>
                             <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App Three", <AppThree />)}>
                               Launch App Three
-                            </Button>
+                            </Button> */}
                           </div>
                           {this.renderPrereqs(thread)}
                           <div dangerouslySetInnerHTML={{ __html: parsedThread.preamble }} />
