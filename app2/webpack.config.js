@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack").container
   .ModuleFederationPlugin;
 const path = require("path");
+const { dependencies } = require("./package.json");
 
 module.exports = {
   entry: "./src/index",
@@ -101,7 +102,18 @@ module.exports = {
         "./AppTwo": "./src/AppTwo",
         "./AppThree": "./src/AppThree",
       },
-      shared: ["react", "react-dom"],
+      shared: {
+        react: {
+          eager: true,
+          singleton: true,
+          requiredVersion: dependencies["react"],
+        },
+        "react-dom": {
+          eager: true,
+          singleton: true,
+          requiredVersion: dependencies["react-dom"],
+        },
+      },
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",

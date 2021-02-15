@@ -53,7 +53,10 @@ import ProvisioningScreen from "../../../components/provisioning/provisioningScr
 import { findServices } from "../../../common/serviceInstanceHelpers";
 import { isOpenShift4 } from "../../../common/openshiftHelpers";
 import { AppDrawerContext } from "../../../AppDrawerContext";
+// import { MkRoot, MkUi } from "./MkRoot";
+import { ControlPlanePage } from './ControlPlanePage';
 const AppOne = React.lazy(() => import("app2/AppOne"));
+// const MkRoot = React.lazy(() => import("openshiftStreams/RootApp"));
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -111,7 +114,7 @@ class TaskPage extends React.Component {
           id={`app-launch-${sequenceNumber.toString()}`}
           variant="primary"
           isInline
-          onClick={() => handleClick("RHOSAK", <AppOne />)}
+          onClick={() => handleClick("RHOSAK", <ControlPlanePage />)}
         >
           {block.innerText}
         </Button>,
@@ -125,7 +128,7 @@ class TaskPage extends React.Component {
     const handleClick = (event) => {
       // this weird looking code sets the input value and triggers a change event
       const el = document.querySelector("#simple-form-name-01");
-      const newValue = "My first kafka stream"; 
+      const newValue = "My first kafka stream";
       const valueSetter = Object.getOwnPropertyDescriptor(el, "value").set;
       const prototype = Object.getPrototypeOf(el);
       const prototypeValueSetter = Object.getOwnPropertyDescriptor(

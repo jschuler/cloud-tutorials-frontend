@@ -4,6 +4,7 @@ const ModuleFederationPlugin = require("webpack").container
   .ModuleFederationPlugin;
 const CopyPlugin = require("copy-webpack-plugin");
 const { readFileSync } = require('fs');
+const { dependencies } = require('../package.json');
 
 const chromePath = resolve(__dirname, '../../standalone-crc/packages/insights-chrome/build'); 
 const landingPath = resolve(__dirname, '../../standalone-crc/packages/landing-page-frontend/dist');
@@ -22,6 +23,7 @@ const { config: webpackConfig, plugins } = config({
       },
     ]
 });
+webpackConfig.devServer.port = 8003;
 webpackConfig.devServer.proxy = [
  {
     context: ['/api/mosaic/cloud-tutorials', '/walkthroughs'],
@@ -50,9 +52,22 @@ plugins.push(
     name: "app1",
     remotes: {
       app2: "app2@http://localhost:3002/remoteEntry.js",
-      mkUiFrontend: "mkUiFrontend@http://localhost:9000/remoteEntry.js"
+      mkUiFrontend: "mkUiFrontend@http://localhost:9000/remoteEntry.js",
+      openshiftStreams: "openshiftStreams@https://localhost:8002/beta/apps/application-services/remoteEntry.js"
     },
-    shared: ["react", "react-dom"],
+    shared: {
+      ...dependencies,
+      react: {
+        eager: true,
+        singleton: true,
+        requiredVersion: dependencies.react
+      },
+      'react-dom': {
+        eager: true,
+        singleton: true,
+        requiredVersion: dependencies['react-dom']
+      }
+    }
   }),
 )
 webpackConfig.resolve.fallback = {
