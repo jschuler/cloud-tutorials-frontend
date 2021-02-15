@@ -53,7 +53,8 @@ import ProvisioningScreen from "../../../components/provisioning/provisioningScr
 import { findServices } from "../../../common/serviceInstanceHelpers";
 import { isOpenShift4 } from "../../../common/openshiftHelpers";
 import { AppDrawerContext } from "../../../AppDrawerContext";
-const AppOne = React.lazy(() => import("app2/AppOne"));
+// const AppOne = React.lazy(() => import("app2/AppOne"));
+import { MkUi } from "./MkUi";
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -111,7 +112,7 @@ class TaskPage extends React.Component {
           id={`app-launch-${sequenceNumber.toString()}`}
           variant="primary"
           isInline
-          onClick={() => handleClick("OpenShift Streams", <AppOne />)}
+          onClick={() => handleClick("OpenShift Streams", <MkUi />)}
         >
           {block.innerText}
         </Button>,

@@ -4,45 +4,53 @@ const ModuleFederationPlugin = require("webpack").container
   .ModuleFederationPlugin;
 const CopyPlugin = require("copy-webpack-plugin");
 const { readFileSync } = require('fs');
+const { dependencies } = require('../package.json');
 
-const chromePath = resolve(__dirname, '../../standalone-crc/packages/insights-chrome/build'); 
-const landingPath = resolve(__dirname, '../../standalone-crc/packages/landing-page-frontend/dist');
-const configPath = resolve(__dirname, '../../cloud-services-config'); 
+// const chromePath = resolve(__dirname, '../../standalone-crc/packages/insights-chrome/build'); 
+// const landingPath = resolve(__dirname, '../../standalone-crc/packages/landing-page-frontend/dist');
+// const configPath = resolve(__dirname, '../../cloud-services-config'); 
+// const { config: webpackConfig, plugins } = config({
+//     rootFolder: resolve(__dirname, '../'),
+//     debug: true,
+//     replacePlugin: [
+//       {
+//         pattern: /<\s*esi:include\s+src\s*=\s*"([^"]+)"\s*\/\s*>/gm,
+//         replacement(_match, file) {
+//           file = file.split('/').pop();
+//           const snippet = resolve(chromePath, 'snippets', file);
+//           return readFileSync(snippet);
+//         }
+//       },
+//     ]
+// });
 const { config: webpackConfig, plugins } = config({
-    rootFolder: resolve(__dirname, '../'),
-    debug: true,
-    replacePlugin: [
-      {
-        pattern: /<\s*esi:include\s+src\s*=\s*"([^"]+)"\s*\/\s*>/gm,
-        replacement(_match, file) {
-          file = file.split('/').pop();
-          const snippet = resolve(chromePath, 'snippets', file);
-          return readFileSync(snippet);
-        }
-      },
-    ]
+  rootFolder: resolve(__dirname, '../'),
+  debug: true,
+  https: true,
+  useFileHash: false,
 });
-webpackConfig.devServer.proxy = [
- {
-    context: ['/api/mosaic/cloud-tutorials', '/walkthroughs'],
-    target: 'http://localhost:5001',
-    secure: false,
-    pathRewrite: { '^/api/mosaic/cloud-tutorials': '' },
-    changeOrigin: true
-  },
-  {
-    context: ['/api'],
-    target: 'http://localhost:3000',
-    secure: false,
-    changeOrigin: true
-  },
- ];
+webpackConfig.devServer.port = 8003;
+// webpackConfig.devServer.proxy = [
+//  {
+//     context: ['/api/mosaic/cloud-tutorials', '/walkthroughs'],
+//     target: 'http://localhost:5001',
+//     secure: false,
+//     pathRewrite: { '^/api/mosaic/cloud-tutorials': '' },
+//     changeOrigin: true
+//   },
+//   {
+//     context: ['/api'],
+//     target: 'http://localhost:3000',
+//     secure: false,
+//     changeOrigin: true
+//   },
+//  ];
 plugins.push(new CopyPlugin({
   patterns: [
-    { from: chromePath, to: 'apps/chrome' },
-    { from: landingPath, to: '' },
+    // { from: chromePath, to: 'apps/chrome' },
+    // { from: landingPath, to: '' },
     { from: resolve(__dirname, '../public'), to: '' },
-    { from: configPath, to: 'config' },
+    // { from: configPath, to: 'config' },
   ]
 }));
 plugins.push(
@@ -52,7 +60,18 @@ plugins.push(
       app2: "app2@http://localhost:3002/remoteEntry.js",
       mkUiFrontend: "mkUiFrontend@http://localhost:9000/remoteEntry.js"
     },
-    shared: ["react", "react-dom"],
+    shared: {
+      react: {
+        eager: true,
+        singleton: true,
+        requiredVersion: dependencies["react"],
+      },
+      "react-dom": {
+        eager: true,
+        singleton: true,
+        requiredVersion: dependencies["react-dom"],
+      },
+    },
   }),
 )
 webpackConfig.resolve.fallback = {
