@@ -111,7 +111,7 @@ class TaskPage extends React.Component {
           id={`app-launch-${sequenceNumber.toString()}`}
           variant="primary"
           isInline
-          onClick={() => handleClick("RHOSAK", <AppOne />)}
+          onClick={() => handleClick("OpenShift Streams", <AppOne />)}
         >
           {block.innerText}
         </Button>,
@@ -125,7 +125,7 @@ class TaskPage extends React.Component {
     const handleClick = (event) => {
       // this weird looking code sets the input value and triggers a change event
       const el = document.querySelector("#simple-form-name-01");
-      const newValue = "My first kafka stream"; 
+      const newValue = "kafka-test"; 
       const valueSetter = Object.getOwnPropertyDescriptor(el, "value").set;
       const prototype = Object.getPrototypeOf(el);
       const prototypeValueSetter = Object.getOwnPropertyDescriptor(
@@ -574,7 +574,7 @@ class TaskPage extends React.Component {
         <React.Fragment>
           <Page className="pf-u-h-100vh">
             <SkipToContent href="#main-content">Skip to content</SkipToContent>
-            <RoutedConnectedMasthead />
+            {/* <RoutedConnectedMasthead /> */}
             <PageSection variant="light">
               <Breadcrumb
                 threadName={parsedThread.title}
