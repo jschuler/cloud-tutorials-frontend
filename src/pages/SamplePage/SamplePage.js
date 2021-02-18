@@ -7,6 +7,7 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import LandingPage from '../../pages/landing/landingPage';
+import { MkUi } from '../tutorial/task/MkUi';
 
 import './sample-page.scss';
 
@@ -28,8 +29,9 @@ const SamplePage = () => {
         <PageHeaderTitle title="Sample Insights App" />
         <p>This is page header text </p>
       </PageHeader>
-      <Main>
-        <LandingPage />
+      <Main style={{ height: '100%'}}>
+        {/* <LandingPage /> */}
+        <MkUi />
       </Main>
     </React.Fragment>
   );

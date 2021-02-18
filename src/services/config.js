@@ -13,7 +13,7 @@ const authHeader = () => {
 };
 
 const serviceConfig = (passedConfig = {}, auth = true) => {
-  passedConfig.url = '/api/mosaic/cloud-tutorials' + passedConfig.url;
+  passedConfig.url = '/api/application-services/cloud-tutorials' + passedConfig.url;
   return Object.assign(
     {
       headers: auth ? authHeader() : {},

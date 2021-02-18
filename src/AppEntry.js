@@ -37,17 +37,27 @@ const AppWithKeycloak = () => {
         clientId: keycloadConfig.clientId,
         realm: keycloadConfig.realm,
       });
-      debugger;
       setKeycloak(keycloak);
       setLoadingKeycloak(false);
+      const token = await getKeyCloakToken();
+      // console.log(`token: ${token}`);
+      setToken(token);
     };
     loadToken();
   }, []);
 
+  // React.useEffect(() => {
+  //   getKeyCloakToken().then((token) => {
+  //     console.log(token);
+  //     setLoadingKeycloak(false);
+  //   });
+  // }, [keycloak]);
+
+  const [token, setToken] = React.useState('');
   const [keycloak, setKeycloak] = React.useState(undefined);
   const [loadingKeycloak, setLoadingKeycloak] = React.useState(true);
 
-  if (loadingKeycloak || keycloak === undefined) {
+  if (!token || loadingKeycloak || keycloak === undefined) {
     return <div>Loading</div>;
   }
 
@@ -58,7 +68,8 @@ const AppWithKeycloak = () => {
   return (
     <AuthContext.Provider
       value={{
-        getToken,
+        token,
+        getToken: () => Promise.resolve(token),
       }}
     >
       <App />

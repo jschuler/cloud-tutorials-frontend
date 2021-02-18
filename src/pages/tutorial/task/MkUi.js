@@ -4,11 +4,12 @@ const AppMk = React.lazy(() => import("mkUiFrontend/OpenshiftStreams"));
 
 export const MkUi = () => {
     const authContext = React.useContext(AuthContext);
+    console.log(`MkUi: ${authContext.token}`)
     const mkProps = {
         getUsername: () => { return Promise.resolve({
           user: 'User'
         }) },
-        getToken: authContext.getToken,
+        getToken: () => { return Promise.resolve(authContext.token)},
         onConnectToInstance: () => { return true; },
         getConnectToInstancePath: () => { return true; },
         addAlert: () => { return true; },

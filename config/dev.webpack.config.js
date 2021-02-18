@@ -29,7 +29,7 @@ const { config: webpackConfig, plugins } = config({
   https: true,
   useFileHash: false,
 });
-webpackConfig.devServer.port = 8003;
+// webpackConfig.devServer.port = 8003;
 // webpackConfig.devServer.proxy = [
 //  {
 //     context: ['/api/mosaic/cloud-tutorials', '/walkthroughs'],
@@ -57,7 +57,7 @@ plugins.push(
   new ModuleFederationPlugin({
     name: "app1",
     remotes: {
-      app2: "app2@http://localhost:3002/remoteEntry.js",
+      // app2: "app2@http://localhost:3002/remoteEntry.js",
       mkUiFrontend: "mkUiFrontend@http://localhost:9000/remoteEntry.js"
     },
     shared: {

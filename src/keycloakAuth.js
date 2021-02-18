@@ -41,7 +41,7 @@ export const init = async (config) => {
       const initOptions = {
         onLoad: 'login-required',
         responseMode: "query",
-        redirectUri: "https://prod.foo.redhat.com:1337/beta/application-services/"
+        redirectUri: "https://prod.foo.redhat.com:1337/beta/application-services/cloud-tutorials/tutorial/"
       };
       await keycloak.init(initOptions);
     }
@@ -62,6 +62,7 @@ export const init = async (config) => {
  */
 export const getKeyCloakToken = async () => {
   await keycloak?.updateToken(50);
+  debugger;
   if (keycloak?.token) {
     return keycloak.token;
   }

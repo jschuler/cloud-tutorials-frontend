@@ -28,9 +28,9 @@ import { getDocsForWalkthrough, getDefaultAdocAttrs } from '../../common/docsHel
 import { RoutedConnectedMasthead } from '../../components/masthead/masthead';
 import Breadcrumb from '../../components/breadcrumb/breadcrumb';
 import { AppDrawerContext } from "../../AppDrawerContext";
-const AppOne = React.lazy(() => import("app2/AppOne"));
-const AppTwo = React.lazy(() => import("app2/AppTwo"));
-const AppThree = React.lazy(() => import("app2/AppThree"));
+// const AppOne = React.lazy(() => import("app2/AppOne"));
+// const AppTwo = React.lazy(() => import("app2/AppTwo"));
+// const AppThree = React.lazy(() => import("app2/AppThree"));
 
 class TutorialPage extends React.Component {
   componentDidMount() {
