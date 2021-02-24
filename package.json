@@ -3,7 +3,9 @@
   "version": "1.1.0",
   "private": false,
   "scripts": {
-    "uberstart": "cd apps/mk-ui-frontend && BASE_PATH=http://localhost:8000 npm run start:dev",
+    "uberstart": "npm run mk-ui-frontend",
+    "mk-ui-frontend": "cd apps/mk-ui-frontend && BASE_PATH=http://localhost:8000 npm run start:dev",
+    "mk-ui-mock": "cd apps/mk-ui-frontend/mas-mock && npm run start",
     "build": "webpack --config config/prod.webpack.config.js",
     "analyze": "NODE_ENV=production webpack --config config/prod.webpack.config.js --env analyze=true",
     "build:prod": "NODE_ENV=production webpack --config config/prod.webpack.config.js",
@@ -42,8 +44,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.12.13",
-    "@patternfly/react-core": "4.90.2",
-    "@patternfly/react-table": "4.20.15",
+    "@patternfly/react-core": "^4.97.2",
+    "@patternfly/react-table": "^4.23.2",
     "@redhat-cloud-services/frontend-components": "^3.0.3",
     "@redhat-cloud-services/frontend-components-notifications": "^3.0.3",
     "@redhat-cloud-services/frontend-components-utilities": "^3.0.2",
