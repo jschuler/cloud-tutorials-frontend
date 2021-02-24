@@ -75,6 +75,7 @@ const devSpecificConfig = {
     compress: true,
     inline: true,
     hot: true,
+    open: false,
     https: devEnvToUseTls,
     host: webpackDevServer.hostname,
     port: webpackDevServer.port,

@@ -3,9 +3,12 @@
   "version": "1.1.0",
   "private": false,
   "scripts": {
-    "uberstart": "npm run mk-ui-frontend",
-    "mk-ui-frontend": "cd apps/mk-ui-frontend && BASE_PATH=http://localhost:8000 npm run start:dev",
-    "mk-ui-mock": "cd apps/mk-ui-frontend/mas-mock && npm run start",
+    "uberstart:front": "npm-run-all --parallel mk-ui-front strimzi-ui-front start",
+    "uberstart:back": "npm-run-all --parallel mk-ui-back start:backend",
+    "mk-ui-front": "cd apps/mk-ui-frontend && BASE_PATH=http://localhost:8000 npm run start:dev",
+    "mk-ui-back": "cd apps/mk-ui-frontend/mas-mock && npm run start",
+    "strimzi-ui-front": "cd apps/strimzi-ui && npm run start",
+    "strimzi-ui-back": "cd apps/strimzi-ui && npm run start:mockadminserver",
     "build": "webpack --config config/prod.webpack.config.js",
     "analyze": "NODE_ENV=production webpack --config config/prod.webpack.config.js --env analyze=true",
     "build:prod": "NODE_ENV=production webpack --config config/prod.webpack.config.js",
@@ -89,6 +92,7 @@
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-imports": "^2.0.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "copy-webpack-plugin": "^7.0.0",
     "cross-fetch": "^3.0.6",
     "css-loader": "5.0.1",
@@ -98,7 +102,7 @@
     "eslint-loader": "4.0.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.6.3",
-    "npm-run-all": "4.1.5",
+    "npm-run-all": "^4.1.5",
     "prop-types": "15.7.2",
     "react-i18next": "8.3.8",
     "sequelize": "^6.5.0",
@@ -115,6 +119,7 @@
   },
   "workspaces": [
     "apps/mk-ui-frontend",
+    "apps/mk-ui-frontend/mas-mock",
     "apps/strimzi-ui"
   ]
 }
