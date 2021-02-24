@@ -35,7 +35,7 @@ export type FederatedTopicsProps = {
   quickstartState?: any;
   onQuickstartChange?: (value: any) => void;
   onQuickstartClose?: (value: any) => void;
-  topics?: any[];
+  topics: any[];
 };
 
 const FederatedTopics: FunctionComponent<FederatedTopicsProps> = ({

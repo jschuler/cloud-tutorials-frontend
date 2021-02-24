@@ -320,7 +320,7 @@ const StreamsTableView = ({
       date = typeof date === 'string' ? new Date(date) : date;
       return (
         <>
-          {formatDistance(new Date(), new Date())} {t('ago')}
+          {/* {formatDistance(new Date(), new Date())} {t('ago')} */}
         </>
       );
     };
