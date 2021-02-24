@@ -36,17 +36,38 @@ This Solution Pattern consists of the following components:
 
 For this task, you will create a Kafka instance.
 
-. Open the [.app-launch-container]#Kafka creation form#.
-. Enter the following as the Instance name:
+. Choose the following as the instance name:
 +
 [subs="attributes+", role="clipboard"]
 ----
 kafka-test
 ----
-.. Or [.copy-to-drawer]#click here# to copy it directly into the form.
+. Copy the instance name and launch the app in the next step. Follow the quick start steps within the app to create a kafka instance.
+. Open the [.app-launch-control]#Kafka control plane#.
 
 [type=verification]
-Is the name field filled out correctly?
+Were you able to create a kafka instance with the name `+kafka-test+`?
+
+[type=verificationFail]
+Verify that you followed each step in the procedure above. If you are still having issues, contact your administrator.
+
+
+[time=5]
+== Creating a topic
+
+For this task, you will create a kafka topic.
+
+. Choose the following as the topic name:
++
+[subs="attributes+", role="clipboard"]
+----
+topic-test
+----
+. Copy the topic name and launch the app in the next step. Follow the quick start steps within the app to create a kafka topic.
+. Open the [.app-launch-data]#Kafka data plane#.
+
+[type=verification]
+Were you able to create a kafka topic with the name `+topic-test+`?
 
 [type=verificationFail]
 Verify that you followed each step in the procedure above. If you are still having issues, contact your administrator.

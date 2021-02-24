@@ -21,6 +21,9 @@ import {
   Text,
   TextVariants,
   Spinner,
+  Split,
+  SplitItem,
+  Bullseye,
 } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
@@ -53,7 +56,8 @@ import ProvisioningScreen from "../../../components/provisioning/provisioningScr
 import { findServices } from "../../../common/serviceInstanceHelpers";
 import { isOpenShift4 } from "../../../common/openshiftHelpers";
 import { AppDrawerContext } from "../../../AppDrawerContext";
-const AppOne = React.lazy(() => import("app2/AppOne"));
+import { ControlPlanePage } from "../../ManagedKafka/ControlPlanePage";
+import { DataPlanePage } from "../../ManagedKafka/DataPlanePage";
 
 class TaskPage extends React.Component {
   constructor(props) {
@@ -62,6 +66,9 @@ class TaskPage extends React.Component {
     this.subClipboard = this.subClipboard.bind(this);
     this.subApplaunch = this.subApplaunch.bind(this);
     this.subCopyToDrawer = this.subCopyToDrawer.bind(this);
+    this.state = {
+      taskStatus: "Unknown"
+    }
   }
 
   subClipboard() {
@@ -85,7 +92,7 @@ class TaskPage extends React.Component {
     });
   }
 
-  subApplaunch() {
+  subApplaunch(query, FedModule, title, quickstartId) {
     const {
       setDrawerOpen,
       setDrawerContent,
@@ -93,17 +100,42 @@ class TaskPage extends React.Component {
       drawerOpen,
       drawerTitle,
     } = this.props.drawerContext;
-    const handleClick = (appTitle, content) => {
-      const contentWithSuspense = (
-        <React.Suspense fallback={<Spinner />}>{content}</React.Suspense>
-      );
-      setDrawerContent(contentWithSuspense);
-      setDrawerTitle(appTitle);
-      setDrawerOpen(appTitle === drawerTitle ? !drawerOpen : true);
+    const quickstartState = {
+      [quickstartId]: {
+        status: "Not started",
+        taskNumber: -1,
+      },
     };
-    const codeBlocks = this.rootDiv.current.querySelectorAll(
-      "span.app-launch-container"
-    );
+
+    const handleClick = () => {
+      setDrawerContent(
+        <React.Suspense fallback={<Spinner />}>
+          <FedModule
+            quickstartId={quickstartId}
+            quickstartState={quickstartState}
+          />
+        </React.Suspense>
+      );
+      setDrawerTitle(
+        <Split hasGutter>
+          <SplitItem>{title}</SplitItem>
+          {/* <SplitItem isFilled>
+            <Bullseye>
+              <strong>Task status</strong>&nbsp;
+              {this.state.taskStatus === "Unknown" ? (
+                <OutlinedCircleIcon color="gray" />
+              ) : this.state.taskStatus === "Success" ? (
+                <CheckCircleIcon color="green" />
+              ) : (
+                <TimesCircleIcon color="red" />
+              )}
+            </Bullseye>
+          </SplitItem> */}
+        </Split>
+      );
+      setDrawerOpen(title === drawerTitle ? !drawerOpen : true);
+    };
+    const codeBlocks = this.rootDiv.current.querySelectorAll(query);
     let sequenceNumber = 1;
     codeBlocks.forEach((block) => {
       ReactDOM.render(
@@ -111,7 +143,7 @@ class TaskPage extends React.Component {
           id={`app-launch-${sequenceNumber.toString()}`}
           variant="primary"
           isInline
-          onClick={() => handleClick("OpenShift Streams", <AppOne />)}
+          onClick={handleClick}
         >
           {block.innerText}
         </Button>,
@@ -125,7 +157,7 @@ class TaskPage extends React.Component {
     const handleClick = (event) => {
       // this weird looking code sets the input value and triggers a change event
       const el = document.querySelector("#simple-form-name-01");
-      const newValue = "kafka-test"; 
+      const newValue = "kafka-test";
       const valueSetter = Object.getOwnPropertyDescriptor(el, "value").set;
       const prototype = Object.getPrototypeOf(el);
       const prototypeValueSetter = Object.getOwnPropertyDescriptor(
@@ -162,7 +194,18 @@ class TaskPage extends React.Component {
   componentDidUpdate() {
     if (this.rootDiv.current) {
       this.subClipboard();
-      this.subApplaunch();
+      this.subApplaunch(
+        "span.app-launch-control",
+        ControlPlanePage,
+        "Kafka control plane",
+        "create-kafka-instance"
+      );
+      this.subApplaunch(
+        "span.app-launch-data",
+        DataPlanePage,
+        "Kafka data plane",
+        "create-topic"
+      );
       this.subCopyToDrawer();
     }
   }
@@ -576,14 +619,34 @@ class TaskPage extends React.Component {
             <SkipToContent href="#main-content">Skip to content</SkipToContent>
             {/* <RoutedConnectedMasthead /> */}
             <PageSection variant="light">
-              <Breadcrumb
-                threadName={parsedThread.title}
-                threadId={id}
-                taskPosition={taskNum + 1}
-                totalTasks={totalTasks}
-                homeClickedCallback={() => {}}
-                isAllSolutionPattern
-              />
+              <Split>
+                <SplitItem>
+                  <Breadcrumb
+                    threadName={parsedThread.title}
+                    threadId={id}
+                    taskPosition={taskNum + 1}
+                    totalTasks={totalTasks}
+                    homeClickedCallback={() => {}}
+                    isAllSolutionPattern
+                  />
+                </SplitItem>
+                <SplitItem isFilled></SplitItem>
+                {/* <SplitItem>
+                  Task status {" "}
+                  {this.getVerificationsForTask(threadTask).map(
+                    (verificationId, i) => {
+                      return currentThreadProgress[verificationId] ===
+                        undefined ? (
+                        <OutlinedCircleIcon color="gray" />
+                      ) : currentThreadProgress[verificationId] ? (
+                        <CheckCircleIcon color="green" />
+                      ) : (
+                        <TimesCircleIcon color="red" />
+                      );
+                    }
+                  )}
+                </SplitItem> */}
+              </Split>
             </PageSection>
             <PageSection className="integr8ly-landing-page-tutorial-dashboard-section">
               <Grid hasGutter>

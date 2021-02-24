@@ -57,8 +57,8 @@
     "lodash.get": "^4.4.2",
     "mustache": "^4.1.0",
     "path-browserify": "^1.0.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-redux": "5.0.6",
     "react-router-dom": "5.2.0",
     "redux": "4.0.5",
@@ -79,7 +79,7 @@
     "@redhat-cloud-services/eslint-config-redhat-cloud-services": "^1.0.0",
     "@redhat-cloud-services/frontend-components-config": "3.0.0-beta18",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
-    "asciidoctor": "2.2.1",
+    "asciidoctor": "^2.2.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "26.6.3",
     "babel-plugin-dual-import": "1.2.1",
@@ -109,5 +109,9 @@
   },
   "insights": {
     "appname": "cloud-tutorials"
-  }
+  },
+  "workspaces": [
+    "apps/mk-ui-frontend",
+    "apps/strimzi-ui"
+  ]
 }

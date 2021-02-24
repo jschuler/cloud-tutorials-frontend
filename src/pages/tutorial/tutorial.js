@@ -28,9 +28,6 @@ import { getDocsForWalkthrough, getDefaultAdocAttrs } from '../../common/docsHel
 import { RoutedConnectedMasthead } from '../../components/masthead/masthead';
 import Breadcrumb from '../../components/breadcrumb/breadcrumb';
 import { AppDrawerContext } from "../../AppDrawerContext";
-const AppOne = React.lazy(() => import("app2/AppOne"));
-const AppTwo = React.lazy(() => import("app2/AppTwo"));
-const AppThree = React.lazy(() => import("app2/AppThree"));
 
 class TutorialPage extends React.Component {
   componentDidMount() {
@@ -143,15 +140,6 @@ class TutorialPage extends React.Component {
                             >
                               {t('tutorial.getStarted')}
                             </Button>
-                            {/* <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App One", <AppOne />)}>
-                              Launch App One
-                            </Button>
-                            <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App Two", <AppTwo />)}>
-                              Launch App Two
-                            </Button>
-                            <Button variant="secondary" style={{ display: 'block '}} onClick={() => handleClick("App Three", <AppThree />)}>
-                              Launch App Three
-                            </Button> */}
                           </div>
                           {this.renderPrereqs(thread)}
                           <div dangerouslySetInnerHTML={{ __html: parsedThread.preamble }} />
