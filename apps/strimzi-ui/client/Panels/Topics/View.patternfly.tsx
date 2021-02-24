@@ -15,7 +15,7 @@ const Topics: FunctionComponent = () => {
     history.push('/topics/create');
   };
 
-  return <TopicsList onCreateTopic={onCreateTopic} />;
+  return <TopicsList topics={[]} onCreateTopic={onCreateTopic} />;
 };
 
 export { Topics };

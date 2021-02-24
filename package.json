@@ -7,6 +7,7 @@
     "uberstart:back": "npm-run-all --parallel mk-ui-back start:backend",
     "mk-ui-front": "cd apps/mk-ui-frontend && BASE_PATH=http://localhost:8000 npm run start:dev",
     "mk-ui-back": "cd apps/mk-ui-frontend/mas-mock && npm run start",
+    "strimzi-ui": "cd apps/strimzi-ui && npm run start",
     "strimzi-ui-front": "cd apps/strimzi-ui && npm run start:client",
     "strimzi-ui-back": "cd apps/strimzi-ui && npm run start:mockadminserver",
     "build": "webpack --config config/prod.webpack.config.js",
