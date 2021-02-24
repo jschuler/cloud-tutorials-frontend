@@ -1,0 +1,8 @@
+
+.co-quick-start-content {
+    min-height: revert !important;
+}
+
+.co-quick-start-panel-content .pf-c-drawer__close {
+    display: none !important;
+}

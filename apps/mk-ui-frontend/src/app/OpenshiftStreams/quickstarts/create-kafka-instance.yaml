@@ -1,0 +1,31 @@
+metadata:
+  name: create-kafka-instance
+spec:
+  displayName: Creating a kafka instance
+  durationMinutes: 5
+  icon: ''
+  description: Card description
+  prerequisites: [Card prereqs]
+  introduction: |-
+    ### This quick start shows you how to create a kafka instance.
+  tasks:
+    - title: Creating a kafka instance
+      description: |-
+        ### To create a kafka instance:
+        1. Click on the **Create Kafka instance** button
+        1. A dialog is launched
+        1. Provide an instance name
+        1. Optionally choose a cloud region
+        1. Click on the **Create instance** button.
+
+        The dialog will close and you will see a new entry in the kafka list.
+      review:
+        instructions: |-
+          #### To verify you created a kafka instance:
+          Do you see your instance in the list?
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+      summary:
+        success: You have created a kafka instance!
+        failed: Try the steps again.
+  conclusion: You have successfully created a kafka instance.
+  nextQuickStart: []

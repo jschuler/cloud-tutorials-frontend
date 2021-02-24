@@ -1,0 +1,1 @@
+linting/husky.config.js
