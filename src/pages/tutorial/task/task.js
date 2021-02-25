@@ -131,6 +131,7 @@ class TaskPage extends React.Component {
     }
 
     const handleClick = () => {
+      window.localStorage.removeItem('quickstarts');
       setDrawerContent(
         <React.Suspense fallback={<Spinner />}>
           <FedModule

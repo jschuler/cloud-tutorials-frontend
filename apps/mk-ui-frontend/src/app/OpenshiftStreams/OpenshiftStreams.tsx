@@ -36,8 +36,9 @@ type SelectedInstance = {
 };
 
 const OpenshiftStreams = ({ onConnectToInstance }: OpenShiftStreamsProps) => {
-  const authContext = useContext(AuthContext);
-  const { basePath } = useContext(ApiContext);
+  // const authContext = useContext(AuthContext);
+  // const { basePath } = useContext(ApiContext);
+  const basePath = "http://localhost:8000";
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -110,7 +111,7 @@ const OpenshiftStreams = ({ onConnectToInstance }: OpenShiftStreamsProps) => {
 
   // Functions
   const fetchKafkas = async () => {
-    const accessToken = await authContext?.getToken();
+    const accessToken = 'token'; // await authContext?.getToken();
 
     if (isValidToken(accessToken)) {
       try {
@@ -187,7 +188,7 @@ const OpenshiftStreams = ({ onConnectToInstance }: OpenShiftStreamsProps) => {
   useEffect(() => {
     setKafkaDataLoaded(false);
     fetchKafkas();
-  }, [authContext, page, perPage, filteredValue, orderBy]);
+  }, [/*authContext, */page, perPage, filteredValue, orderBy]);
 
   useEffect(() => {
     fetchCloudProviders();

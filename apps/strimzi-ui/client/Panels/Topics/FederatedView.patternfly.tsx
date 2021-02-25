@@ -61,8 +61,16 @@ const FederatedTopics: FunctionComponent<FederatedTopicsProps> = ({
   });
 
   const allQuickStarts = [example];
-  const [activeQuickStartID, setActiveQuickStartID] = React.useState(quickstartId);
-  const [allQuickStartStates, setAllQuickStartStates] = React.useState(quickstartState);
+  // const [activeQuickStartID, setActiveQuickStartID] = React.useState(quickstartId);
+  // const [allQuickStartStates, setAllQuickStartStates] = React.useState(quickstartState);
+  const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage(
+    "quickstartId",
+    quickstartId
+  );
+  const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage(
+    "quickstarts",
+    quickstartState
+  );
   const onChangeQuickStartState = (valueFnc) => {
     setAllQuickStartStates(valueFnc(allQuickStartStates));
     onQuickstartChange && onQuickstartChange(valueFnc(allQuickStartStates));

@@ -1,3 +1,8 @@
 .mk--main-page__page-section--table {
   padding-bottom: 69px;
 }
+
+.co-quick-start-drawer__body.pf-c-backdrop__open .pf-c-backdrop {
+  right: 315px !important;
+  width: revert !important;
+}

@@ -99,7 +99,7 @@ const App = (props) => {
   }, [handleEscapePress]);
 
   const panelContent = (
-    <DrawerPanelContent isResizable={false} defaultSize="100%" minSize="200px">
+    <DrawerPanelContent isResizable={false} defaultSize="calc(100% - 72px)">
       <DrawerHead>
         <span>{drawerTitle}</span>
         <DrawerActions>
@@ -122,7 +122,6 @@ const App = (props) => {
       <Drawer isExpanded={drawerOpen} position="bottom" onExpand={onExpand}>
         <DrawerContent
           panelContent={panelContent}
-          style={{ marginBottom: "72px" }}
         >
           <DrawerContentBody>
             <Routes childProps={props} />
