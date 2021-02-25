@@ -484,9 +484,6 @@ class TaskPage extends React.Component {
       verificationLabel = "Alert fail";
     }
     const verifyThroughApp =  block.html.indexOf("verify-through-app") > -1;
-    // this.setState({
-    //   verifyThroughApp
-    // });
     if (verifyThroughApp) {
       if (this.state.taskStatus === "Success") {
         // this.handleVerificationInput(null, blockId, true);
