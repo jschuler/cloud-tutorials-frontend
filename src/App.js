@@ -69,6 +69,7 @@ const App = (props) => {
   }, []);
 
   const toggleFullScreen = (event, disable) => {
+    debugger;
     const isFullScreen = disable !== undefined ? disable : !fullScreen;
     setFullScreen(isFullScreen);
     if (isFullScreen) {

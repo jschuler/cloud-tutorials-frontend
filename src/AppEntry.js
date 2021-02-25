@@ -15,6 +15,24 @@ const AppEntry = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [drawerContent, setDrawerContent] = React.useState(null);
   const [drawerTitle, setDrawerTitle] = React.useState("");
+  const [fullScreen, setFullScreen] = React.useState(false);
+  const toggleFullScreen = (event, disable) => {
+    const isFullScreen = disable !== undefined ? disable : !fullScreen;
+    setFullScreen(isFullScreen);
+    if (isFullScreen) {
+      document.querySelector(".pf-c-page__sidebar").style.display = "none";
+      document.querySelector(".pf-c-page__header").style.display = "none";
+      document.querySelector(
+        ".pf-c-drawer__body .pf-c-page__main"
+      ).style.overflow = "hidden";
+    } else {
+      document.querySelector(".pf-c-page__sidebar").style.display = "block";
+      document.querySelector(".pf-c-page__header").style.display = "block";
+      document.querySelector(
+        ".pf-c-drawer__body .pf-c-page__main"
+      ).style.overflow = "auto";
+    }
+  };
   
   return (
     <I18nProvider locale="en">
@@ -27,7 +45,9 @@ const AppEntry = () => {
               drawerContent,
               setDrawerContent,
               drawerTitle,
-              setDrawerTitle
+              setDrawerTitle,
+              fullScreen,
+              setFullScreen: toggleFullScreen
             }}
           >
             <App />

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { BreadcrumbItem, Breadcrumb as PfBreadcrumb } from '@patternfly/react-core';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class Breadcrumb extends React.Component {
   homeClicked = () => {
@@ -14,21 +14,28 @@ class Breadcrumb extends React.Component {
   };
 
   render() {
-    const { t, threadName, threadId, totalTasks, taskPosition, isAllSolutionPattern } = this.props;
+    const { t, threadName, threadId, totalTasks, taskPosition, isAllSolutionPattern, location, onTaskClick, drawerOpen } = this.props;
     return (
       <PfBreadcrumb aria-label="Breadcrumb">
         <BreadcrumbItem to="#" onClick={this.homeClicked} id="breadcrumb-home">
           Home
         </BreadcrumbItem>
         {isAllSolutionPattern && <BreadcrumbItem to="/solution-patterns">Solution Patterns</BreadcrumbItem>}
-        {threadName && !taskPosition && <BreadcrumbItem isActive>{threadName}</BreadcrumbItem>}
+        {threadName && !taskPosition && <BreadcrumbItem>{threadName}</BreadcrumbItem>}
         {threadName &&
           taskPosition && (
             <React.Fragment>
-              <BreadcrumbItem to={`/tutorial/${threadId}`}>{threadName}</BreadcrumbItem>
-              <BreadcrumbItem isActive aria-current="page">
+              <BreadcrumbItem showDivider to={`/tutorial/${threadId}`}>{threadName}</BreadcrumbItem>
+              <BreadcrumbItem showDivider isActive={drawerOpen} aria-current="page" onClick={onTaskClick} render={(className) => {
+                return drawerOpen ? (
+                  <Link className={className}><strong>{t('breadcrumb.task', { taskPosition, totalTasks })}</strong></Link>
+                ) : (
+                  <span className={className}>{t('breadcrumb.task', { taskPosition, totalTasks })}</span>
+                );
+              }} />
+              {/* <BreadcrumbItem aria-current="page" active={drawerOpen} onClick={onTaskClick}>
                 {t('breadcrumb.task', { taskPosition, totalTasks })}
-              </BreadcrumbItem>
+              </BreadcrumbItem> */}
             </React.Fragment>
           )}
       </PfBreadcrumb>

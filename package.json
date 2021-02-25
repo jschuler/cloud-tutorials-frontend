@@ -3,11 +3,10 @@
   "version": "1.1.0",
   "private": false,
   "scripts": {
-    "uberstart:front": "npm-run-all --parallel mk-ui-front start",
-    "uberstart:back": "npm-run-all --parallel mk-ui-back start:backend",
+    "uberstart:front": "npm-run-all --parallel mk-ui-front strimzi-ui-front start",
+    "uberstart:back": "npm-run-all --parallel mk-ui-back strimzi-ui-back start:backend",
     "mk-ui-front": "cd apps/mk-ui-frontend && BASE_PATH=http://localhost:8000 npm run start:dev",
     "mk-ui-back": "cd apps/mk-ui-frontend/mas-mock && npm run start",
-    "strimzi-ui": "cd apps/strimzi-ui && npm run start",
     "strimzi-ui-front": "cd apps/strimzi-ui && npm run start:client",
     "strimzi-ui-back": "cd apps/strimzi-ui && npm run start:mockadminserver",
     "build": "webpack --config config/prod.webpack.config.js",
@@ -111,7 +110,7 @@
     "stylelint": "13.9.0",
     "stylelint-config-recommended-scss": "4.2.0",
     "stylelint-scss": "3.18.0",
-    "webpack": "5.20.0",
+    "webpack": "5.24.2",
     "webpack-bundle-analyzer": "4.4.0",
     "webpack-cli": "4.5.0"
   },

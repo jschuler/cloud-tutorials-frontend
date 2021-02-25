@@ -322,6 +322,7 @@ const CreateInstanceModal: React.FunctionComponent<CreateInstanceModalProps> = (
   return (
     <>
       <Modal
+        appendTo={() => document.querySelector('.co-quick-start-drawer__body') as HTMLElement}
         variant={ModalVariant.medium}
         title={t('create_a_kafka_instance')}
         isOpen={createStreamsInstance}

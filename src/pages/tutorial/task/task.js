@@ -24,6 +24,7 @@ import {
   Split,
   SplitItem,
   Bullseye,
+  Banner
 } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
@@ -612,13 +613,19 @@ class TaskPage extends React.Component {
       const combinedResources = parsedThread.resources.concat(
         threadTask.resources
       );
-      const { drawerOpen } = this.props.drawerContext;
+      const { drawerOpen, setDrawerOpen, setFullScreen } = this.props.drawerContext;
+      const onTaskClick = () => {
+        if (drawerOpen) {
+          setDrawerOpen(false);
+          setFullScreen(null, false);
+        }
+      }
       return (
         <React.Fragment>
           <Page className="pf-u-h-100vh">
             <SkipToContent href="#main-content">Skip to content</SkipToContent>
             {/* <RoutedConnectedMasthead /> */}
-            <PageSection variant="light">
+            <PageSection variant="light" style={drawerOpen ? { backgroundColor: 'yellow' } : {}}>
               <Split>
                 <SplitItem>
                   <Breadcrumb
@@ -628,6 +635,8 @@ class TaskPage extends React.Component {
                     totalTasks={totalTasks}
                     homeClickedCallback={() => {}}
                     isAllSolutionPattern
+                    drawerOpen={drawerOpen}
+                    onTaskClick={onTaskClick}
                   />
                 </SplitItem>
                 <SplitItem isFilled></SplitItem>

@@ -6,5 +6,7 @@ export const AppDrawerContext = createContext({
     drawerOpen: false,
     setDrawerOpen: () => {},
     drawerContent: null,
-    setDrawerContent: () => {}
+    setDrawerContent: () => {},
+    fullScreen: false,
+    setFullScreen: () => {},
 });
