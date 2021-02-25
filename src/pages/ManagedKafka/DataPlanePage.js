@@ -6,7 +6,7 @@ import { AppDrawerContext } from "../../AppDrawerContext";
 
 export const DataPlanePage = (props) => {
 
-  const { quickstartId } = props;
+  const { quickstartId, onQsStateChange } = props;
 
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
   const [qsState, setQsState] = React.useState("Unknown");
@@ -41,7 +41,8 @@ export const DataPlanePage = (props) => {
         key = `taskStatus${i}`;
       }
     }
-    setQsState(status)
+    setQsState(status);
+    onQsStateChange(status);
   };
 
   const [showCreateTopic, setShowCreateTopic] = React.useState(false);

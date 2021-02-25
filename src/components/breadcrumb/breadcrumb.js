@@ -26,16 +26,16 @@ class Breadcrumb extends React.Component {
           taskPosition && (
             <React.Fragment>
               <BreadcrumbItem showDivider to={`/tutorial/${threadId}`}>{threadName}</BreadcrumbItem>
-              <BreadcrumbItem showDivider isActive={drawerOpen} aria-current="page" onClick={onTaskClick} render={(className) => {
+              {/* <BreadcrumbItem showDivider isActive={drawerOpen} aria-current="page" onClick={onTaskClick} render={(className) => {
                 return drawerOpen ? (
                   <Link className={className}><strong>{t('breadcrumb.task', { taskPosition, totalTasks })}</strong></Link>
                 ) : (
                   <span className={className}>{t('breadcrumb.task', { taskPosition, totalTasks })}</span>
                 );
-              }} />
-              {/* <BreadcrumbItem aria-current="page" active={drawerOpen} onClick={onTaskClick}>
+              }} /> */}
+              <BreadcrumbItem showDivider aria-current="page" isActive>
                 {t('breadcrumb.task', { taskPosition, totalTasks })}
-              </BreadcrumbItem> */}
+              </BreadcrumbItem>
             </React.Fragment>
           )}
       </PfBreadcrumb>

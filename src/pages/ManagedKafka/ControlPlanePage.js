@@ -5,7 +5,7 @@ import { AppDrawerContext } from "../../AppDrawerContext";
 
 export const ControlPlanePage = (props) => {
 
-  const { quickstartId } = props;
+  const { quickstartId, onQsStateChange } = props;
 
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
   const [qsState, setQsState] = React.useState("Unknown");
@@ -40,7 +40,8 @@ export const ControlPlanePage = (props) => {
         key = `taskStatus${i}`;
       }
     }
-    setQsState(status)
+    setQsState(status);
+    onQsStateChange(status);
   };
 
   const MkControlPlaneProps = {

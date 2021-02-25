@@ -55,7 +55,7 @@ const App = (props) => {
     setDrawerContent(null);
     setDrawerTitle("");
     setDrawerOpen(false);
-    toggleFullScreen(null, false);
+    // toggleFullScreen(null, false);
   };
 
   const [fullScreen, setFullScreen] = React.useState(false);
@@ -69,18 +69,17 @@ const App = (props) => {
   }, []);
 
   const toggleFullScreen = (event, disable) => {
-    debugger;
     const isFullScreen = disable !== undefined ? disable : !fullScreen;
     setFullScreen(isFullScreen);
     if (isFullScreen) {
-      document.querySelector(".pf-c-page__sidebar").style.display = "none";
-      document.querySelector(".pf-c-page__header").style.display = "none";
+      // document.querySelector(".pf-c-page__sidebar").style.display = "none";
+      // document.querySelector(".pf-c-page__header").style.display = "none";
       document.querySelector(
         ".pf-c-drawer__body .pf-c-page__main"
       ).style.overflow = "hidden";
     } else {
-      document.querySelector(".pf-c-page__sidebar").style.display = "block";
-      document.querySelector(".pf-c-page__header").style.display = "block";
+      // document.querySelector(".pf-c-page__sidebar").style.display = "block";
+      // document.querySelector(".pf-c-page__header").style.display = "block";
       document.querySelector(
         ".pf-c-drawer__body .pf-c-page__main"
       ).style.overflow = "auto";
@@ -88,7 +87,7 @@ const App = (props) => {
   };
 
   const onExpand = (expand, a) => {
-    toggleFullScreen(null, true);
+    // toggleFullScreen(null, true);
   };
 
   useEffect(() => {

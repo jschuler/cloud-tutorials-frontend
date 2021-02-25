@@ -20,14 +20,14 @@ const AppEntry = () => {
     const isFullScreen = disable !== undefined ? disable : !fullScreen;
     setFullScreen(isFullScreen);
     if (isFullScreen) {
-      document.querySelector(".pf-c-page__sidebar").style.display = "none";
-      document.querySelector(".pf-c-page__header").style.display = "none";
+      // document.querySelector(".pf-c-page__sidebar").style.display = "none";
+      // document.querySelector(".pf-c-page__header").style.display = "none";
       document.querySelector(
         ".pf-c-drawer__body .pf-c-page__main"
       ).style.overflow = "hidden";
     } else {
-      document.querySelector(".pf-c-page__sidebar").style.display = "block";
-      document.querySelector(".pf-c-page__header").style.display = "block";
+      // document.querySelector(".pf-c-page__sidebar").style.display = "block";
+      // document.querySelector(".pf-c-page__header").style.display = "block";
       document.querySelector(
         ".pf-c-drawer__body .pf-c-page__main"
       ).style.overflow = "auto";

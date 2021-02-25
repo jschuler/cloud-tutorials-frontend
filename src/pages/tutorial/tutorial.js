@@ -116,7 +116,7 @@ class TutorialPage extends React.Component {
               <Page className="pf-u-h-100vh">
                 <SkipToContent href="#main-content">Skip to content</SkipToContent>
                 {/* <RoutedConnectedMasthead /> */}
-                <PageSection variant="light">
+                <PageSection variant="light" style={{ backgroundColor: 'yellow' }}> 
                   <Breadcrumb
                     threadName={parsedThread.title}
                     isAllSolutionPattern

@@ -23,8 +23,7 @@ import {
   Spinner,
   Split,
   SplitItem,
-  Bullseye,
-  Banner
+  Alert
 } from "@patternfly/react-core";
 import {
   CheckCircleIcon,
@@ -65,10 +64,12 @@ class TaskPage extends React.Component {
     super(props);
     this.rootDiv = React.createRef();
     this.subClipboard = this.subClipboard.bind(this);
+    this.subApps = this.subApps.bind(this);
     this.subApplaunch = this.subApplaunch.bind(this);
     this.subCopyToDrawer = this.subCopyToDrawer.bind(this);
     this.state = {
-      taskStatus: "Unknown"
+      taskStatus: "",
+      verifyThroughApp: false
     }
   }
 
@@ -93,6 +94,22 @@ class TaskPage extends React.Component {
     });
   }
 
+  subApps() {
+    let hasApp = false;
+    const hasControlPlane = this.subApplaunch(
+      "span.app-launch-control",
+      ControlPlanePage,
+      "Kafka control plane",
+      "create-kafka-instance"
+    );
+    const hasDataPlane = this.subApplaunch(
+      "span.app-launch-data",
+      DataPlanePage,
+      "Kafka data plane",
+      "create-topic"
+    );
+  }
+
   subApplaunch(query, FedModule, title, quickstartId) {
     const {
       setDrawerOpen,
@@ -107,6 +124,11 @@ class TaskPage extends React.Component {
         taskNumber: -1,
       },
     };
+    const onQsStateChange = (taskStatus) => {
+      this.setState({
+        taskStatus
+      });
+    }
 
     const handleClick = () => {
       setDrawerContent(
@@ -114,24 +136,13 @@ class TaskPage extends React.Component {
           <FedModule
             quickstartId={quickstartId}
             quickstartState={quickstartState}
+            onQsStateChange={onQsStateChange}
           />
         </React.Suspense>
       );
       setDrawerTitle(
         <Split hasGutter>
           <SplitItem>{title}</SplitItem>
-          {/* <SplitItem isFilled>
-            <Bullseye>
-              <strong>Task status</strong>&nbsp;
-              {this.state.taskStatus === "Unknown" ? (
-                <OutlinedCircleIcon color="gray" />
-              ) : this.state.taskStatus === "Success" ? (
-                <CheckCircleIcon color="green" />
-              ) : (
-                <TimesCircleIcon color="red" />
-              )}
-            </Bullseye>
-          </SplitItem> */}
         </Split>
       );
       setDrawerOpen(title === drawerTitle ? !drawerOpen : true);
@@ -152,6 +163,7 @@ class TaskPage extends React.Component {
       );
       sequenceNumber++;
     });
+    return codeBlocks.length > 0;
   }
 
   subCopyToDrawer() {
@@ -195,19 +207,8 @@ class TaskPage extends React.Component {
   componentDidUpdate() {
     if (this.rootDiv.current) {
       this.subClipboard();
-      this.subApplaunch(
-        "span.app-launch-control",
-        ControlPlanePage,
-        "Kafka control plane",
-        "create-kafka-instance"
-      );
-      this.subApplaunch(
-        "span.app-launch-data",
-        DataPlanePage,
-        "Kafka data plane",
-        "create-topic"
-      );
-      this.subCopyToDrawer();
+      this.subApps();
+      // this.subCopyToDrawer();
     }
   }
 
@@ -416,6 +417,9 @@ class TaskPage extends React.Component {
 
   goToTask = (e, next) => {
     e.preventDefault();
+    this.setState({
+      taskStatus: ""
+    });
     const {
       history,
       match: {
@@ -427,6 +431,9 @@ class TaskPage extends React.Component {
 
   exitTutorial = (e) => {
     e.preventDefault();
+    this.setState({
+      taskStatus: ""
+    });
     const { history } = this.props;
     history.push(`/congratulations/${this.props.thread.data.id}`);
   };
@@ -475,6 +482,33 @@ class TaskPage extends React.Component {
         "pf-c-alert pf-m-danger pf-m-inline pf-u-mt-md integr8ly-m-alert";
       verificationIcon = "fas fa-times-circle";
       verificationLabel = "Alert fail";
+    }
+    const verifyThroughApp =  block.html.indexOf("verify-through-app") > -1;
+    // this.setState({
+    //   verifyThroughApp
+    // });
+    if (verifyThroughApp) {
+      if (this.state.taskStatus === "Success") {
+        // this.handleVerificationInput(null, blockId, true);
+        return (
+          <Alert isInline variant="success" title="Task completed">
+            <p>
+              You can move onto the next task.
+            </p>
+          </Alert>
+        )
+      } else if (this.state.taskStatus === "Failed") {
+        // this.handleVerificationInput(null, blockId, false);
+        return (
+          <Alert isInline variant="danger" title="Task not completed">
+            <p>
+              Complete the task before moving onto the next task.
+            </p>
+          </Alert>
+        )
+      } else {
+        return null;
+      }
     }
     return (
       <div
@@ -617,15 +651,15 @@ class TaskPage extends React.Component {
       const onTaskClick = () => {
         if (drawerOpen) {
           setDrawerOpen(false);
-          setFullScreen(null, false);
+          // setFullScreen(null, false);
         }
       }
       return (
         <React.Fragment>
-          <Page className="pf-u-h-100vh">
+          <Page /*className="pf-u-h-100vh"*/>
             <SkipToContent href="#main-content">Skip to content</SkipToContent>
             {/* <RoutedConnectedMasthead /> */}
-            <PageSection variant="light" style={drawerOpen ? { backgroundColor: 'yellow' } : {}}>
+            <PageSection variant="light" style={{ backgroundColor: 'yellow' }}>
               <Split>
                 <SplitItem>
                   <Breadcrumb
@@ -640,24 +674,9 @@ class TaskPage extends React.Component {
                   />
                 </SplitItem>
                 <SplitItem isFilled></SplitItem>
-                {/* <SplitItem>
-                  Task status {" "}
-                  {this.getVerificationsForTask(threadTask).map(
-                    (verificationId, i) => {
-                      return currentThreadProgress[verificationId] ===
-                        undefined ? (
-                        <OutlinedCircleIcon color="gray" />
-                      ) : currentThreadProgress[verificationId] ? (
-                        <CheckCircleIcon color="green" />
-                      ) : (
-                        <TimesCircleIcon color="red" />
-                      );
-                    }
-                  )}
-                </SplitItem> */}
               </Split>
             </PageSection>
-            <PageSection className="integr8ly-landing-page-tutorial-dashboard-section">
+            <PageSection className="integr8ly-landing-page-tutorial-dashboard-section" style={drawerOpen ? { display: 'none' } : { display: 'block'}}>
               <Grid hasGutter>
                 <GridItem sm={12} md={drawerOpen ? 12 : 9}>
                   <Card className="integr8ly-c-card--content pf-u-p-lg pf-u-mb-xl">
@@ -695,7 +714,7 @@ class TaskPage extends React.Component {
               {/* The div below is needed for automated testing with Nightwatch.js */}
               <div id="pushIntoView" />
             </PageSection>
-            <PageSection>
+            <PageSection style={drawerOpen ? { display: 'none' } : { display: 'block'}}>
               {/* Bottom footer */}
               <div className="integr8ly-module-column--footer pf-u-w-100 pf-u-pl-2xl">
                 <TextContent>
@@ -794,7 +813,7 @@ class TaskPage extends React.Component {
                         }
                         type="button"
                         onClick={(e) => this.goToTask(e, taskNum + 1)}
-                        isDisabled={!taskVerificationComplete}
+                        isDisabled={this.state.taskStatus ? this.state.taskStatus !== "Success" : !taskVerificationComplete}
                       >
                         {t("task.nextTask")}
                       </Button>
@@ -807,7 +826,7 @@ class TaskPage extends React.Component {
                         }
                         type="button"
                         onClick={(e) => this.exitTutorial(e)}
-                        isDisabled={!taskVerificationComplete}
+                        isDisabled={this.state.taskStatus ? this.state.taskStatus !== "Success" : !taskVerificationComplete}
                       >
                         {t("task.exitTutorial")}
                       </Button>
