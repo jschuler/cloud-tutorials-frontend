@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/RedHatInsights/cloud-tutorials-frontend?branch=master)](https://travis-ci.org/RedHatInsights/cloud-tutorials-frontend)
+[![Build Status](https://travis-ci.com/cloudmosaic/cloud-tutorials-frontend?branch=master)](https://travis-ci.org/cloudmosaic/cloud-tutorials-frontend)
 
 # cloud-tutorials-frontend
 Launcher app for multi-application cloud tutorials. Includes additional `quickstarts.js` script for external websites.
