@@ -1,0 +1,3 @@
+[submodule "content/console-operator"]
+	path = content/console-operator
+	url = https://github.com/openshift/console-operator
