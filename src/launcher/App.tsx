@@ -18,7 +18,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>hi</div>
+    <div>hi </div>
   );
 };
 

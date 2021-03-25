@@ -19,8 +19,6 @@ module.exports = (_env, argv) => {
   const appDeployment = (isProduction && betaBranches.includes(gitBranch)) ? '/beta' : '';
   const publicPath = `${appDeployment}/apps/${name}/`;
   const port = 4567;
-  // Moved multiple entries to index.tsx in order to help speed up webpack
-  const entry = path.join(srcDir, 'entry.ts');
 
   console.log('~~~Using variables~~~');
   console.log(`isProduction: ${isProduction}`);
@@ -37,11 +35,21 @@ module.exports = (_env, argv) => {
       modules: false,
     },
     mode: isProduction ? 'production' : 'development',
-    devtool: 'source-map', // isProduction ? 'source-map' : 'eval',
-    entry,
+    devtool: isProduction ? 'source-map' : 'inline-cheap-source-map',
+    entry: {
+      launcher: path.join(srcDir, 'launcher/entry.ts'),
+      quickstarts: {
+        import: path.join(srcDir, 'quickstarts/entry.ts'),
+        filename: 'quickstarts.js',
+        library: {
+          name: 'quickstarts',
+          type: 'window'
+        }
+      }
+    },
     output: {
       path: path.resolve(__dirname, './dist/'),
-      filename: isProduction ? '[chunkhash].bundle.js' : '[name].bundle.js',
+      filename: isProduction ? '[name].[chunkhash].js' : '[name].js',
       publicPath,
     },
     module: {
@@ -71,7 +79,8 @@ module.exports = (_env, argv) => {
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: path.join(srcDir, 'index.html'),
+        chunks: ['launcher'],
+        template: path.join(srcDir, 'launcher/index.html'),
       }),
       new HtmlReplaceWebpackPlugin([
         {
@@ -85,22 +94,23 @@ module.exports = (_env, argv) => {
         chunkFilename: isProduction ? '[id].[contenthash].css' : '[id].css',
       }),
     ],
-    optimization: {
-      runtimeChunk: true,
-      splitChunks: {
-        chunks: 'all'
-      },
-    },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
     },
     devServer: {
+      client: {
+        host: 'localhost'
+      },
       port,
-      writeToDisk: true,
+      host: 'localhost',
+      https: true,
+      firewall: false,
+      hot: false,
+      injectHot: false,
       historyApiFallback: {
         index: `${publicPath}index.html`
       },
-      proxy: getProxyPaths({ publicPath, webpackPort: port })
+      proxy: getProxyPaths({ publicPath, webpackPort: port }),
     },
   };
 };
