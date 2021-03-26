@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlReplaceWebpackPlugin = require('html-replace-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -77,6 +78,9 @@ module.exports = (_env, argv) => {
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`
+      }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         chunks: ['launcher'],
@@ -108,6 +112,11 @@ module.exports = (_env, argv) => {
       host: 'localhost',
       https: true,
       firewall: false,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+      },
       hot: false,
       injectHot: false,
       historyApiFallback: {
