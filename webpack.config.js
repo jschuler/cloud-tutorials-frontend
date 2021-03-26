@@ -93,6 +93,9 @@ module.exports = (_env, argv) => {
         filename: isProduction ? '[id].[contenthash].css' : '[name].css',
         chunkFilename: isProduction ? '[id].[contenthash].css' : '[id].css',
       }),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.join(__dirname, 'static'), to: '' }
+      ]})
     ],
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
