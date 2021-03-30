@@ -19,12 +19,16 @@ const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
   ...props
 }) => {
   React.useEffect(() => {
-    fetch(`${QUICKSTARTS_BASE}/add-healthchecks-quickstart.json`)
-      .then((res) => res.json())
-      .then((json) => {
-        setAllQuickStarts([json]);
-        setAllQuickStartsLoaded(true);
-      });
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchQuery = queryParams.get('quickstart');
+    if (searchQuery) {
+      fetch(`${QUICKSTARTS_BASE}/${searchQuery}.json`)
+        .then((res) => res.json())
+        .then((json) => {
+          setAllQuickStarts([json]);
+          setAllQuickStartsLoaded(true);
+        });
+    }
   }, []);
 
   const [activeQuickStartID, setActiveQuickStartID] = React.useState("");
