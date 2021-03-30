@@ -99,7 +99,22 @@ module.exports = (_env, argv) => {
       }),
       new CopyWebpackPlugin({ patterns: [
         { from: path.join(__dirname, 'static'), to: '' }
-      ]})
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@cloudmosaic/quickstarts/dist/quickstarts.min.css'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@patternfly/patternfly/patternfly.min.css'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@patternfly/patternfly/utilities/Accessibility/accessibility.css'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@patternfly/patternfly/assets'), to: 'assets' }
+      ]}),
     ],
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],

@@ -19,7 +19,7 @@ yamlDirs
     const toPath = path.join(
       __dirname,
       '../static/quickstarts',
-      path.basename(yamlPath).replace(yamlRegex, '.json')
+      `${doc.metadata.name}.json`
     );
 
     fs.outputFileSync(toPath, JSON.stringify(doc, null, 2));

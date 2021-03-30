@@ -16,6 +16,7 @@
     "test": "true"
   },
   "dependencies": {
+    "@cloudmosaic/quickstarts": "0.0.19",
     "@patternfly/react-core": "^4.101.3",
     "@patternfly/react-table": "^4.23.14",
     "react": "^17.0.0",
