@@ -5,9 +5,6 @@ import {
   useLocalStorage,
   useValuesForQuickStartContext,
 } from "@cloudmosaic/quickstarts";
-import "@patternfly/patternfly/patternfly.min.css";
-import "@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css";
-import "@cloudmosaic/quickstarts/dist/quickstarts.css";
 
 declare const QUICKSTARTS_BASE: string;
 
