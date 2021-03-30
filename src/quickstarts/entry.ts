@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import drawerStyles from '@patternfly/react-styles/css/components/Drawer/drawer';
-import { QuickStartPanel } from './components/QuickStartPanel';
+import QuickStartDrawer from './components/QuickStartDrawer';
+import VanillaChildren from './components/VanillaChildren';
 
 console.log('chrome here!');
 
-const pages = document.getElementsByClassName('pf-c-page');
-const page = pages.length > 0 ? pages[0] : document.body;
+function injectStylesheet(href: string) {
+  var link = document.createElement("link");
+  link.href = href;
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  document.getElementsByTagName("head")[0].appendChild(link);
+}
 
-function makeDiv(className: string | string[]) {
+injectStylesheet('https://unpkg.com/@cloudmosaic/quickstarts@0.0.19/dist/quickstarts.css');
+injectStylesheet('https://www.unpkg.com/@patternfly/patternfly@4.96.2/patternfly.min.css');
+// injectStylesheet('https://www.unpkg.com/@patternfly/patternfly@4.96.2/components/Drawer/drawer.css');
+
+function makeDiv(className: string | string[], styles?: { [key: string]: string }) {
   const div = document.createElement('div');
   if (Array.isArray(className)) {
     div.className = className.join(' ');
@@ -16,34 +25,27 @@ function makeDiv(className: string | string[]) {
   else {
     div.className = className;
   }
+  if (styles) {
+    for (const property in styles) {
+      // @ts-ignore
+      div.style[property] = styles[property];
+    }
+  }
   return div;
 }
 
-// Wrap everything in a patternfly page drawer 
-const pageDrawer = makeDiv('pf-c-page__drawer');
-const drawer = makeDiv([drawerStyles.drawer, drawerStyles.modifiers.inline, drawerStyles.modifiers.expanded]);
-drawer.id = 'quickstartDrawer';
-pageDrawer.append(drawer);
-const drawerMain = makeDiv(drawerStyles.drawerMain);
-drawer.append(drawerMain);
-const drawerContent = makeDiv(drawerStyles.drawerContent);
-const drawerContentBody = makeDiv(drawerStyles.drawerBody);
-drawerContent.append(drawerContentBody);
-const drawerPanel = makeDiv(drawerStyles.drawerPanel);
-drawerMain.append(drawerContent, drawerPanel);
-
-// Move existing content into drawerContentBody
-const toMove = document.getElementById('root');
-if (toMove) {
-  drawerContentBody.appendChild(toMove);
+const wrappedDocBody = makeDiv('doc-body', {
+  height: '100vh'
+});
+while (document.body.firstChild) {
+  wrappedDocBody.appendChild(document.body.firstChild);
 }
-else {
-  // Move everything since we don't know what other JS on page does
-  while (page.childNodes.length) {
-    drawerContentBody.appendChild(page.childNodes[0]);
-  }
-}
-page.append(pageDrawer);
 
-ReactDOM.render(React.createElement(QuickStartPanel), drawerPanel);
+const qsDrawer = makeDiv('qs-drawer', {
+  'height': '100%'
+});
+document.body.append(qsDrawer);
 
+ReactDOM.render(React.createElement(QuickStartDrawer, {
+  children: React.createElement(VanillaChildren, {}, wrappedDocBody)
+}), qsDrawer);
