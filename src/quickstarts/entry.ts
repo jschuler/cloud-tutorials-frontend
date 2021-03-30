@@ -5,18 +5,6 @@ import VanillaChildren from './components/VanillaChildren';
 
 console.log('chrome here!');
 
-function injectStylesheet(href: string) {
-  var link = document.createElement("link");
-  link.href = href;
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  document.getElementsByTagName("head")[0].appendChild(link);
-}
-
-injectStylesheet('https://unpkg.com/@cloudmosaic/quickstarts@0.0.19/dist/quickstarts.css');
-injectStylesheet('https://www.unpkg.com/@patternfly/patternfly@4.96.2/patternfly.min.css');
-// injectStylesheet('https://www.unpkg.com/@patternfly/patternfly@4.96.2/components/Drawer/drawer.css');
-
 function makeDiv(className: string | string[], styles?: { [key: string]: string }) {
   const div = document.createElement('div');
   if (Array.isArray(className)) {
