@@ -1,5 +1,4 @@
 {
-  "version": 4.7,
   "displayName": "<p>Monitor your sample application</p>",
   "durationMinutes": 10,
   "description": "<p>Now that you’ve created a sample application and added health checks, let’s monitor your application.</p>",

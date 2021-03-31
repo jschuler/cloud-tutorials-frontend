@@ -1,5 +1,4 @@
 {
-  "version": 4.7,
   "displayName": "<p>Add health checks to your sample application</p>",
   "durationMinutes": 10,
   "description": "<p>You just created a sample application. Now, let’s add health checks to it.</p>",
@@ -45,8 +44,5 @@
       }
     }
   ],
-  "conclusion": "<p>Your sample application now has health checks. To ensure that your application is running correctly, take the <strong>Monitor your sample application</strong> quick start.</p>",
-  "nextQuickStart": [
-    "<p>monitor-sampleapp</p>"
-  ]
+  "conclusion": "<p>Your sample application now has health checks. To ensure that your application is running correctly, take the <strong>Monitor your sample application</strong> quick start.</p>"
 }

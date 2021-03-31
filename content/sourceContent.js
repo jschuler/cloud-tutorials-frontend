@@ -6,7 +6,7 @@ const { renderMD } = require('./md');
 
 const yamlRegex = /\.ya?ml$/;
 const yamlDirs = [
-  // path.join(__dirname, 'console-operator/quickstarts'),
+  path.join(__dirname, 'console-operator/quickstarts'),
   path.join(__dirname, 'quarkus')
 ];
 

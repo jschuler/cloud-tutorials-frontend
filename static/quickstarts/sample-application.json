@@ -1,5 +1,4 @@
 {
-  "version": 4.7,
   "displayName": "<p>Get started with a sample application</p>",
   "durationMinutes": 10,
   "description": "<p>Is this the first time you’ve used OpenShift? Let's start with a simple sample app to learn the basics.</p>",
@@ -66,8 +65,5 @@
       }
     }
   ],
-  "conclusion": "<p>Your sample application is deployed and ready! To add health checks to your sample app, take the <strong>Adding health checks to your sample application</strong> quick start.</p>",
-  "nextQuickStart": [
-    "<p>add-healthchecks</p>"
-  ]
+  "conclusion": "<p>Your sample application is deployed and ready! To add health checks to your sample app, take the <strong>Adding health checks to your sample application</strong> quick start.</p>"
 }
