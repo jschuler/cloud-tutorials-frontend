@@ -2,7 +2,6 @@ import React, { useState, useEffect, FunctionComponent } from "react";
 import {
   QuickStartContext,
   QuickStartDrawer as QuickStartDrawerLib,
-  useLocalStorage,
   useValuesForQuickStartContext,
 } from "@cloudmosaic/quickstarts";
 
