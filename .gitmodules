@@ -1,3 +1,6 @@
 [submodule "content/console-operator"]
 	path = content/console-operator
 	url = https://github.com/openshift/console-operator
+[submodule "content/mas-guides"]
+	path = content/mas-guides
+	url = https://github.com/redallen/mas-guides

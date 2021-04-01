@@ -1,13 +1,13 @@
 const path = require('path');
 const fs = require('fs-extra');
+const glob = require('glob');
 const yaml = require('js-yaml');
 const { snippetTag, taskTag, titleTag } = require('./asciidoc');
 const { renderMD } = require('./md');
 
-const yamlRegex = /\.ya?ml$/;
-const yamlDirs = [
-  path.join(__dirname, 'console-operator/quickstarts'),
-  path.join(__dirname, 'quarkus')
+const sourcePatterns = [
+  'console-operator/quickstarts/*.{yaml,yml}',
+  'mas-guides/!(external-*)/*.{yaml,yml}'
 ];
 
 // js-yaml doesn't give us the current filename it's parsing for use in custom tags
@@ -34,11 +34,14 @@ const allowedProps = requiredProps.concat(...[
 ]);
 
 const schema = yaml.DEFAULT_SCHEMA.extend([ snippetTag, taskTag, titleTag ]);
-yamlDirs
-  .map(dir => fs.readdirSync(dir).map(p => path.join(dir, p)))
+sourcePatterns
+  .map(p => glob.sync(p, {
+    cwd: __dirname,
+    nodir: true
+  }))
   .flat()
-  .filter(filename => yamlRegex.test(path.extname(filename)))
   .forEach(filename => {
+    console.log(filename);
     console.log(filename.replace(__dirname, ''));
     global.curFilename = filename;
     const text = fs.readFileSync(filename, 'utf8');
