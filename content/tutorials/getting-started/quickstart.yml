@@ -13,9 +13,9 @@ spec:
     - Access to the Red Hat OpenShift Streams for Apache Kafka environment at https://cloud.redhat.com
   introduction: !snippet README.adoc#introduction
   tasks:
-    - !snippet/task README.adoc#proc-creating-kafka-instance_getting-started
-    - !snippet/task README.adoc#proc-creating-service-account_getting-started
-    - !snippet/task README.adoc#proc-creating-kafka-topic_getting-started
+    - !snippet/proc README.adoc#proc-creating-kafka-instance_getting-started
+    - !snippet/proc README.adoc#proc-creating-service-account_getting-started
+    - !snippet/proc README.adoc#proc-creating-kafka-topic_getting-started
   conclusion: !snippet README.adoc#conclusion
   nextQuickStart:
     - 'kafkacat'

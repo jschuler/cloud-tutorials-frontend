@@ -30,17 +30,35 @@ function splitTag(tag, data) {
 }
 
 function getBlock(doc, id) {
+  // Let's support .{context} being postpended to ids. For context:
+  //    > Zackary Allen: hey for the quickstarts why did you postpend _{context} to some of the ids?
+  //    > Pete Muir: i have zero idea, that comes from the docs team
+
+  // Look for a direct match
   const blocks = doc.findBy({ id });
-  if (blocks.length === 0) {
-    throw Error(`Could not find id=${id} in ${filename}`);
+  if (blocks[0]) {
+    return blocks[0];
   }
-  return blocks[0];
+  // Look for postpended .{context}
+  const context = doc.getAttributes().context;
+  if (context) {
+    const contextBlock = doc.getBlocks().find(block => {
+      const bid = block.getId();
+      return bid && new RegExp(`${id}.?${context}`).test(bid);
+    });
+    if (contextBlock) {
+      return contextBlock;
+    }
+  }
+
+  throw Error(`Could not find id=${id} in ${global.curFilename}`);
 }
 
 // Returns string which is the title
 const titleTag = new yaml.Type('!snippet/title', {
   kind: 'scalar',
   construct: tag => {
+    tag = tag.replace(/#.*/, '');
     const doc = resolveDoc(tag);
     return doc.getDocumentTitle() || `Title of ${doc}`;
   }
@@ -62,11 +80,10 @@ class Task {
   constructor(block) {
     this.title = block.getTitle();
     this.description = block.getContent();
-    ;
   }
 }
 
-const taskTagName = '!snippet/task';
+const taskTagName = '!snippet/proc';
 const taskTag = new yaml.Type(taskTagName, {
   kind: 'scalar',
   construct: tag => {
