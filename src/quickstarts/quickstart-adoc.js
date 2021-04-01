@@ -19,7 +19,7 @@ const buildQuickStart = (content, filePath, basePath, asciidocOptions) => {
     const schema = JSON.parse(rawSchema);
     const validate = ajv.compile(schema);
     const valid = validate(instance);
-    console.log(instance);
+    // console.log(instance);
     if (!valid) {
       throw new Error(`${filePath} ${validate.errors.map(error => error.message).toString()}`);
     }

@@ -6,8 +6,11 @@ import {
   NavItem,
   PageSidebar,
   PageHeader,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbHeading,
 } from "@patternfly/react-core";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -26,6 +29,9 @@ const App = ({ children }: { children: React.ReactNode }) => {
     window.insights.chrome.identifyApp("cloud-tutorials");
   }, []);
 
+  const location = useLocation();
+  const locationChunks = location.pathname.split("/");
+
   const AppNav = (
     <Nav aria-label="Nav">
       <NavList>
@@ -38,8 +44,29 @@ const App = ({ children }: { children: React.ReactNode }) => {
 
   const AppSidebar = <PageSidebar isNavOpen nav={AppNav} />;
 
+  const PageBreadcrumb = (
+    <Breadcrumb>
+      {locationChunks.map((chunk, index) => {
+        if (index === 0) {
+          return;
+        }
+        return (
+          <BreadcrumbItem
+            key={`breadcrumb-${chunk || '/'}`}
+            isActive={index === locationChunks.length - 1}
+            render={({ className }) => (
+              <Link to={locationChunks.slice(0, index + 1).join('/')} className={className}>
+                {chunk || "/"}
+              </Link>
+            )}
+          />
+        );
+      })}
+    </Breadcrumb>
+  );
+
   return (
-    <Page sidebar={AppSidebar} isManagedSidebar>
+    <Page sidebar={AppSidebar} isManagedSidebar breadcrumb={PageBreadcrumb}>
       {children}
     </Page>
   );

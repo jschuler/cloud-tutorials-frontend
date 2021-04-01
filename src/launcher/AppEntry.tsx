@@ -8,19 +8,19 @@ import { Tasks } from './Tasks';
 const AppEntry = () => {
   return (
     <Router basename="/mosaic/cloud-tutorials">
-      <Route exact path="/">
+      <Route exact path={['/', '/tutorials']}>
         <App>
           <Catalog />
         </App>
       </Route>
-      <Route exact path="/tutorial/quarkus-kafka">
+      <Route exact path="/tutorials/:name">
         <App>
-          <Tutorial path="quarkus.quickstart.json" />
+          <Tutorial />
         </App>
       </Route>
-      <Route exact path="/tutorial/quarkus-kafka/tasks">
+      <Route exact path="/tutorials/:name/tasks">
         <App>
-          <Tasks tutorialPath="/tutorial/quarkus-kafka" path="quarkus.quickstart.json" />
+          <Tasks />
         </App>
       </Route>
     </Router>

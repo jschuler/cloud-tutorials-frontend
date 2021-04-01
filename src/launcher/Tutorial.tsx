@@ -18,48 +18,25 @@ import {
 } from "@patternfly/react-core";
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import "./asciidoctor-skins/adoc-github.css";
 
 declare const QUICKSTARTS_BASE: string;
+declare const TUTORIALS_BASE: string;
 
-export const Tutorial = ({ path }: { path: string }) => {
+export const Tutorial = () => {
   const history = useHistory();
+  // @ts-ignore
+  const { name } = useParams();
   const handleClick = (path: string) => history.push(path);
   const [tutorial, setTutorial] = React.useState<QuickStart>();
-  const [steps, setSteps] = React.useState<WizardStep[]>([]);
   React.useEffect(() => {
-    fetch(`${QUICKSTARTS_BASE}/${path}`)
+    fetch(`${TUTORIALS_BASE}/${name}.tutorial.json`)
       .then((res) => res.json())
       .then((json) => {
         setTutorial(json);
       });
   }, []);
-  React.useEffect(() => {
-    const taskSteps: WizardStep[] = [];
-    if (tutorial) {
-      (tutorial?.spec.tasks as string[]).map((task: string, index: number) => {
-        const template = document.createElement("template");
-        template.innerHTML = task.trim();
-        // remove procedure
-        template.content
-          ?.querySelectorAll(".olist")
-          .forEach((node) => node.remove());
-        // remove verification
-        template.content
-          ?.querySelectorAll(".ulist")
-          .forEach((node) => node.remove());
-        const title =
-          template.content.querySelector("h2")?.innerHTML ||
-          `Task ${index + 1}`;
-        taskSteps.push({
-          name: <QuickStartMarkdownView content={title} />,
-          component: <QuickStartMarkdownView content={template.innerHTML} />,
-        });
-        setSteps(taskSteps);
-      });
-    }
-  }, [tutorial]);
 
   return tutorial ? (
     <>
@@ -86,12 +63,10 @@ export const Tutorial = ({ path }: { path: string }) => {
       )}
       <Button
         variant="primary"
-        onClick={() => handleClick("/tutorial/quarkus-kafka/tasks")}
+        onClick={() => handleClick(`/tutorials/${name}/tasks`)}
       >
         Start tutorial
       </Button>
     </>
-  ) : (
-    <div>Loading</div>
-  );
+  ) : null;
 };

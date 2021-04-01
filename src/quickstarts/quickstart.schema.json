@@ -195,7 +195,6 @@
       ],
       "required": [
         "version",
-        "type",
         "displayName",
         "icon",
         "description"

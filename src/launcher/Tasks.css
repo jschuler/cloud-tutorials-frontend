@@ -1,0 +1,14 @@
+.tut-tasks {
+    padding-top: 16px;
+}
+
+.tut-tasks.pf-c-wizard .pf-c-wizard__main-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tut-app-launch {
+    padding: '15px 0';
+    flex-grow: 1;
+}

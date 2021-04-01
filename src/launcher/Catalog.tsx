@@ -15,8 +15,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
-
-declare const QUICKSTARTS_BASE: string;
+import { loadJSONTutorials } from './tutorialLoader';
 
 export const Catalog: React.FC = () => {
   const history = useHistory();
@@ -24,14 +23,12 @@ export const Catalog: React.FC = () => {
 
   const [tutorials, setTutorials] = React.useState<QuickStart[]>([]);
 
-  // TODO: grab all tutorials
-  const path = 'quarkus.quickstart.json';
   React.useEffect(() => {
-    fetch(`${QUICKSTARTS_BASE}/${path}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setTutorials([json]);
-      });
+    const load = async () => {
+      const allTutorials = await loadJSONTutorials("/apps/cloud-tutorials/");
+      setTutorials(allTutorials);
+    };
+    load();
   }, []);
 
   return (
@@ -48,7 +45,7 @@ export const Catalog: React.FC = () => {
         <Gallery hasGutter>
           {tutorials.map((tutorial, i) => (
             <GalleryItem key={i}>
-              <Card isHoverable onClick={() => handleClick('/tutorial/quarkus-kafka')}>
+              <Card isHoverable onClick={() => handleClick(`/tutorials/${tutorial.metadata.name}`)}>
                 <CardTitle>
                   {tutorial.spec.displayName}
                 </CardTitle>

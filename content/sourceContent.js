@@ -12,7 +12,7 @@ yamlDirs
   .flat()
   .filter(yamlPath => yamlRegex.test(path.extname(yamlPath)))
   .forEach(yamlPath => {
-    console.log(yamlPath.replace(__dirname, ''));
+    // console.log(yamlPath.replace(__dirname, ''));
     const text = fs.readFileSync(yamlPath, 'utf8');
     const doc = yaml.load(text);
 

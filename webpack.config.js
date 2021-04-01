@@ -81,7 +81,8 @@ module.exports = (_env, argv) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`
+        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`,
+        'TUTORIALS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}tutorials"`
       }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -124,7 +125,7 @@ module.exports = (_env, argv) => {
             to: ({_context, absoluteFilename}) => {
               // The dirname of quickstart is used as the output key
               const dirName = path.basename(path.dirname(absoluteFilename));
-              return `quickstarts/${dirName}.quickstart.json`
+              return `tutorials/${dirName}.tutorial.json`
               // if (!isProduction) {
               //   return `${dirName}.quickstart.json`
               // }
@@ -140,6 +141,7 @@ module.exports = (_env, argv) => {
       }),
       new AssetsPlugin({
         keepInMemory: !isProduction,
+        path: 'static',
         removeFullPathAutoPrefix: true
       }),
     ],

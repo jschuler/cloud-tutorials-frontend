@@ -1,12 +1,9 @@
 apiVersion: console.openshift.io/v1
 kind: QuickStarts
 metadata:
-  name: quarkus-kafka
+  name: quarkus
 spec:
   version: 0.1
-  type:
-    text: Quick start
-    color: green
   displayName: !snippet/title README.adoc#chap-using-quarkus
   durationMinutes: 10
   icon: ''

@@ -25,6 +25,9 @@ function makeDiv(className: string | string[], styles?: { [key: string]: string 
 const wrappedDocBody = makeDiv('doc-body', {
   height: '100vh'
 });
+let alert = makeDiv('asd');
+alert.textContent = "WITHIN TUTORIAL";
+wrappedDocBody.appendChild(alert)
 while (document.body.firstChild) {
   wrappedDocBody.appendChild(document.body.firstChild);
 }
