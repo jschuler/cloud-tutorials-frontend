@@ -43,17 +43,12 @@ yamlDirs
     global.curFilename = filename;
     const text = fs.readFileSync(filename, 'utf8');
     let quickstart = yaml.load(text, { schema });
-    const toPath = path.join(
-      __dirname,
-      '../static/quickstarts',
-      `${quickstart.metadata.name}.json`
-    );
+    const name = quickstart.metadata.name;
 
     // Make sure it has required props
     quickstart = quickstart.spec;
-
     requiredProps.forEach(prop => assertProp(quickstart, prop, filename));
-    // TODO: only keep valid props
+    // Only keep valid props that we render
     Object.keys(quickstart).forEach(key => {
       if (!allowedProps.includes(key)) {
         delete quickstart[key];
@@ -62,5 +57,17 @@ yamlDirs
     // Render string fields to md
     renderMD(quickstart);
 
+    // Stay compatible with old schema
+    quickstart = {
+      metadata: { name },
+      spec: quickstart
+    };
+
+    const toPath = path.join(
+      __dirname,
+      '../static/quickstarts',
+      `${name}.json`
+    );
     fs.outputFileSync(toPath, JSON.stringify(quickstart, null, 2));
   });
+

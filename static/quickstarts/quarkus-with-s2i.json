@@ -1,82 +1,87 @@
 {
-  "description": "<p>Import a Quarkus Application from git, build, and deploy it onto OpenShift.</p>",
-  "displayName": "<p>Get started with Quarkus using s2i</p>",
-  "durationMinutes": 10,
-  "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJMYXllcl8xIiBkYXRhLW5hbWU9IkxheWVyIDEiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojNDY5NWViO30uY2xzLTJ7ZmlsbDojZmYwMDRhO30uY2xzLTN7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+cXVhcmt1c19pY29uX3JnYl8xMDI0cHhfcmV2ZXJzZTwvdGl0bGU+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjY2OS4zNCAxODAuNTcgNTEyIDI3MS40MSA2NjkuMzQgMzYyLjI1IDY2OS4zNCAxODAuNTciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMzU0LjY2IDE4MC41NyAzNTQuNjYgMzYyLjI1IDUxMiAyNzEuNDEgMzU0LjY2IDE4MC41NyIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI2NjkuMzQgMzYyLjI1IDUxMiAyNzEuNDEgMzU0LjY2IDM2Mi4yNSA1MTIgNDUzLjA5IDY2OS4zNCAzNjIuMjUiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTg4Ljc2IDQ2Ny45MyAzNDYuMSA1NTguNzYgMzQ2LjEgMzc3LjA5IDE4OC43NiA0NjcuOTMiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMzQ2LjEgNzQwLjQ0IDUwMy40MyA2NDkuNiAzNDYuMSA1NTguNzYgMzQ2LjEgNzQwLjQ0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjM0Ni4xIDM3Ny4wOSAzNDYuMSA1NTguNzYgNTAzLjQzIDY0OS42IDUwMy40MyA0NjcuOTMgMzQ2LjEgMzc3LjA5Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjY3Ny45IDc0MC40NCA2NzcuOSA1NTguNzYgNTIwLjU3IDY0OS42IDY3Ny45IDc0MC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSI4MzUuMjQgNDY3LjkzIDY3Ny45IDM3Ny4wOSA2NzcuOSA1NTguNzYgODM1LjI0IDQ2Ny45MyIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1MjAuNTcgNjQ5LjYgNjc3LjkgNTU4Ljc2IDY3Ny45IDM3Ny4wOSA1MjAuNTcgNDY3LjkzIDUyMC41NyA2NDkuNiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTg1My40NywxSDE3MC41M0M3Ny4yOSwxLDEsNzcuMjksMSwxNzAuNTNWODUzLjQ3QzEsOTQ2LjcxLDc3LjI5LDEwMjMsMTcwLjUzLDEwMjNoNDY3LjdMNTEyLDcxNi4zOSw0MjAuNDIsOTEwSDE3MC41M0MxMzkuOSw5MTAsMTE0LDg4NC4xLDExNCw4NTMuNDdWMTcwLjUzQzExNCwxMzkuOSwxMzkuOSwxMTQsMTcwLjUzLDExNEg4NTMuNDdDODg0LjEsMTE0LDkxMCwxMzkuOSw5MTAsMTcwLjUzVjg1My40N0M5MTAsODg0LjEsODg0LjEsOTEwLDg1My40Nyw5MTBINzA1LjI4bDQ2LjUyLDExM0g4NTMuNDdjOTMuMjQsMCwxNjkuNTMtNzYuMjksMTY5LjUzLTE2OS41M1YxNzAuNTNDMTAyMyw3Ny4yOSw5NDYuNzEsMSw4NTMuNDcsMVoiLz48L3N2Zz4K",
-  "introduction": "<h4>Quarkus is a Cloud Native, (Linux) Container First framework for writing Java applications.</h4>\n<ul>\n<li><strong>Container First:</strong> Minimal footprint Java applications that are optimal for running in containers.</li>\n<li><strong>Cloud Native:</strong> Embraces 12 factor architecture in environments like Kubernetes.</li>\n<li><strong>Unify imperative and reactive</strong>: Brings under one programming model non-blocking and imperative styles of development.</li>\n<li><strong>Standards-based</strong>: Based on the standards and frameworks you love and use: RESTEasy and JAX-RS, Hibernate ORM and JPA, Netty, Eclipse Vert.x, Eclipse MicroProfile, Apache Camel.</li>\n<li><strong>A great choice for microservices and serverless</strong>: Brings lightning fast startup time and code turnaround to Java apps.</li>\n<li><strong>Developer Joy</strong>: Development centric experience bringing your amazing apps to life in no time.</li>\n</ul>",
-  "tasks": [
-    {
-      "description": "<p>To create a Quarkus application:</p>\n<ol>\n<li>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</li>\n<li>In the navigation menu, click [Add]{{highlight qs-nav-add}}.</li>\n<li>Click the <strong>Project</strong> dropdown menu and select <strong>Create Project</strong> to create a project for your Quarkus application.</li>\n<li>In the <strong>Name</strong> field, enter a name for your new project. Then click <strong>Create</strong>.</li>\n<li>On the <strong>+Add</strong> page, click <strong>From Git</strong>.</li>\n<li>In the <strong>Git Repo URL</strong> field, add</li>\n</ol>\n<pre><code>  https://github.com/quarkusio/quarkus-quickstarts\n</code></pre>\n<ol>\n<li>Click on <strong>Show advanced Git options</strong>, which will expose additional fields:</li>\n<li>Add\n<code>getting-started</code>\nto the <strong>Context dir</strong> field</li>\n<li>At the end of the form, click <strong>Create</strong>.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>The application is represented by the light grey area with the white border.  The deployment is a white circle.  Verify that the application was successfully created:</p>\n<ol>\n<li>Do you see a <strong>quarkus-quickstarts-app</strong> application?</li>\n<li>Do you see a <strong>quarkus-quickstarts</strong> deployment?</li>\n</ol>"
+  "metadata": {
+    "name": "quarkus-with-s2i"
+  },
+  "spec": {
+    "description": "<p>Import a Quarkus Application from git, build, and deploy it onto OpenShift.</p>",
+    "displayName": "<p>Get started with Quarkus using s2i</p>",
+    "durationMinutes": 10,
+    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJMYXllcl8xIiBkYXRhLW5hbWU9IkxheWVyIDEiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojNDY5NWViO30uY2xzLTJ7ZmlsbDojZmYwMDRhO30uY2xzLTN7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48dGl0bGU+cXVhcmt1c19pY29uX3JnYl8xMDI0cHhfcmV2ZXJzZTwvdGl0bGU+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjY2OS4zNCAxODAuNTcgNTEyIDI3MS40MSA2NjkuMzQgMzYyLjI1IDY2OS4zNCAxODAuNTciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMzU0LjY2IDE4MC41NyAzNTQuNjYgMzYyLjI1IDUxMiAyNzEuNDEgMzU0LjY2IDE4MC41NyIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI2NjkuMzQgMzYyLjI1IDUxMiAyNzEuNDEgMzU0LjY2IDM2Mi4yNSA1MTIgNDUzLjA5IDY2OS4zNCAzNjIuMjUiLz48cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTg4Ljc2IDQ2Ny45MyAzNDYuMSA1NTguNzYgMzQ2LjEgMzc3LjA5IDE4OC43NiA0NjcuOTMiLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMzQ2LjEgNzQwLjQ0IDUwMy40MyA2NDkuNiAzNDYuMSA1NTguNzYgMzQ2LjEgNzQwLjQ0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0zIiBwb2ludHM9IjM0Ni4xIDM3Ny4wOSAzNDYuMSA1NTguNzYgNTAzLjQzIDY0OS42IDUwMy40MyA0NjcuOTMgMzQ2LjEgMzc3LjA5Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjY3Ny45IDc0MC40NCA2NzcuOSA1NTguNzYgNTIwLjU3IDY0OS42IDY3Ny45IDc0MC40NCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSI4MzUuMjQgNDY3LjkzIDY3Ny45IDM3Ny4wOSA2NzcuOSA1NTguNzYgODM1LjI0IDQ2Ny45MyIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMyIgcG9pbnRzPSI1MjAuNTcgNjQ5LjYgNjc3LjkgNTU4Ljc2IDY3Ny45IDM3Ny4wOSA1MjAuNTcgNDY3LjkzIDUyMC41NyA2NDkuNiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTg1My40NywxSDE3MC41M0M3Ny4yOSwxLDEsNzcuMjksMSwxNzAuNTNWODUzLjQ3QzEsOTQ2LjcxLDc3LjI5LDEwMjMsMTcwLjUzLDEwMjNoNDY3LjdMNTEyLDcxNi4zOSw0MjAuNDIsOTEwSDE3MC41M0MxMzkuOSw5MTAsMTE0LDg4NC4xLDExNCw4NTMuNDdWMTcwLjUzQzExNCwxMzkuOSwxMzkuOSwxMTQsMTcwLjUzLDExNEg4NTMuNDdDODg0LjEsMTE0LDkxMCwxMzkuOSw5MTAsMTcwLjUzVjg1My40N0M5MTAsODg0LjEsODg0LjEsOTEwLDg1My40Nyw5MTBINzA1LjI4bDQ2LjUyLDExM0g4NTMuNDdjOTMuMjQsMCwxNjkuNTMtNzYuMjksMTY5LjUzLTE2OS41M1YxNzAuNTNDMTAyMyw3Ny4yOSw5NDYuNzEsMSw4NTMuNDcsMVoiLz48L3N2Zz4K",
+    "introduction": "<h4>Quarkus is a Cloud Native, (Linux) Container First framework for writing Java applications.</h4>\n<ul>\n<li><strong>Container First:</strong> Minimal footprint Java applications that are optimal for running in containers.</li>\n<li><strong>Cloud Native:</strong> Embraces 12 factor architecture in environments like Kubernetes.</li>\n<li><strong>Unify imperative and reactive</strong>: Brings under one programming model non-blocking and imperative styles of development.</li>\n<li><strong>Standards-based</strong>: Based on the standards and frameworks you love and use: RESTEasy and JAX-RS, Hibernate ORM and JPA, Netty, Eclipse Vert.x, Eclipse MicroProfile, Apache Camel.</li>\n<li><strong>A great choice for microservices and serverless</strong>: Brings lightning fast startup time and code turnaround to Java apps.</li>\n<li><strong>Developer Joy</strong>: Development centric experience bringing your amazing apps to life in no time.</li>\n</ul>",
+    "tasks": [
+      {
+        "description": "<p>To create a Quarkus application:</p>\n<ol>\n<li>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</li>\n<li>In the navigation menu, click [Add]{{highlight qs-nav-add}}.</li>\n<li>Click the <strong>Project</strong> dropdown menu and select <strong>Create Project</strong> to create a project for your Quarkus application.</li>\n<li>In the <strong>Name</strong> field, enter a name for your new project. Then click <strong>Create</strong>.</li>\n<li>On the <strong>+Add</strong> page, click <strong>From Git</strong>.</li>\n<li>In the <strong>Git Repo URL</strong> field, add</li>\n</ol>\n<pre><code>  https://github.com/quarkusio/quarkus-quickstarts\n</code></pre>\n<ol>\n<li>Click on <strong>Show advanced Git options</strong>, which will expose additional fields:</li>\n<li>Add\n<code>getting-started</code>\nto the <strong>Context dir</strong> field</li>\n<li>At the end of the form, click <strong>Create</strong>.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>The application is represented by the light grey area with the white border.  The deployment is a white circle.  Verify that the application was successfully created:</p>\n<ol>\n<li>Do you see a <strong>quarkus-quickstarts-app</strong> application?</li>\n<li>Do you see a <strong>quarkus-quickstarts</strong> deployment?</li>\n</ol>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your Quarkus application has been deployed onto OpenShift.</p>"
+        },
+        "title": "<p>Create a Quarkus application</p>"
       },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your Quarkus application has been deployed onto OpenShift.</p>"
+      {
+        "description": "<p>To view the build status of the Quarkus application:</p>\n<ol>\n<li>\n<p>Hover over the icon on the bottom left quadrant of the <strong>quarkus-quickstarts</strong> deployment to see the build status in a tooltip.</p>\n</li>\n<li>\n<p>Click the icon for quick access to the build log.</p>\n<ul>\n<li>\n<p>You should be able\nto see the log stream of the <strong>quarkus-quickstarts-1</strong> build on the <strong>Build Details</strong> page.</p>\n</li>\n<li>\n<p>The application and its dependencies will be\nbuilt into a container image and pushed to the OpenShift container registry.</p>\n</li>\n</ul>\n</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify the build is complete:</p>\n<ol>\n<li>This build may take a few minutes. When it's finished, a <strong>Complete</strong> badge will surface on the page header beside build name <strong>quarkus-quickstarts-1</strong>. Did this badge appear?</li>\n</ol>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your build is complete.</p>"
+        },
+        "title": "<p>View the build status</p>"
       },
-      "title": "<p>Create a Quarkus application</p>"
-    },
-    {
-      "description": "<p>To view the build status of the Quarkus application:</p>\n<ol>\n<li>\n<p>Hover over the icon on the bottom left quadrant of the <strong>quarkus-quickstarts</strong> deployment to see the build status in a tooltip.</p>\n</li>\n<li>\n<p>Click the icon for quick access to the build log.</p>\n<ul>\n<li>\n<p>You should be able\nto see the log stream of the <strong>quarkus-quickstarts-1</strong> build on the <strong>Build Details</strong> page.</p>\n</li>\n<li>\n<p>The application and its dependencies will be\nbuilt into a container image and pushed to the OpenShift container registry.</p>\n</li>\n</ul>\n</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify the build is complete:</p>\n<ol>\n<li>This build may take a few minutes. When it's finished, a <strong>Complete</strong> badge will surface on the page header beside build name <strong>quarkus-quickstarts-1</strong>. Did this badge appear?</li>\n</ol>"
+      {
+        "description": "<p>To view the associated code:</p>\n<ol>\n<li>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</li>\n<li>The icon on the bottom right quadrant of the <strong>quarkus-quickstarts</strong> deployment represents the Git repository of the associated code.  The icon shown can be for Bitbucket, GitHub, GitLab or generic Git.</li>\n<li>Click on the icon to navigate to the associated Git repository.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify that you can see the code associated with the sample app:</p>\n<ul>\n<li>Was a new browser tab opened with <strong>https://github.com/quarkusio/quarkus-quickstarts</strong>?</li>\n<li>Return to the browser tab running OpenShift.</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>You accessed the Git repository associated with your deployment.</p>"
+        },
+        "title": "<p>View the associated Git repository</p>"
       },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your build is complete.</p>"
+      {
+        "description": "<p>To view the pod status:</p>\n<ol>\n<li>\n<p>Hover over the pod donut to see the pod status in a tooltip.</p>\n<ul>\n<li>\n<p>Notice that the <strong>quarkus-quickstarts</strong> deployment has a pod donut imposed on the circle, representing the pod status (i.e. blue = running).</p>\n</li>\n<li>\n<p>The color of the donut indicates the pod status.</p>\n</li>\n</ul>\n</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify you see the pod status:</p>\n<p>Do you see the number of associated pods and their statuses?</p>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your deployment has one running pod.</p>"
+        },
+        "title": "<p>View the pod status</p>"
       },
-      "title": "<p>View the build status</p>"
-    },
-    {
-      "description": "<p>To view the associated code:</p>\n<ol>\n<li>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</li>\n<li>The icon on the bottom right quadrant of the <strong>quarkus-quickstarts</strong> deployment represents the Git repository of the associated code.  The icon shown can be for Bitbucket, GitHub, GitLab or generic Git.</li>\n<li>Click on the icon to navigate to the associated Git repository.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify that you can see the code associated with the sample app:</p>\n<ul>\n<li>Was a new browser tab opened with <strong>https://github.com/quarkusio/quarkus-quickstarts</strong>?</li>\n<li>Return to the browser tab running OpenShift.</li>\n</ul>"
+      {
+        "description": "<p>Since a Java builder image was used during the <strong>Import from Git</strong> flow, a Java icon is used by default in Topology view.</p>\n<ul>\n<li>\n<p>The displayed icon is determined by the\nvalue of the <code>app.openshift.io/runtime</code> label.</p>\n</li>\n<li>\n<p>You can change the icon associated with a deployment to indicate its application type.</p>\n</li>\n</ul>\n<p>To associate a Quarkus icon with the <strong>quarkus-quickstarts</strong> deployment:</p>\n<ol>\n<li>Click on the <strong>quarkus-quickstarts</strong> deployment.</li>\n<li>In the side panel, click the <strong>Actions</strong> dropdown menu and select <strong>Edit labels</strong>.</li>\n<li>Click on the “x” next to the <code>app.openshift.io/runtime=java</code> label to remove it from the labels list.</li>\n<li>Add an additional label:</li>\n</ol>\n<pre><code>app.openshift.io/runtime=quarkus\n</code></pre>\n<ol>\n<li>Click on <strong>Save</strong> to save the labels.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify you have updated the icon :</p>\n<ul>\n<li>Do you now see the quarkus icon rather than a java icon in the <strong>quarkus-quickstarts</strong> deployment?</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>You changed the icon associated with your deployment.</p>"
+        },
+        "title": "<p>Change the deployment icon to Quarkus</p>"
       },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>You accessed the Git repository associated with your deployment.</p>"
-      },
-      "title": "<p>View the associated Git repository</p>"
-    },
-    {
-      "description": "<p>To view the pod status:</p>\n<ol>\n<li>\n<p>Hover over the pod donut to see the pod status in a tooltip.</p>\n<ul>\n<li>\n<p>Notice that the <strong>quarkus-quickstarts</strong> deployment has a pod donut imposed on the circle, representing the pod status (i.e. blue = running).</p>\n</li>\n<li>\n<p>The color of the donut indicates the pod status.</p>\n</li>\n</ul>\n</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify you see the pod status:</p>\n<p>Do you see the number of associated pods and their statuses?</p>"
-      },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your deployment has one running pod.</p>"
-      },
-      "title": "<p>View the pod status</p>"
-    },
-    {
-      "description": "<p>Since a Java builder image was used during the <strong>Import from Git</strong> flow, a Java icon is used by default in Topology view.</p>\n<ul>\n<li>\n<p>The displayed icon is determined by the\nvalue of the <code>app.openshift.io/runtime</code> label.</p>\n</li>\n<li>\n<p>You can change the icon associated with a deployment to indicate its application type.</p>\n</li>\n</ul>\n<p>To associate a Quarkus icon with the <strong>quarkus-quickstarts</strong> deployment:</p>\n<ol>\n<li>Click on the <strong>quarkus-quickstarts</strong> deployment.</li>\n<li>In the side panel, click the <strong>Actions</strong> dropdown menu and select <strong>Edit labels</strong>.</li>\n<li>Click on the “x” next to the <code>app.openshift.io/runtime=java</code> label to remove it from the labels list.</li>\n<li>Add an additional label:</li>\n</ol>\n<pre><code>app.openshift.io/runtime=quarkus\n</code></pre>\n<ol>\n<li>Click on <strong>Save</strong> to save the labels.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify you have updated the icon :</p>\n<ul>\n<li>Do you now see the quarkus icon rather than a java icon in the <strong>quarkus-quickstarts</strong> deployment?</li>\n</ul>"
-      },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>You changed the icon associated with your deployment.</p>"
-      },
-      "title": "<p>Change the deployment icon to Quarkus</p>"
-    },
-    {
-      "description": "<p>The external link icon on the top right quadrant of the <strong>quarkus-quickstarts</strong> deployment represents the route URL.</p>\n<ol>\n<li>Click on the external link icon to open the URL and run the application in a new browser tab.</li>\n<li>Learn more about deploying Quarkus applications on OpenShift at\n<a href=\"https://quarkus.io\">quarkus.io</a>.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify your Quarkus application is running:</p>\n<ul>\n<li>Is the new tab titled <strong>Your new Cloud-Native application is ready!</strong>?</li>\n</ul>"
-      },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your Quarkus application is running.</p>"
-      },
-      "title": "<p>Run the Quarkus application</p>"
-    }
-  ],
-  "conclusion": "<p>Your Quarkus application is deployed and ready!</p>"
+      {
+        "description": "<p>The external link icon on the top right quadrant of the <strong>quarkus-quickstarts</strong> deployment represents the route URL.</p>\n<ol>\n<li>Click on the external link icon to open the URL and run the application in a new browser tab.</li>\n<li>Learn more about deploying Quarkus applications on OpenShift at\n<a href=\"https://quarkus.io\">quarkus.io</a>.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify your Quarkus application is running:</p>\n<ul>\n<li>Is the new tab titled <strong>Your new Cloud-Native application is ready!</strong>?</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your Quarkus application is running.</p>"
+        },
+        "title": "<p>Run the Quarkus application</p>"
+      }
+    ],
+    "conclusion": "<p>Your Quarkus application is deployed and ready!</p>"
+  }
 }

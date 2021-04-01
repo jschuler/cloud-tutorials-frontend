@@ -1,82 +1,87 @@
 {
-  "description": "<p>Import a Spring Application from git, build, and deploy it onto OpenShift.</p>",
-  "displayName": "<p>Get started with Spring</p>",
-  "durationMinutes": 10,
-  "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJMYXllcl8xIiBkYXRhLW5hbWU9IkxheWVyIDEiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTUzZDNjO30uY2xzLTJ7ZmlsbDojZDhkYTlkO30uY2xzLTN7ZmlsbDojNThjMGE4O30uY2xzLTR7ZmlsbDojZmZmO30uY2xzLTV7ZmlsbDojM2Q5MTkxO308L3N0eWxlPjwvZGVmcz48dGl0bGU+c25vd2Ryb3BfaWNvbl9yZ2JfZGVmYXVsdDwvdGl0bGU+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTAxMi42OSw1OTNjLTExLjEyLTM4LjA3LTMxLTczLTU5LjIxLTEwMy44LTkuNS0xMS4zLTIzLjIxLTI4LjI5LTM5LjA2LTQ3Ljk0QzgzMy41MywzNDEsNzQ1LjM3LDIzNC4xOCw2NzQsMTY4Ljk0Yy01LTUuMjYtMTAuMjYtMTAuMzEtMTUuNjUtMTUuMDdhMjQ2LjQ5LDI0Ni40OSwwLDAsMC0zNi41NS0yNi44LDE4Mi41LDE4Mi41LDAsMCwwLTIwLjMtMTEuNzcsMjAxLjUzLDIwMS41MywwLDAsMC00My4xOS0xNUExNTUuMjQsMTU1LjI0LDAsMCwwLDUyOCw5NS4yYy02Ljc2LS42OC0xMS43NC0uODEtMTQuMzktLjgxaDBsLTEuNjIsMC0xLjYyLDBhMTc3LjMsMTc3LjMsMCwwLDAtMzEuNzcsMy4zNSwyMDguMjMsMjA4LjIzLDAsMCwwLTU2LjEyLDE3LjU2LDE4MSwxODEsMCwwLDAtMjAuMjcsMTEuNzUsMjQ3LjQzLDI0Ny40MywwLDAsMC0zNi41NywyNi44MUMzNjAuMjUsMTU4LjYyLDM1NSwxNjMuNjgsMzUwLDE2OWMtNzEuMzUsNjUuMjUtMTU5LjUsMTcyLTI0MC4zOSwyNzIuMjhDOTMuNzMsNDYwLjg4LDgwLDQ3Ny44Nyw3MC41Miw0ODkuMTcsNDIuMzUsNTIwLDIyLjQzLDU1NC45LDExLjMxLDU5MywuNzIsNjI5LjIyLTEuNzMsNjY3LjY5LDQsNzA3LjMxLDE1LDc4Mi40OSw1NS43OCw4NTkuMTIsMTE4LjkzLDkyMy4wOWEyMiwyMiwwLDAsMCwxNS41OSw2LjUyaDEuODNsMS44Ny0uMzJjODEuMDYtMTMuOTEsMTEwLTc5LjU3LDE0My40OC0xNTUuNiwzLjkxLTguODgsNy45NS0xOC4wNSwxMi4yLTI3LjQzcTUuNDIsOC41NCwxMS4zOSwxNi4yM2MzMS44NSw0MC45MSw3NS4xMiw2NC42NywxMzIuMzIsNzIuNjNsMTguOCwyLjYyLDQuOTUtMTguMzNjMTMuMjYtNDkuMDcsMzUuMy05MC44NSw1MC42NC0xMTYuMTksMTUuMzQsMjUuMzQsMzcuMzgsNjcuMTIsNTAuNjQsMTE2LjE5bDUsMTguMzMsMTguOC0yLjYyYzU3LjItOCwxMDAuNDctMzEuNzIsMTMyLjMyLTcyLjYzcTYtNy42OCwxMS4zOS0xNi4yM2M0LjI1LDkuMzgsOC4yOSwxOC41NSwxMi4yLDI3LjQzLDMzLjQ5LDc2LDYyLjQyLDE0MS42OSwxNDMuNDgsMTU1LjZsMS44MS4zMWgxLjg5YTIyLDIyLDAsMCwwLDE1LjU5LTYuNTJjNjMuMTUtNjQsMTAzLjk1LTE0MC42LDExNC44OS0yMTUuNzhDMTAyNS43Myw2NjcuNjksMTAyMy4yOCw2MjkuMjIsMTAxMi42OSw1OTNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzY0LjE1LDE4NS4yM2MxNy44OS0xNi40LDM0LjctMzAuMTUsNDkuNzctNDAuMTFhMjEyLDIxMiwwLDAsMSw2NS45My0yNS43M0ExOTgsMTk4LDAsMCwxLDUxMiwxMTYuMjdhMTk2LjExLDE5Ni4xMSwwLDAsMSwzMiwzLjFjNC41LjkxLDkuMzYsMi4wNiwxNC41MywzLjUyLDYwLjQxLDIwLjQ4LDg0LjkyLDkxLjA1LTQ3LjQ0LDI0OC4wNi0yOC43NSwzNC4xMi0xNDAuNywxOTQuODQtMTg0LjY2LDI2OC40MmE2MzAuODYsNjMwLjg2LDAsMCwwLTMzLjIyLDU4LjMyQzI3Niw2NTUuMzQsMjY1LjQsNTk4LDI2NS40LDUyMC4yOSwyNjUuNCwzNDAuNjEsMzExLjY5LDI0MC43NCwzNjQuMTUsMTg1LjIzWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTUyNy41NCwzODQuODNjODQuMDYtOTkuNywxMTYuMDYtMTc3LjI4LDk1LjIyLTIzMC43NCwxMS42Miw4LjY5LDI0LDE5LjIsMzcuMDYsMzEuMTMsNTIuNDgsNTUuNSw5OC43OCwxNTUuMzgsOTguNzgsMzM1LjA3LDAsNzcuNzEtMTAuNiwxMzUuMDUtMjcuNzcsMTc3LjRhNjI4LjczLDYyOC43MywwLDAsMC0zMy4yMy01OC4zMmMtMzktNjUuMjYtMTMxLjQ1LTE5OS0xNzEuOTMtMjUyLjI3QzUyNi4zMywzODYuMjksNTI3LDM4NS41Miw1MjcuNTQsMzg0LjgzWiIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTEzNC41OCw5MDguMDdoLS4wNmEuMzkuMzksMCwwLDEtLjI3LS4xMWMtMTE5LjUyLTEyMS4wNy0xNTUtMjg3LjQtNDcuNTQtNDA0LjU4LDM0LjYzLTQxLjE0LDEyMC0xNTEuNiwyMDIuNzUtMjQyLjE5LTMuMTMsNy02LjEyLDE0LjI1LTguOTIsMjEuNjktMjQuMzQsNjQuNDUtMzYuNjcsMTQ0LjMyLTM2LjY3LDIzNy40MSwwLDU2LjUzLDUuNTgsMTA2LDE2LjU5LDE0Ny4xNEEzMDcuNDksMzA3LjQ5LDAsMCwwLDI4MC45MSw3MjNDMjM3LDgxNi44OCwyMTYuOTMsODkzLjkzLDEzNC41OCw5MDguMDdaIi8+PHBhdGggY2xhc3M9ImNscy01IiBkPSJNNTgzLjQzLDgxMy43OUM1NjAuMTgsNzI3LjcyLDUxMiw2NjQuMTUsNTEyLDY2NC4xNXMtNDguMTcsNjMuNTctNzEuNDMsMTQ5LjY0Yy00OC40NS02Ljc0LTEwMC45MS0yNy41Mi0xMzUuNjYtOTEuMThhNjQ1LjY4LDY0NS42OCwwLDAsMSwzOS41Ny03MS41NGwuMjEtLjMyLjE5LS4zM2MzOC02My42MywxMjYuNC0xOTEuMzcsMTY3LjEyLTI0NS42Niw0MC43MSw1NC4yOCwxMjkuMSwxODIsMTY3LjEyLDI0NS42NmwuMTkuMzMuMjEuMzJhNjQ1LjY4LDY0NS42OCwwLDAsMSwzOS41Nyw3MS41NEM2ODQuMzQsNzg2LjI3LDYzMS44OCw4MDcuMDUsNTgzLjQzLDgxMy43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik04ODkuNzUsOTA4YS4zOS4zOSwwLDAsMS0uMjcuMTFoLS4wNkM4MDcuMDcsODkzLjkzLDc4Nyw4MTYuODgsNzQzLjA5LDcyM2EzMDcuNDksMzA3LjQ5LDAsMCwwLDIwLjQ1LTU1LjU0YzExLTQxLjExLDE2LjU5LTkwLjYxLDE2LjU5LTE0Ny4xNCwwLTkzLjA4LTEyLjMzLTE3My0zNi42Ni0yMzcuNHEtNC4yMi0xMS4xNi04LjkzLTIxLjdjODIuNzUsOTAuNTksMTY4LjEyLDIwMS4wNSwyMDIuNzUsMjQyLjE5QzEwNDQuNzksNjIwLjU2LDEwMDkuMjcsNzg2Ljg5LDg4OS43NSw5MDhaIi8+PC9zdmc+Cg==",
-  "introduction": "<p><strong>Spring</strong> is a Java framework for building applications based on a distributed microservices architecture.</p>\n<ul>\n<li>Spring enables easy packaging and configuration of Spring applications into a self-contained executable application which can be easily deployed as a container to OpenShift.</li>\n<li>Spring applications can integrate OpenShift capabilities to provide a natural \"Spring on OpenShift\" developer experience for both existing and net-new Spring applications. For example:</li>\n<li>Externalized configuration using Kubernetes ConfigMaps and integration with Spring Cloud Kubernetes</li>\n<li>Service discovery using Kubernetes Services</li>\n<li>Load balancing with Replication Controllers</li>\n<li>Kubernetes health probes and integration with Spring Actuator</li>\n<li>Metrics: Prometheus, Grafana, and integration with Spring Cloud Sleuth</li>\n<li>Distributed tracing with Istio &#x26; Jaeger tracing</li>\n<li>Developer tooling through Red Hat OpenShift and Red Hat CodeReady developer tooling to quickly scaffold new Spring projects, gain access to familiar Spring APIs in your favorite IDE, and deploy to Red Hat OpenShift</li>\n</ul>",
-  "tasks": [
-    {
-      "description": "<p>To create a Spring application:</p>\n<ol>\n<li>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</li>\n<li>In the navigation menu, click [Add]{{highlight qs-nav-add}}.</li>\n<li>Click the <strong>Project</strong> dropdown menu and select <strong>Create Project</strong> to create a project for your Spring application.</li>\n<li>In the <strong>Name</strong> field, enter a name for your new project. Then click <strong>Create</strong>.</li>\n<li>On the <strong>+Add</strong> page, click <strong>From Git</strong>.</li>\n<li>In the <strong>Git Repo URL</strong> field, add</li>\n</ol>\n<pre><code>  https://github.com/snowdrop/rest-http-example\n</code></pre>\n<ol>\n<li>Click <strong>Show advanced Git options</strong> to expose additional form fields.</li>\n<li>Add</li>\n</ol>\n<pre><code>2.3.4-2-redhat\n</code></pre>\n<p>to the <strong>Git reference</strong> field.</p>\n<ol>\n<li>At the end of the form, click <strong>Create</strong>.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>The application is represented by the light grey area with the white border.  The deployment is a white circle.  Verify that the application was successfully created:</p>\n<ol>\n<li>Do you see a <strong>rest-http-example-app</strong> application?</li>\n<li>Do you see a <strong>rest-http-example</strong> deployment?</li>\n</ol>"
+  "metadata": {
+    "name": "spring-with-s2i"
+  },
+  "spec": {
+    "description": "<p>Import a Spring Application from git, build, and deploy it onto OpenShift.</p>",
+    "displayName": "<p>Get started with Spring</p>",
+    "durationMinutes": 10,
+    "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJMYXllcl8xIiBkYXRhLW5hbWU9IkxheWVyIDEiIHZpZXdCb3g9IjAgMCAxMDI0IDEwMjQiPjxkZWZzPjxzdHlsZT4uY2xzLTF7ZmlsbDojMTUzZDNjO30uY2xzLTJ7ZmlsbDojZDhkYTlkO30uY2xzLTN7ZmlsbDojNThjMGE4O30uY2xzLTR7ZmlsbDojZmZmO30uY2xzLTV7ZmlsbDojM2Q5MTkxO308L3N0eWxlPjwvZGVmcz48dGl0bGU+c25vd2Ryb3BfaWNvbl9yZ2JfZGVmYXVsdDwvdGl0bGU+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTAxMi42OSw1OTNjLTExLjEyLTM4LjA3LTMxLTczLTU5LjIxLTEwMy44LTkuNS0xMS4zLTIzLjIxLTI4LjI5LTM5LjA2LTQ3Ljk0QzgzMy41MywzNDEsNzQ1LjM3LDIzNC4xOCw2NzQsMTY4Ljk0Yy01LTUuMjYtMTAuMjYtMTAuMzEtMTUuNjUtMTUuMDdhMjQ2LjQ5LDI0Ni40OSwwLDAsMC0zNi41NS0yNi44LDE4Mi41LDE4Mi41LDAsMCwwLTIwLjMtMTEuNzcsMjAxLjUzLDIwMS41MywwLDAsMC00My4xOS0xNUExNTUuMjQsMTU1LjI0LDAsMCwwLDUyOCw5NS4yYy02Ljc2LS42OC0xMS43NC0uODEtMTQuMzktLjgxaDBsLTEuNjIsMC0xLjYyLDBhMTc3LjMsMTc3LjMsMCwwLDAtMzEuNzcsMy4zNSwyMDguMjMsMjA4LjIzLDAsMCwwLTU2LjEyLDE3LjU2LDE4MSwxODEsMCwwLDAtMjAuMjcsMTEuNzUsMjQ3LjQzLDI0Ny40MywwLDAsMC0zNi41NywyNi44MUMzNjAuMjUsMTU4LjYyLDM1NSwxNjMuNjgsMzUwLDE2OWMtNzEuMzUsNjUuMjUtMTU5LjUsMTcyLTI0MC4zOSwyNzIuMjhDOTMuNzMsNDYwLjg4LDgwLDQ3Ny44Nyw3MC41Miw0ODkuMTcsNDIuMzUsNTIwLDIyLjQzLDU1NC45LDExLjMxLDU5MywuNzIsNjI5LjIyLTEuNzMsNjY3LjY5LDQsNzA3LjMxLDE1LDc4Mi40OSw1NS43OCw4NTkuMTIsMTE4LjkzLDkyMy4wOWEyMiwyMiwwLDAsMCwxNS41OSw2LjUyaDEuODNsMS44Ny0uMzJjODEuMDYtMTMuOTEsMTEwLTc5LjU3LDE0My40OC0xNTUuNiwzLjkxLTguODgsNy45NS0xOC4wNSwxMi4yLTI3LjQzcTUuNDIsOC41NCwxMS4zOSwxNi4yM2MzMS44NSw0MC45MSw3NS4xMiw2NC42NywxMzIuMzIsNzIuNjNsMTguOCwyLjYyLDQuOTUtMTguMzNjMTMuMjYtNDkuMDcsMzUuMy05MC44NSw1MC42NC0xMTYuMTksMTUuMzQsMjUuMzQsMzcuMzgsNjcuMTIsNTAuNjQsMTE2LjE5bDUsMTguMzMsMTguOC0yLjYyYzU3LjItOCwxMDAuNDctMzEuNzIsMTMyLjMyLTcyLjYzcTYtNy42OCwxMS4zOS0xNi4yM2M0LjI1LDkuMzgsOC4yOSwxOC41NSwxMi4yLDI3LjQzLDMzLjQ5LDc2LDYyLjQyLDE0MS42OSwxNDMuNDgsMTU1LjZsMS44MS4zMWgxLjg5YTIyLDIyLDAsMCwwLDE1LjU5LTYuNTJjNjMuMTUtNjQsMTAzLjk1LTE0MC42LDExNC44OS0yMTUuNzhDMTAyNS43Myw2NjcuNjksMTAyMy4yOCw2MjkuMjIsMTAxMi42OSw1OTNaIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMzY0LjE1LDE4NS4yM2MxNy44OS0xNi40LDM0LjctMzAuMTUsNDkuNzctNDAuMTFhMjEyLDIxMiwwLDAsMSw2NS45My0yNS43M0ExOTgsMTk4LDAsMCwxLDUxMiwxMTYuMjdhMTk2LjExLDE5Ni4xMSwwLDAsMSwzMiwzLjFjNC41LjkxLDkuMzYsMi4wNiwxNC41MywzLjUyLDYwLjQxLDIwLjQ4LDg0LjkyLDkxLjA1LTQ3LjQ0LDI0OC4wNi0yOC43NSwzNC4xMi0xNDAuNywxOTQuODQtMTg0LjY2LDI2OC40MmE2MzAuODYsNjMwLjg2LDAsMCwwLTMzLjIyLDU4LjMyQzI3Niw2NTUuMzQsMjY1LjQsNTk4LDI2NS40LDUyMC4yOSwyNjUuNCwzNDAuNjEsMzExLjY5LDI0MC43NCwzNjQuMTUsMTg1LjIzWiIvPjxwYXRoIGNsYXNzPSJjbHMtMyIgZD0iTTUyNy41NCwzODQuODNjODQuMDYtOTkuNywxMTYuMDYtMTc3LjI4LDk1LjIyLTIzMC43NCwxMS42Miw4LjY5LDI0LDE5LjIsMzcuMDYsMzEuMTMsNTIuNDgsNTUuNSw5OC43OCwxNTUuMzgsOTguNzgsMzM1LjA3LDAsNzcuNzEtMTAuNiwxMzUuMDUtMjcuNzcsMTc3LjRhNjI4LjczLDYyOC43MywwLDAsMC0zMy4yMy01OC4zMmMtMzktNjUuMjYtMTMxLjQ1LTE5OS0xNzEuOTMtMjUyLjI3QzUyNi4zMywzODYuMjksNTI3LDM4NS41Miw1MjcuNTQsMzg0LjgzWiIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTEzNC41OCw5MDguMDdoLS4wNmEuMzkuMzksMCwwLDEtLjI3LS4xMWMtMTE5LjUyLTEyMS4wNy0xNTUtMjg3LjQtNDcuNTQtNDA0LjU4LDM0LjYzLTQxLjE0LDEyMC0xNTEuNiwyMDIuNzUtMjQyLjE5LTMuMTMsNy02LjEyLDE0LjI1LTguOTIsMjEuNjktMjQuMzQsNjQuNDUtMzYuNjcsMTQ0LjMyLTM2LjY3LDIzNy40MSwwLDU2LjUzLDUuNTgsMTA2LDE2LjU5LDE0Ny4xNEEzMDcuNDksMzA3LjQ5LDAsMCwwLDI4MC45MSw3MjNDMjM3LDgxNi44OCwyMTYuOTMsODkzLjkzLDEzNC41OCw5MDguMDdaIi8+PHBhdGggY2xhc3M9ImNscy01IiBkPSJNNTgzLjQzLDgxMy43OUM1NjAuMTgsNzI3LjcyLDUxMiw2NjQuMTUsNTEyLDY2NC4xNXMtNDguMTcsNjMuNTctNzEuNDMsMTQ5LjY0Yy00OC40NS02Ljc0LTEwMC45MS0yNy41Mi0xMzUuNjYtOTEuMThhNjQ1LjY4LDY0NS42OCwwLDAsMSwzOS41Ny03MS41NGwuMjEtLjMyLjE5LS4zM2MzOC02My42MywxMjYuNC0xOTEuMzcsMTY3LjEyLTI0NS42Niw0MC43MSw1NC4yOCwxMjkuMSwxODIsMTY3LjEyLDI0NS42NmwuMTkuMzMuMjEuMzJhNjQ1LjY4LDY0NS42OCwwLDAsMSwzOS41Nyw3MS41NEM2ODQuMzQsNzg2LjI3LDYzMS44OCw4MDcuMDUsNTgzLjQzLDgxMy43OVoiLz48cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik04ODkuNzUsOTA4YS4zOS4zOSwwLDAsMS0uMjcuMTFoLS4wNkM4MDcuMDcsODkzLjkzLDc4Nyw4MTYuODgsNzQzLjA5LDcyM2EzMDcuNDksMzA3LjQ5LDAsMCwwLDIwLjQ1LTU1LjU0YzExLTQxLjExLDE2LjU5LTkwLjYxLDE2LjU5LTE0Ny4xNCwwLTkzLjA4LTEyLjMzLTE3My0zNi42Ni0yMzcuNHEtNC4yMi0xMS4xNi04LjkzLTIxLjdjODIuNzUsOTAuNTksMTY4LjEyLDIwMS4wNSwyMDIuNzUsMjQyLjE5QzEwNDQuNzksNjIwLjU2LDEwMDkuMjcsNzg2Ljg5LDg4OS43NSw5MDhaIi8+PC9zdmc+Cg==",
+    "introduction": "<p><strong>Spring</strong> is a Java framework for building applications based on a distributed microservices architecture.</p>\n<ul>\n<li>Spring enables easy packaging and configuration of Spring applications into a self-contained executable application which can be easily deployed as a container to OpenShift.</li>\n<li>Spring applications can integrate OpenShift capabilities to provide a natural \"Spring on OpenShift\" developer experience for both existing and net-new Spring applications. For example:</li>\n<li>Externalized configuration using Kubernetes ConfigMaps and integration with Spring Cloud Kubernetes</li>\n<li>Service discovery using Kubernetes Services</li>\n<li>Load balancing with Replication Controllers</li>\n<li>Kubernetes health probes and integration with Spring Actuator</li>\n<li>Metrics: Prometheus, Grafana, and integration with Spring Cloud Sleuth</li>\n<li>Distributed tracing with Istio &#x26; Jaeger tracing</li>\n<li>Developer tooling through Red Hat OpenShift and Red Hat CodeReady developer tooling to quickly scaffold new Spring projects, gain access to familiar Spring APIs in your favorite IDE, and deploy to Red Hat OpenShift</li>\n</ul>",
+    "tasks": [
+      {
+        "description": "<p>To create a Spring application:</p>\n<ol>\n<li>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</li>\n<li>In the navigation menu, click [Add]{{highlight qs-nav-add}}.</li>\n<li>Click the <strong>Project</strong> dropdown menu and select <strong>Create Project</strong> to create a project for your Spring application.</li>\n<li>In the <strong>Name</strong> field, enter a name for your new project. Then click <strong>Create</strong>.</li>\n<li>On the <strong>+Add</strong> page, click <strong>From Git</strong>.</li>\n<li>In the <strong>Git Repo URL</strong> field, add</li>\n</ol>\n<pre><code>  https://github.com/snowdrop/rest-http-example\n</code></pre>\n<ol>\n<li>Click <strong>Show advanced Git options</strong> to expose additional form fields.</li>\n<li>Add</li>\n</ol>\n<pre><code>2.3.4-2-redhat\n</code></pre>\n<p>to the <strong>Git reference</strong> field.</p>\n<ol>\n<li>At the end of the form, click <strong>Create</strong>.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>The application is represented by the light grey area with the white border.  The deployment is a white circle.  Verify that the application was successfully created:</p>\n<ol>\n<li>Do you see a <strong>rest-http-example-app</strong> application?</li>\n<li>Do you see a <strong>rest-http-example</strong> deployment?</li>\n</ol>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your Spring application has been deployed onto OpenShift.</p>"
+        },
+        "title": "<p>Create a Spring application</p>"
       },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your Spring application has been deployed onto OpenShift.</p>"
+      {
+        "description": "<p>To view the build status of the Spring application:</p>\n<ol>\n<li>\n<p>Hover over the icon on the bottom left quadrant of the <strong>rest-http-example</strong> deployment to see the build status in a tooltip.</p>\n</li>\n<li>\n<p>Click on the icon for quick access to the build log.</p>\n<ul>\n<li>\n<p>You should be able to see the log stream of the <strong>rest-http-example-1</strong> build on the <strong>Build Details</strong> page.</p>\n</li>\n<li>\n<p>The application and its dependencies will be built into a container image and pushed to the OpenShift container registry.</p>\n</li>\n</ul>\n</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify the build is complete:</p>\n<ul>\n<li>This build may take a few minutes. When it's finished, a <strong>Complete</strong> badge will surface on the page header beside build name <strong>rest-http-example</strong>. Did this badge appear?</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your build is complete.</p>"
+        },
+        "title": "<p>View the build status</p>"
       },
-      "title": "<p>Create a Spring application</p>"
-    },
-    {
-      "description": "<p>To view the build status of the Spring application:</p>\n<ol>\n<li>\n<p>Hover over the icon on the bottom left quadrant of the <strong>rest-http-example</strong> deployment to see the build status in a tooltip.</p>\n</li>\n<li>\n<p>Click on the icon for quick access to the build log.</p>\n<ul>\n<li>\n<p>You should be able to see the log stream of the <strong>rest-http-example-1</strong> build on the <strong>Build Details</strong> page.</p>\n</li>\n<li>\n<p>The application and its dependencies will be built into a container image and pushed to the OpenShift container registry.</p>\n</li>\n</ul>\n</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify the build is complete:</p>\n<ul>\n<li>This build may take a few minutes. When it's finished, a <strong>Complete</strong> badge will surface on the page header beside build name <strong>rest-http-example</strong>. Did this badge appear?</li>\n</ul>"
+      {
+        "description": "<p>To view the associated code:</p>\n<ol>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>The icon on the bottom right quadrant of the <strong>rest-http-example</strong> deployment represents the Git repository of the associated code.</p>\n<ul>\n<li>The icon shown can be for Bitbucket, GitHub, GitLab or generic Git.</li>\n</ul>\n</li>\n<li>\n<p>Click on the icon to navigate to the associated Git repository.</p>\n</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify that you can see the code associated with the sample app:</p>\n<ul>\n<li>\n<p>Was a new browser tab opened with https://github.com/snowdrop/rest-http-example ?</p>\n</li>\n<li>\n<p>Return to the browser tab running OpenShift.</p>\n</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>You accessed the Git repository associated with your deployment.</p>"
+        },
+        "title": "<p>View the associated Git repository</p>"
       },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your build is complete.</p>"
+      {
+        "description": "<p>To view the pod status:</p>\n<ol>\n<li>\n<p>To view pod status in a tooltip, hover over the pod donut.</p>\n<ul>\n<li>\n<p>Notice that the <strong>rest-http-example</strong> deployment has a pod donut imposed on the circle, representing the pod status (i.e. blue = running).</p>\n</li>\n<li>\n<p>The color of the donut indicates the pod status.</p>\n</li>\n</ul>\n</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify you see the pod status:</p>\n<ul>\n<li>Do you see the number of associated pods and their statuses?</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your deployment has one running pod.</p>"
+        },
+        "title": "<p>View the pod status</p>"
       },
-      "title": "<p>View the build status</p>"
-    },
-    {
-      "description": "<p>To view the associated code:</p>\n<ol>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>The icon on the bottom right quadrant of the <strong>rest-http-example</strong> deployment represents the Git repository of the associated code.</p>\n<ul>\n<li>The icon shown can be for Bitbucket, GitHub, GitLab or generic Git.</li>\n</ul>\n</li>\n<li>\n<p>Click on the icon to navigate to the associated Git repository.</p>\n</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify that you can see the code associated with the sample app:</p>\n<ul>\n<li>\n<p>Was a new browser tab opened with https://github.com/snowdrop/rest-http-example ?</p>\n</li>\n<li>\n<p>Return to the browser tab running OpenShift.</p>\n</li>\n</ul>"
+      {
+        "description": "<p>Since a Java builder image was used during the <strong>Import from Git</strong> flow, a Java icon is used by default in topology.</p>\n<ul>\n<li>\n<p>This icon is determined by the value of the <code>app.openshift.io/runtime</code> label.</p>\n</li>\n<li>\n<p>Let’s change the icon associated with the <strong>rest-http-example</strong> deployment to indicate that it is a Spring application.</p>\n</li>\n</ul>\n<ol>\n<li>Click on the <strong>rest-http-example</strong> deployment.</li>\n<li>In the side panel, click on the Actions drop-down and click the <strong>Edit labels</strong> menu item.</li>\n<li>Click on the “x” next to the <code>app.openshift.io/runtime=java</code> label to remove the entry</li>\n<li>Add an additional label:</li>\n</ol>\n<pre><code>app.openshift.io/runtime=rh-spring-boot\n</code></pre>\n<ol>\n<li>Click on <strong>Save</strong> to save the labels.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify you have updated the icon:</p>\n<ul>\n<li>Has the Spring icon replaced the Java icon in the <strong>rest-http-example</strong> deployment?</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>You changed the icon associated with your deployment.</p>"
+        },
+        "title": "<p>Change the deployment icon to Spring</p>"
       },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>You accessed the Git repository associated with your deployment.</p>"
-      },
-      "title": "<p>View the associated Git repository</p>"
-    },
-    {
-      "description": "<p>To view the pod status:</p>\n<ol>\n<li>\n<p>To view pod status in a tooltip, hover over the pod donut.</p>\n<ul>\n<li>\n<p>Notice that the <strong>rest-http-example</strong> deployment has a pod donut imposed on the circle, representing the pod status (i.e. blue = running).</p>\n</li>\n<li>\n<p>The color of the donut indicates the pod status.</p>\n</li>\n</ul>\n</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify you see the pod status:</p>\n<ul>\n<li>Do you see the number of associated pods and their statuses?</li>\n</ul>"
-      },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your deployment has one running pod.</p>"
-      },
-      "title": "<p>View the pod status</p>"
-    },
-    {
-      "description": "<p>Since a Java builder image was used during the <strong>Import from Git</strong> flow, a Java icon is used by default in topology.</p>\n<ul>\n<li>\n<p>This icon is determined by the value of the <code>app.openshift.io/runtime</code> label.</p>\n</li>\n<li>\n<p>Let’s change the icon associated with the <strong>rest-http-example</strong> deployment to indicate that it is a Spring application.</p>\n</li>\n</ul>\n<ol>\n<li>Click on the <strong>rest-http-example</strong> deployment.</li>\n<li>In the side panel, click on the Actions drop-down and click the <strong>Edit labels</strong> menu item.</li>\n<li>Click on the “x” next to the <code>app.openshift.io/runtime=java</code> label to remove the entry</li>\n<li>Add an additional label:</li>\n</ol>\n<pre><code>app.openshift.io/runtime=rh-spring-boot\n</code></pre>\n<ol>\n<li>Click on <strong>Save</strong> to save the labels.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify you have updated the icon:</p>\n<ul>\n<li>Has the Spring icon replaced the Java icon in the <strong>rest-http-example</strong> deployment?</li>\n</ul>"
-      },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>You changed the icon associated with your deployment.</p>"
-      },
-      "title": "<p>Change the deployment icon to Spring</p>"
-    },
-    {
-      "description": "<p>The external link icon on the top right quadrant of the <strong>rest-http-example</strong> deployment represents the route URL.</p>\n<ol>\n<li>Click on the external link icon to open the URL and run the application in a new browser tab.</li>\n</ol>",
-      "review": {
-        "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
-        "instructions": "<p>Verify your Spring application is running:</p>\n<ul>\n<li>Is the new tab titled <strong>HTTP Example</strong>?</li>\n</ul>"
-      },
-      "summary": {
-        "failed": "<p>Try the steps again.</p>",
-        "success": "<p>Your Spring application is running.</p>"
-      },
-      "title": "<p>Run the Spring application</p>"
-    }
-  ],
-  "conclusion": "<p>Your Spring application is deployed and ready.</p>"
+      {
+        "description": "<p>The external link icon on the top right quadrant of the <strong>rest-http-example</strong> deployment represents the route URL.</p>\n<ol>\n<li>Click on the external link icon to open the URL and run the application in a new browser tab.</li>\n</ol>",
+        "review": {
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>",
+          "instructions": "<p>Verify your Spring application is running:</p>\n<ul>\n<li>Is the new tab titled <strong>HTTP Example</strong>?</li>\n</ul>"
+        },
+        "summary": {
+          "failed": "<p>Try the steps again.</p>",
+          "success": "<p>Your Spring application is running.</p>"
+        },
+        "title": "<p>Run the Spring application</p>"
+      }
+    ],
+    "conclusion": "<p>Your Spring application is deployed and ready.</p>"
+  }
 }
