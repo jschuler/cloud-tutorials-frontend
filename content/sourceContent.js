@@ -11,7 +11,7 @@ const sourcePatterns = [
 ];
 
 const tutorialPatterns = [
-  'tutorials/getting-started/*.{yaml,yml}',
+  'tutorials/**/*.{yaml,yml}',
 ];
 
 // js-yaml doesn't give us the current filename it's parsing for use in custom tags

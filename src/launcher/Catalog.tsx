@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
 import { loadJSONTutorials } from './tutorialLoader';
+import { removeParagraphWrap } from './utils';
 
 export const Catalog: React.FC = () => {
   const history = useHistory();
@@ -47,7 +48,7 @@ export const Catalog: React.FC = () => {
             <GalleryItem key={i}>
               <Card isHoverable onClick={() => handleClick(`/tutorials/${tutorial.metadata.name}`)}>
                 <CardTitle>
-                  {tutorial.spec.displayName}
+                  {removeParagraphWrap(tutorial.spec.displayName)}
                 </CardTitle>
                 <CardBody>
                   <QuickStartMarkdownView content={tutorial.spec.description} />

@@ -1,18 +1,7 @@
 import React from "react";
 import {
   PageSection,
-  PageSectionVariants,
-  TextContent,
-  Text,
-  Gallery,
-  GalleryItem,
-  Card,
-  CardTitle,
-  CardBody,
-  CardFooter,
   Button,
-  TextList,
-  TextListItem,
   Wizard,
   WizardStep,
 } from "@patternfly/react-core";
@@ -20,7 +9,7 @@ import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdown
 import { QuickStart, QuickStartTaskStatus, QuickStartTaskReview, QuickStartTask } from "@cloudmosaic/quickstarts";
 import { useHistory, useParams } from "react-router-dom";
 import { TaskReview } from "./TaskReview";
-import { AppModal } from "./AppModal";
+import { removeParagraphWrap } from './utils';
 import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
 
@@ -66,7 +55,7 @@ export const Tasks = () => {
         }
 
         const title = task.title || `Task ${index + 1}`;
-        const wrappedTitle = `<h2>${title}</h2>`;
+        const wrappedTitle = `<h2>${removeParagraphWrap(title)}</h2>`;
 
         const reviewBlock = document.createElement("div");
         verification?.querySelectorAll('p').forEach(p => {

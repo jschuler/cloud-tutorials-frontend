@@ -4,21 +4,14 @@ import {
   PageSectionVariants,
   TextContent,
   Text,
-  Gallery,
-  GalleryItem,
-  Card,
-  CardTitle,
-  CardBody,
-  CardFooter,
   Button,
   TextList,
   TextListItem,
-  Wizard,
-  WizardStep,
 } from "@patternfly/react-core";
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
 import { useHistory, useParams } from "react-router-dom";
+import { removeParagraphWrap } from './utils';
 import "./asciidoctor-skins/adoc-github.css";
 
 declare const QUICKSTARTS_BASE: string;
@@ -42,7 +35,7 @@ export const Tutorial = () => {
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Text component="h1">{tutorial.spec.displayName}</Text>
+          <Text component="h1">{removeParagraphWrap(tutorial.spec.displayName)}</Text>
           <QuickStartMarkdownView content={tutorial.spec.description} />
         </TextContent>
       </PageSection>
@@ -55,7 +48,7 @@ export const Tutorial = () => {
             <Text component="h2">Prerequisites</Text>
             <TextList>
               {tutorial.spec.prerequisites.map((prereq, index) => (
-                <TextListItem key={index}>{prereq}</TextListItem>
+                <TextListItem key={index}>{removeParagraphWrap(prereq)}</TextListItem>
               ))}
             </TextList>
           </TextContent>
