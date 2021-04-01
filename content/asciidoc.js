@@ -44,7 +44,7 @@ function getBlock(doc, id) {
   if (context) {
     const contextBlock = doc.getBlocks().find(block => {
       const bid = block.getId();
-      return bid && new RegExp(`${id}.${context}`).test(bid);
+      return bid && new RegExp(`${id}.?${context}`).test(bid);
     });
     if (contextBlock) {
       return contextBlock;
