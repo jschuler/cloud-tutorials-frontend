@@ -40,8 +40,8 @@ sourcePatterns
     nodir: true
   }))
   .flat()
+  .map(filename => path.join(__dirname, filename))
   .forEach(filename => {
-    console.log(filename);
     console.log(filename.replace(__dirname, ''));
     global.curFilename = filename;
     const text = fs.readFileSync(filename, 'utf8');
