@@ -1,61 +1,53 @@
 {
-  "apiVersion": "console.openshift.io/v1",
-  "kind": "ConsoleQuickStart",
   "metadata": {
-    "name": "monitor-sampleapp",
-    "annotations": {
-      "include.release.openshift.io/ibm-cloud-managed": "true",
-      "include.release.openshift.io/self-managed-high-availability": "true",
-      "include.release.openshift.io/single-node-developer": "true"
-    }
+    "name": "monitor-sampleapp"
   },
   "spec": {
-    "version": 4.7,
-    "displayName": "Monitor your sample application",
+    "displayName": "<p>Monitor your sample application</p>",
     "durationMinutes": 10,
-    "description": "Now that you’ve created a sample application and added health checks, let’s monitor your application.",
+    "description": "<p>Now that you’ve created a sample application and added health checks, let’s monitor your application.</p>",
     "prerequisites": [
-      "You completed the \"Getting started with a sample\" quick start."
+      "<p>You completed the \"Getting started with a sample\" quick start.</p>"
     ],
-    "introduction": "### This quick start shows you how to monitor your sample application.\nYou should have previously created the **sample-app** application and **nodejs-sample** deployment via the **Get started with a sample** quick start. If you haven't, you may be able to follow these tasks with any existing deployment.",
+    "introduction": "<h3>This quick start shows you how to monitor your sample application.</h3>\n<p>You should have previously created the <strong>sample-app</strong> application and <strong>nodejs-sample</strong> deployment via the <strong>Get started with a sample</strong> quick start. If you haven't, you may be able to follow these tasks with any existing deployment.</p>",
     "tasks": [
       {
-        "title": "View the monitoring details of your sample application",
-        "description": "To view the details of your sample application:\n\n1. Go to the project your sample application was created in.\n\n1. Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select **Developer**.\n\n1. In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.\n\n1. Click on the **nodejs-sample** deployment to view its details.\n\n1. Click on the **Monitoring** tab in the side panel.\n\nYou can see context sensitive metrics and alerts in the **Monitoring** tab.",
+        "title": "<p>View the monitoring details of your sample application</p>",
+        "description": "<p>To view the details of your sample application:</p>\n<ol>\n<li>\n<p>Go to the project your sample application was created in.</p>\n</li>\n<li>\n<p>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</p>\n</li>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>Click on the <strong>nodejs-sample</strong> deployment to view its details.</p>\n</li>\n<li>\n<p>Click on the <strong>Monitoring</strong> tab in the side panel.</p>\n</li>\n</ol>\n<p>You can see context sensitive metrics and alerts in the <strong>Monitoring</strong> tab.</p>",
         "review": {
-          "instructions": "#### To verify you can view the monitoring information:\n1. Do you see a **Metrics** accordion in the side panel?\n2. Do you see a **View monitoring dashboard** link in the **Metrics** accordion?\n3. Do you see three charts in the **Metrics** accordion: **CPU Usage**, **Memory Usage** and **Receive Bandwidth**?",
-          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
+          "instructions": "<h4>To verify you can view the monitoring information:</h4>\n<ol>\n<li>Do you see a <strong>Metrics</strong> accordion in the side panel?</li>\n<li>Do you see a <strong>View monitoring dashboard</strong> link in the <strong>Metrics</strong> accordion?</li>\n<li>Do you see three charts in the <strong>Metrics</strong> accordion: <strong>CPU Usage</strong>, <strong>Memory Usage</strong> and <strong>Receive Bandwidth</strong>?</li>\n</ol>",
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
         },
         "summary": {
-          "success": "You have learned how you can monitor your sample app!",
-          "failed": "Try the steps again."
+          "success": "<p>You have learned how you can monitor your sample app!</p>",
+          "failed": "<p>Try the steps again.</p>"
         }
       },
       {
-        "title": "View your project monitoring dashboard",
-        "description": "### To view the project monitoring dashboard in the context of **nodejs-sample**:\n1. Click on the **View monitoring dashboard** link in the side panel.\n2. You can change the **Time Range** and **Refresh Interval** of the dashboard.\n3. You can change the context of the dashboard as well by clicking on the drop-down list. Select a specific workload or **All Workloads** to view the dashboard in the context of the entire project.",
+        "title": "<p>View your project monitoring dashboard</p>",
+        "description": "<h3>To view the project monitoring dashboard in the context of <strong>nodejs-sample</strong>:</h3>\n<ol>\n<li>Click on the <strong>View monitoring dashboard</strong> link in the side panel.</li>\n<li>You can change the <strong>Time Range</strong> and <strong>Refresh Interval</strong> of the dashboard.</li>\n<li>You can change the context of the dashboard as well by clicking on the drop-down list. Select a specific workload or <strong>All Workloads</strong> to view the dashboard in the context of the entire project.</li>\n</ol>",
         "review": {
-          "instructions": "#### To verify that you are able to view the monitoring dashboard:\nDo you see metrics charts in the dashboard?",
-          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
+          "instructions": "<h4>To verify that you are able to view the monitoring dashboard:</h4>\n<p>Do you see metrics charts in the dashboard?</p>",
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
         },
         "summary": {
-          "success": "You have learned how to view the dashboard in the context of your sample app!",
-          "failed": "Try the steps again."
+          "success": "<p>You have learned how to view the dashboard in the context of your sample app!</p>",
+          "failed": "<p>Try the steps again.</p>"
         }
       },
       {
-        "title": "View custom metrics",
-        "description": "### To view custom metrics:\n1. Click on the **Metrics** tab of the **Monitoring** page.\n2. Click the **Select Query** drop-down list to see the available queries.\n3. Click on **Filesystem Usage** from the list to run the query.",
+        "title": "<p>View custom metrics</p>",
+        "description": "<h3>To view custom metrics:</h3>\n<ol>\n<li>Click on the <strong>Metrics</strong> tab of the <strong>Monitoring</strong> page.</li>\n<li>Click the <strong>Select Query</strong> drop-down list to see the available queries.</li>\n<li>Click on <strong>Filesystem Usage</strong> from the list to run the query.</li>\n</ol>",
         "review": {
-          "instructions": "#### Verify you can see the chart associated with the query:\nDo you see a chart displayed with filesystem usage for your project?  Note: select **Custom Query** from the dropdown to create and run a custom query utilizing PromQL.\n",
-          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
+          "instructions": "<h4>Verify you can see the chart associated with the query:</h4>\n<p>Do you see a chart displayed with filesystem usage for your project?  Note: select <strong>Custom Query</strong> from the dropdown to create and run a custom query utilizing PromQL.</p>",
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
         },
         "summary": {
-          "success": "You have learned how to run a query!",
-          "failed": "Try the steps again."
+          "success": "<p>You have learned how to run a query!</p>",
+          "failed": "<p>Try the steps again.</p>"
         }
       }
     ],
-    "conclusion": "You have learned how to access workload monitoring and metrics!"
+    "conclusion": "<p>You have learned how to access workload monitoring and metrics!</p>"
   }
 }

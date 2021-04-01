@@ -1,26 +1,77 @@
-const path = require('path');
-const fs = require('fs-extra');
-const yaml = require('js-yaml');
+const path = require("path");
+const fs = require("fs-extra");
+const yaml = require("js-yaml");
+const { snippetTag, taskTag, titleTag } = require("./asciidoc");
+const { renderMD } = require("./md");
 
 const yamlRegex = /\.ya?ml$/;
-const yamlDirs = [
-  path.join(__dirname, 'console-operator/quickstarts')
+const yamlDirs = {
+  quickstarts: [
+    path.join(__dirname, "console-operator/quickstarts"),
+    path.join(__dirname, 'quarkus')
+  ],
+  tutorials: [
+    path.join(__dirname, "tutorials/getting-started"),
+  ]
+};
+
+// js-yaml doesn't give us the current filename it's parsing for use in custom tags
+// We'll use this global var instead...
+global.curFilename = "";
+
+function assertProp(quickstart, prop, filename) {
+  if (!Boolean(quickstart[prop])) {
+    throw Error(`${filename} must have prop ${prop}`);
+  }
+}
+
+const requiredProps = [
+  "displayName",
+  "description",
+  "introduction",
+  "tasks",
+  "conclusion",
 ];
+const allowedProps = requiredProps.concat(
+  ...["durationMinutes", "icon", "prerequisites"]
+);
 
-yamlDirs
-  .map(dir => fs.readdirSync(dir).map(p => path.join(dir, p)))
-  .flat()
-  .filter(yamlPath => yamlRegex.test(path.extname(yamlPath)))
-  .forEach(yamlPath => {
-    // console.log(yamlPath.replace(__dirname, ''));
-    const text = fs.readFileSync(yamlPath, 'utf8');
-    const doc = yaml.load(text);
+const schema = yaml.DEFAULT_SCHEMA.extend([snippetTag, taskTag, titleTag]);
+for (const key in yamlDirs) {
+  yamlDirs[key]
+    .map((dir) => fs.readdirSync(dir).map((p) => path.join(dir, p)))
+    .flat()
+    .filter((filename) => yamlRegex.test(path.extname(filename)))
+    .forEach((filename) => {
+      console.log(filename.replace(__dirname, ""));
+      global.curFilename = filename;
+      const text = fs.readFileSync(filename, "utf8");
+      let quickstart = yaml.load(text, { schema });
+      const name = quickstart.metadata.name;
 
-    const toPath = path.join(
-      __dirname,
-      '../static/quickstarts',
-      `${doc.metadata.name}.json`
-    );
+      // Make sure it has required props
+      quickstart = quickstart.spec;
+      requiredProps.forEach((prop) => assertProp(quickstart, prop, filename));
+      // Only keep valid props that we render
+      Object.keys(quickstart).forEach((key) => {
+        if (!allowedProps.includes(key)) {
+          delete quickstart[key];
+        }
+      });
+      // Render string fields to md
+      renderMD(quickstart);
 
-    fs.outputFileSync(toPath, JSON.stringify(doc, null, 2));
-  })
+      // Stay compatible with old schema
+      quickstart = {
+        metadata: { name },
+        spec: quickstart,
+      };
+
+      const toPath = path.join(
+        __dirname,
+        `../static/${key}`,
+        `${name}.json`
+      );
+      fs.outputFileSync(toPath, JSON.stringify(quickstart, null, 2));
+    });
+}

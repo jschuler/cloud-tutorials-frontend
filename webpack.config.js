@@ -7,7 +7,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const { getProxyPaths, getHtmlReplacements } = require('@redhat-cloud-services/insights-standalone');
-const { buildQuickStart } = require('./src/quickstarts/quickstart-adoc');
 const AssetsPlugin = require('assets-webpack-plugin');
 const { name } = require('./package.json');
 
@@ -118,29 +117,7 @@ module.exports = (_env, argv) => {
       new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@patternfly/patternfly/assets'), to: 'assets' }
       ]}),
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: 'static/tutorials/**/quickstart.yml',
-            to: ({_context, absoluteFilename}) => {
-              // The dirname of quickstart is used as the output key
-              const dirName = path.basename(path.dirname(absoluteFilename));
-              return `tutorials/${dirName}.tutorial.json`
-              // if (!isProduction) {
-              //   return `${dirName}.quickstart.json`
-              // }
-              // return `${dirName}.[contenthash].quickstart.json`
-            },
-            transform: (content, absoluteFilename) => {
-              const basePath = path.dirname(absoluteFilename);
-              return buildQuickStart(content, absoluteFilename, basePath, {});
-            },
-            noErrorOnMissing: true
-          }
-        ]
-      }),
       new AssetsPlugin({
-        keepInMemory: !isProduction,
         path: 'static',
         removeFullPathAutoPrefix: true
       }),

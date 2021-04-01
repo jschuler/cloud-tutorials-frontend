@@ -31,7 +31,7 @@ export const Tutorial = () => {
   const handleClick = (path: string) => history.push(path);
   const [tutorial, setTutorial] = React.useState<QuickStart>();
   React.useEffect(() => {
-    fetch(`${TUTORIALS_BASE}/${name}.tutorial.json`)
+    fetch(`${TUTORIALS_BASE}/${name}.json`)
       .then((res) => res.json())
       .then((json) => {
         setTutorial(json);

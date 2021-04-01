@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "name": "getting-started"
+  },
+  "spec": {
+    "displayName": "<p>Getting Started with {product-long}</p>",
+    "durationMinutes": 10,
+    "icon": "",
+    "description": "<p>Learn how to create and set up your first Apache Kafka instance in {product-long}.</p>",
+    "prerequisites": [
+      "<p>A Red Hat identity</p>",
+      "<p>Access to the Red Hat OpenShift Streams for Apache Kafka environment at https://cloud.redhat.com</p>"
+    ],
+    "introduction": "<p>Welcome to the {product-long} Getting Started quick start. In this quick start, you’ll learn how to create and inspect a Kafka instance, create a service account to connect an application or service to the instance, and create a topic in the instance.</p>",
+    "tasks": [
+      {
+        "title": "<p>Creating a Kafka instance in bf2</p>",
+        "description": "<div>\n<p>A Kafka instance in {product} includes a Kafka cluster, bootstrap server, and other required configurations for connecting to Kafka producer and consumer services. You can use the {product} web console to create and configure a Kafka instance for your applications or services.</p>\n</div>\n<div>\n<div>Verification</div>\n<ul>\n<li>\n<p>Is the new Kafka instance listed in the instances table?</p>\n</li>\n<li>\n<p>Is the state of the new Kafka instance shown as <strong>Ready</strong>?</p>\n</li>\n</ul>\n</div>"
+      },
+      {
+        "title": "<p>Creating a service account to connect to a Kafka instance in bf2</p>",
+        "description": "<div>\n<p>To connect your applications or services to a Kafka instance in the {product} web console, you must create a service account, copy and save the generated credentials, and copy and save the bootstrap server location. {product-long} uses the SASL/OAUTHBEARER authentication mechanism over TLS to provide secure connections between your applications and Kafka instances. SASL/PLAIN authentication is also available for tools and libraries that do not support SASL/OAUTHBEARER, but SASL/OAUTHBEARER is recommended whenever possible. When you generate credentials for a Kafka instance, {product} creates a service account that contains the generated user name and password associated with the instance.</p>\n</div>\n<div>\n<div>Prerequisites</div>\n<ul>\n<li>\n<p>You have created a Kafka instance in the {product} web console and the instance is in <strong>Ready</strong> state.</p>\n</li>\n</ul>\n</div>\n<div>\n<div>Verification</div>\n<ul>\n<li>\n<p>Did you save the bootstrap server endpoint to a secure location?</p>\n</li>\n<li>\n<p>Did you save the client credentials to a secure location?</p>\n</li>\n</ul>\n</div>"
+      },
+      {
+        "title": "<p>Creating a Kafka topic in bf2</p>",
+        "description": "<div>\n<p>After you create a Kafka instance, you can create Kafka topics to start producing and consuming messages in your services.</p>\n</div>\n<div>\n<div>Prerequisites</div>\n<ul>\n<li>\n<p>You have created a Kafka instance in the {product} web console and the instance is in <strong>Ready</strong> state.</p>\n</li>\n</ul>\n</div>\n<div>\n<div>Verification</div>\n<ul>\n<li>\n<p>Is the new Kafka topic listed in the topics table?</p>\n</li>\n</ul>\n</div>"
+      }
+    ],
+    "conclusion": "<p>Congratulations! You successfully completed the {product} Getting Started quick start, and are now ready to use the service.</p>"
+  }
+}

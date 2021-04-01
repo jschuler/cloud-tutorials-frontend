@@ -4,7 +4,7 @@ metadata:
   name: getting-started
 spec:
   version: 0.1
-  displayName: !snippet/title README.adoc#chap-getting-started
+  displayName: !snippet/title README.adoc
   durationMinutes: 10
   icon: ''
   description: !snippet README.adoc#description
@@ -13,9 +13,9 @@ spec:
     - Access to the Red Hat OpenShift Streams for Apache Kafka environment at https://cloud.redhat.com
   introduction: !snippet README.adoc#introduction
   tasks:
-    - !snippet/proc README.adoc#proc-creating-kafka-instance
-    - !snippet/proc README.adoc#proc-creating-service-account
-    - !snippet/proc README.adoc#proc-creating-kafka-topic
+    - !snippet/task README.adoc#proc-creating-kafka-instance_getting-started
+    - !snippet/task README.adoc#proc-creating-service-account_getting-started
+    - !snippet/task README.adoc#proc-creating-kafka-topic_getting-started
   conclusion: !snippet README.adoc#conclusion
   nextQuickStart:
     - 'kafkacat'

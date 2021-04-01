@@ -1,11 +1,7 @@
 const loadJSONTutorialsFilesFromAssets = async (basePath: string): Promise<string[]> => {
     const data = await fetch(`${basePath}/webpack-assets.json`).then(response => response.json());
-    const files = Array.isArray(data[""]["yml"]) ? data[""]["yml"] : [data[""]["yml"]];
-    return files.map(file => {
-        const fileChunks = file.split('/');
-        return `${basePath}/tutorials/${fileChunks[fileChunks.length - 2]}.tutorial.json`
-    });
-    // return files.filter(url => url.endsWith(".quickstart.json")).map(e => !e.startsWith("http") ? `${basePath}/${e}`: e);
+    const files = Array.isArray(data[""]["json"]) ? data[""]["json"] : [data[""]["json"]];
+    return files.filter(url => url.indexOf("/tutorials/") >= 0);
 }
 
 export const loadJSONTutorials = async(basePath: string) => {

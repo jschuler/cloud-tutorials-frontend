@@ -17,7 +17,7 @@ import {
   WizardStep,
 } from "@patternfly/react-core";
 import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
-import { QuickStart, QuickStartTaskStatus, QuickStartTaskReview } from "@cloudmosaic/quickstarts";
+import { QuickStart, QuickStartTaskStatus, QuickStartTaskReview, QuickStartTask } from "@cloudmosaic/quickstarts";
 import { useHistory, useParams } from "react-router-dom";
 import { TaskReview } from "./TaskReview";
 import { AppModal } from "./AppModal";
@@ -37,7 +37,7 @@ export const Tasks = () => {
   const [tutorial, setTutorial] = React.useState<QuickStart>();
   const [steps, setSteps] = React.useState<WizardStep[]>([]);
   React.useEffect(() => {
-    fetch(`${TUTORIALS_BASE}/${name}.tutorial.json`)
+    fetch(`${TUTORIALS_BASE}/${name}.json`)
       .then((res) => res.json())
       .then((json) => {
         setTutorial(json);
@@ -46,44 +46,56 @@ export const Tasks = () => {
   React.useEffect(() => {
     const taskSteps: WizardStep[] = [];
     if (tutorial) {
-      (tutorial?.spec.tasks as string[]).map((task: string, index: number) => {
+      (tutorial.spec.tasks as any[]).forEach((task: QuickStartTask, index: number) => {
+        let verification;
         const template = document.createElement("template");
-        template.innerHTML = task.trim();
+        template.innerHTML = task.description?.trim() || '<p></p>';
         // remove procedure
-        template.content
-          ?.querySelectorAll(".olist")
-          .forEach((node) => node.remove());
+        // template.content
+        //   ?.querySelectorAll(".olist")
+        //   .forEach((node) => node.remove());
         // remove verification
-        template.content
-          ?.querySelectorAll(".ulist")
-          .forEach((node) => node.remove());
-        const title =
-          template.content.querySelector("h2")?.innerHTML ||
-          `Task ${index + 1}`;
-
-        const review: QuickStartTaskReview = {
-          instructions: 'Did you complete the quick start in the launched app?',
-          failedTaskHelp: 'Complete the quick start in the launched app'
+        // template.content
+        //   ?.querySelectorAll(".ulist")
+        //   .forEach((node) => node.remove());
+        const verificationNode = Array.from(template.content.querySelectorAll('div'))
+          .find(el => el.textContent === 'Verification');
+        if (verificationNode) {
+          verification = verificationNode.parentElement?.children[1];
+          verificationNode.parentElement?.remove();
         }
 
-        const onTaskReview = (status: any) => {}
+        const title = task.title || `Task ${index + 1}`;
+        const wrappedTitle = `<h2>${title}</h2>`;
 
+        const reviewBlock = document.createElement("div");
+        verification?.querySelectorAll('p').forEach(p => {
+          reviewBlock.appendChild(p);
+        })
+        const reviewInstructions = reviewBlock?.innerHTML || 'Did you complete the quick start in the launched app?';
+
+        const review: QuickStartTaskReview = {
+          instructions: reviewInstructions,
+          failedTaskHelp: 'Complete the quick start in the launched app'
+        };
+        const onTaskReview = (status: any) => {};
         taskSteps.push({
           name: <QuickStartMarkdownView content={title} />,
           component: (
             <>
-              <QuickStartMarkdownView content={template.innerHTML} />
+              <QuickStartMarkdownView content={wrappedTitle} />
+              <QuickStartMarkdownView content={template.innerHTML || ''} />
               <div className="tut-app-launch">
                 <Button component="a" href="https://cloud.redhat.com?quickstart=quarkus-with-s2i" target="_blank" variant="primary">
                   Launch app & follow the quick start
                 </Button>
               </div>
-              <TaskReview review={review} taskStatus={QuickStartTaskStatus.INIT} onTaskReview={() => {}} />
+              <TaskReview review={review} taskStatus={QuickStartTaskStatus.INIT} onTaskReview={onTaskReview} />
             </>
           ),
         });
-        setSteps(taskSteps);
       });
+      setSteps(taskSteps);
     }
   }, [tutorial]);
 
