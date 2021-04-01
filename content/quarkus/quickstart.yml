@@ -7,7 +7,7 @@ spec:
   type:
     text: Quick start
     color: green
-  displayName: !snippet/title README.adoc
+  displayName: !snippet/title README.adoc#chap-using-quarkus
   durationMinutes: 10
   icon: ''
   description: !snippet README.adoc#description
@@ -20,10 +20,10 @@ spec:
     - Apache Maven
   introduction: !snippet README.adoc#introduction
   tasks:
-    - !snippet/task README.adoc#proc-getting-the-sample-code_using-quarkus
-    - !snippet/task README.adoc#proc-configuring-quarkus_using-quarkus
-    - !snippet/task README.adoc#proc-create-prices-topic_using-quarkus
-    - !snippet/task README.adoc#proc-running-the-quarkus-application_using-quarkus
+    - !snippet/proc README.adoc#proc-getting-the-sample-code
+    - !snippet/proc README.adoc#proc-configuring-quarkus
+    - !snippet/proc README.adoc#proc-create-prices-topic
+    - !snippet/proc README.adoc#proc-running-the-quarkus-application
   conclusion: !snippet README.adoc#conclusion
   nextQuickStart:
     - 'service-binding'
