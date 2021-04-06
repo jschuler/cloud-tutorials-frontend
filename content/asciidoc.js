@@ -1,6 +1,5 @@
 const path = require('path');
 const yaml = require('js-yaml');
-const { timeStamp } = require('console');
 // http://asciidoctor.github.io/asciidoctor.js/master/
 const asciidoctor = require('asciidoctor')();
 
