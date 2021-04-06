@@ -4,12 +4,21 @@ import {
   Button,
   Wizard,
   WizardStep,
+  TextContent,
+  Text,
+  TextList,
+  TextListItem,
 } from "@patternfly/react-core";
 import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
-import { QuickStart, QuickStartTaskStatus, QuickStartTaskReview, QuickStartTask } from "@cloudmosaic/quickstarts";
-import { useHistory, useParams } from "react-router-dom";
+import {
+  QuickStart,
+  QuickStartTaskStatus,
+  QuickStartTaskReview,
+  QuickStartTask,
+} from "@cloudmosaic/quickstarts";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TaskReview } from "./TaskReview";
-import { removeParagraphWrap } from './utils';
+import { removeParagraphWrap } from "./utils";
 import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
 
@@ -18,11 +27,26 @@ declare const TUTORIALS_BASE: string;
 
 export const Tasks = () => {
   const history = useHistory();
-  const locationChunks = history.location.pathname.split('/');
-  const parentPath = locationChunks.slice(0, locationChunks.length - 1).join('/');
+  const location = useLocation();
+  const locationChunks = location.pathname.split("/");
+  const parentPath = locationChunks
+    .slice(0, locationChunks.length - 1)
+    .join("/");
+  const tasksPath = locationChunks
+    .slice(0, locationChunks.length - 1)
+    .join("/");
   // @ts-ignore
-  const { name } = useParams();
+  const { name, task } = useParams();
   const handleClose = () => history.push(parentPath);
+  const handleNext = ({ id, name }: WizardStep) => {
+    history.push(`${tasksPath}/${id}`);
+  };
+  const handleBack = ({ id, name }: WizardStep) => {
+    history.push(`${tasksPath}/${id}`);
+  };
+  const handleGoToStep = ({ id, name }: WizardStep) => {
+    history.push(`${tasksPath}/${id}`);
+  };
   const [tutorial, setTutorial] = React.useState<QuickStart>();
   const [steps, setSteps] = React.useState<WizardStep[]>([]);
   React.useEffect(() => {
@@ -35,60 +59,141 @@ export const Tasks = () => {
   React.useEffect(() => {
     const taskSteps: WizardStep[] = [];
     if (tutorial) {
-      (tutorial.spec.tasks as any[]).forEach((task: QuickStartTask, index: number) => {
-        let verification;
-        const template = document.createElement("template");
-        template.innerHTML = task.description?.trim() || '<p></p>';
-        // remove procedure
-        // template.content
-        //   ?.querySelectorAll(".olist")
-        //   .forEach((node) => node.remove());
-        // remove verification
-        // template.content
-        //   ?.querySelectorAll(".ulist")
-        //   .forEach((node) => node.remove());
-        const verificationNode = Array.from(template.content.querySelectorAll('div'))
-          .find(el => el.textContent === 'Verification');
-        if (verificationNode) {
-          verification = verificationNode.parentElement?.children[1];
-          verificationNode.parentElement?.remove();
+      (tutorial.spec.tasks as QuickStartTask[]).forEach(
+        (task: QuickStartTask, index: number) => {
+          const title = task.title || `Task ${index + 1}`;
+          const wrappedTitle = `<h2>${removeParagraphWrap(title)}</h2>`;
+
+          const template = document.createElement("template");
+          template.innerHTML = task.description?.trim() || "<p></p>";
+
+          const externalLinkNode = template.content.querySelector(
+            ".tutorial-external"
+          );
+          let externalLinkComponent;
+          if (externalLinkNode) {
+            externalLinkComponent = (
+              <Button
+                component="a"
+                href={`${externalLinkNode.getAttribute(
+                  "href"
+                )}?quickstart=kafkacat&tutorial=${encodeURIComponent(
+                  location.pathname
+                )}`}
+                variant="primary"
+                target="__blank"
+              >
+                {externalLinkNode.textContent}
+              </Button>
+            );
+            externalLinkNode.parentElement?.parentElement?.remove();
+          }
+
+          let prereq;
+          const prereqNode = Array.from(
+            template.content.querySelectorAll("div")
+          ).find((el) => el.textContent === "Prerequisites");
+          let prereqComponent;
+          if (prereqNode) {
+            prereq = prereqNode.parentElement?.children[1];
+            prereqNode.parentElement?.remove();
+
+            const items = prereq
+              ? Array.from(prereq?.querySelectorAll("p")).map((p, pIndex) => (
+                  <TextListItem key={`${index}/${pIndex}`}>
+                    <QuickStartMarkdownView content={p.innerHTML} />
+                  </TextListItem>
+                ))
+              : [];
+
+            prereqComponent = (
+              <TextContent>
+                <Text component="h3">Prerequisites</Text>
+                <TextList>{items}</TextList>
+              </TextContent>
+            );
+          }
+
+          let review: QuickStartTaskReview = task.review as QuickStartTaskReview;
+          if (!review) {
+            let verification;
+            const verificationNode = Array.from(
+              template.content.querySelectorAll("div")
+            ).find((el) => el.textContent === "Verification");
+            if (verificationNode) {
+              verification = verificationNode.parentElement?.children[1];
+              verificationNode.parentElement?.remove();
+            }
+
+            const reviewBlock = document.createElement("div");
+            verification?.querySelectorAll("p").forEach((p) => {
+              reviewBlock.appendChild(p);
+            });
+            const reviewInstructions =
+              reviewBlock?.innerHTML ||
+              "Did you complete the task?";
+
+            review = {
+              instructions: reviewInstructions,
+              failedTaskHelp: "Complete the task before continuing on",
+            };
+          }
+
+          const onTaskReview = (status: any) => {};
+
+          let nextButtonText = 'Next';
+          if (tutorial.spec.tasks && index === tutorial.spec.tasks.length - 1) {
+            nextButtonText = 'Review';
+          }
+          taskSteps.push({
+            id: index + 1,
+            name: <QuickStartMarkdownView content={title} />,
+            nextButtonText,
+            component: (
+              <>
+                <QuickStartMarkdownView content={wrappedTitle} />
+                <QuickStartMarkdownView content={template.innerHTML || ""} />
+                {prereqComponent}
+                <div className="tut-app-launch">{externalLinkComponent}</div>
+                <TaskReview
+                  review={review}
+                  taskStatus={QuickStartTaskStatus.INIT}
+                  onTaskReview={onTaskReview}
+                />
+              </>
+            ),
+          });
         }
-
-        const title = task.title || `Task ${index + 1}`;
-        const wrappedTitle = `<h2>${removeParagraphWrap(title)}</h2>`;
-
-        const reviewBlock = document.createElement("div");
-        verification?.querySelectorAll('p').forEach(p => {
-          reviewBlock.appendChild(p);
-        })
-        const reviewInstructions = reviewBlock?.innerHTML || 'Did you complete the quick start in the launched app?';
-
-        const review: QuickStartTaskReview = {
-          instructions: reviewInstructions,
-          failedTaskHelp: 'Complete the quick start in the launched app'
-        };
-        const onTaskReview = (status: any) => {};
-        taskSteps.push({
-          name: <QuickStartMarkdownView content={title} />,
-          component: (
-            <>
-              <QuickStartMarkdownView content={wrappedTitle} />
-              <QuickStartMarkdownView content={template.innerHTML || ''} />
-              <div className="tut-app-launch">
-                <Button component="a" href="https://cloud.redhat.com?quickstart=quarkus-with-s2i" target="_blank" variant="primary">
-                  Launch app & follow the quick start
-                </Button>
-              </div>
-              <TaskReview review={review} taskStatus={QuickStartTaskStatus.INIT} onTaskReview={onTaskReview} />
-            </>
-          ),
-        });
+      );
+      taskSteps.push({
+        id: taskSteps.length + 1,
+        name: "Review",
+        component: (
+          <div>
+            <QuickStartMarkdownView
+              content={
+                tutorial.spec.conclusion || "You have completed this tutorial."
+              }
+            />
+          </div>
+        ),
+        isFinishedStep: true,
       });
       setSteps(taskSteps);
     }
   }, [tutorial]);
 
   return tutorial && steps.length ? (
-    <PageSection variant="light" padding={{ default: 'noPadding' }}><Wizard steps={steps} onClose={handleClose} className="tut-tasks" /></PageSection>
+    <PageSection variant="light" padding={{ default: "noPadding" }}>
+      <Wizard
+        steps={steps}
+        onClose={handleClose}
+        onNext={handleNext}
+        onBack={handleBack}
+        onGoToStep={handleGoToStep}
+        className="tut-tasks"
+        startAtStep={Number.parseInt(task)}
+      />
+    </PageSection>
   ) : null;
 };

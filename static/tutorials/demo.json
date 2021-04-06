@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "name": "demo"
+  },
+  "spec": {
+    "displayName": "<p>Quick starts demo</p>",
+    "durationMinutes": 5,
+    "icon": "",
+    "description": "<p>This demo will walk you through quick start features</p>",
+    "introduction": "<h3>This demo will walk you through quick start features</h3>",
+    "tasks": [
+      {
+        "title": "<p>Highlighting (yaml+markdown)</p>",
+        "description": "<ol>\n<li>You can highlight elements by assigning a <code>data-quickstart-id</code> attribute.</li>\n</ol>\n<p><strong>Example</strong></p>\n<p><code>data-quickstart-id=\"highlight-me\"</code></p>\n<ol>\n<li>From within the quick start, you can trigger that by by writing markdown such as:</li>\n</ol>\n<p><strong>Example</strong></p>\n<p><code>Highlight [my element]{{highlight highlight-me}}</code></p>\n<ol>\n<li>Two examples:</li>\n</ol>\n<ul>\n<li>[Highlight quick starts nav item]{{highlight quickstarts}}</li>\n<li>[Highlight reload button]{{highlight reload-qs}}</li>\n</ul>",
+        "review": {
+          "instructions": "<h4>To verify:</h4>\n<p>Did you see the elements highlighted?</p>",
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+        },
+        "summary": {
+          "success": "<p>You have learned about highlighting elements!</p>",
+          "failed": "<p>Try the steps again.</p>"
+        }
+      }
+    ],
+    "conclusion": "<p>You have finished the quick starts features overview</p>"
+  }
+}

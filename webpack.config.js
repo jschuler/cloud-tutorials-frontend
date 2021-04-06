@@ -80,6 +80,7 @@ module.exports = (_env, argv) => {
     },
     plugins: [
       new webpack.DefinePlugin({
+        'APP_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}"`,
         'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`,
         'TUTORIALS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}tutorials"`
       }),
@@ -110,6 +111,9 @@ module.exports = (_env, argv) => {
       ]}),
       new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@patternfly/patternfly/utilities/Accessibility/accessibility.css'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@patternfly/patternfly/patternfly-addons.css'), to: '' }
       ]}),
       new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css'), to: '' }

@@ -48,19 +48,38 @@ const App = ({ children }: { children: React.ReactNode }) => {
     <Breadcrumb>
       {locationChunks.map((chunk, index) => {
         if (index === 0) {
-          return;
+          return (
+            <BreadcrumbItem
+              key={`breadcrumb-base}`}
+              isActive={!location.pathname || location.pathname === '/'}
+              render={({ className }) => (
+                <Link
+                  to=""
+                  className={className}
+                >
+                  Resources
+                </Link>
+              )}
+            />
+          );
         }
-        return (
-          <BreadcrumbItem
-            key={`breadcrumb-${chunk || '/'}`}
-            isActive={index === locationChunks.length - 1}
-            render={({ className }) => (
-              <Link to={locationChunks.slice(0, index + 1).join('/')} className={className}>
-                {chunk || "/"}
-              </Link>
-            )}
-          />
-        );
+        if (chunk !== "") {
+          return (
+            <BreadcrumbItem
+              key={`breadcrumb-${chunk}`}
+              isActive={index === locationChunks.length - 1}
+              render={({ className }) => (
+                <Link
+                  to={locationChunks.slice(0, index + 1).join("/")}
+                  className={className}
+                >
+                  {chunk}
+                </Link>
+              )}
+            />
+          );
+        }
+        return;
       })}
     </Breadcrumb>
   );

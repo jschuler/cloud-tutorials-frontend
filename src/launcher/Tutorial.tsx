@@ -56,7 +56,7 @@ export const Tutorial = () => {
       )}
       <Button
         variant="primary"
-        onClick={() => handleClick(`/tutorials/${name}/tasks`)}
+        onClick={() => handleClick(`/${name}/1`)}
       >
         Start tutorial
       </Button>

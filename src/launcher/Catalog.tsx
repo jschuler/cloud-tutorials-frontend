@@ -46,7 +46,7 @@ export const Catalog: React.FC = () => {
         <Gallery hasGutter>
           {tutorials.map((tutorial, i) => (
             <GalleryItem key={i}>
-              <Card isHoverable onClick={() => handleClick(`/tutorials/${tutorial.metadata.name}`)}>
+              <Card isHoverable onClick={() => handleClick(`/${tutorial.metadata.name}`)}>
                 <CardTitle>
                   {removeParagraphWrap(tutorial.spec.displayName)}
                 </CardTitle>

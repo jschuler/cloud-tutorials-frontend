@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from "react";
 import {
+  QuickStart,
   QuickStartContext,
   QuickStartDrawer as QuickStartDrawerLib,
   useValuesForQuickStartContext,
@@ -7,36 +8,22 @@ import {
 
 declare const QUICKSTARTS_BASE: string;
 
-export interface QuickStartDrawerProps
-  extends React.HTMLProps<HTMLDivElement> {
+export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   basePath?: string;
+  tutorial: QuickStart;
 }
 
 const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
   children,
   basePath,
+  tutorial,
   ...props
 }) => {
-  React.useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const searchQuery = queryParams.get('quickstart');
-    if (searchQuery) {
-      fetch(`${QUICKSTARTS_BASE}/${searchQuery}.json`)
-        .then((res) => res.json())
-        .then((json) => {
-          setAllQuickStarts([json]);
-          setAllQuickStartsLoaded(true);
-        });
-    }
-  }, []);
-
   const [activeQuickStartID, setActiveQuickStartID] = React.useState("");
   const [allQuickStartStates, setAllQuickStartStates] = React.useState({});
-
-  const [allQuickStartsLoaded, setAllQuickStartsLoaded] = useState<boolean>(
-    false
-  );
-  const [allQuickStarts, setAllQuickStarts] = useState<any[]>([]);
+  const [allQuickStarts, setAllQuickStarts] = useState<QuickStart[]>([
+    tutorial,
+  ]);
 
   const valuesForQuickstartContext = useValuesForQuickStartContext({
     activeQuickStartID,
@@ -45,15 +32,11 @@ const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
     setAllQuickStartStates,
     allQuickStarts,
   });
-  if (allQuickStartsLoaded) {
-    return (
-      <QuickStartContext.Provider value={valuesForQuickstartContext}>
-        <QuickStartDrawerLib {...props}>{children}</QuickStartDrawerLib>
-      </QuickStartContext.Provider>
-    );
-  } else {
-    return <></>;
-  }
+  return (
+    <QuickStartContext.Provider value={valuesForQuickstartContext}>
+      <QuickStartDrawerLib {...props}>{children}</QuickStartDrawerLib>
+    </QuickStartContext.Provider>
+  );
 };
 
 export default QuickStartDrawer;

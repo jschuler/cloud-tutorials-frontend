@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.12">
+<title>Getting Started with {product-long}</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+</head>
+<body id="chap-getting-started" class="article">
+<div id="header">
+<h1>Getting Started with {product-long}</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph _abstract">
+<p>As a developer of applications and services, you can use the bf2fc6cc711aee1a0c2a cloud service to create and set up Kafka instances and connect your applications and services to these instances. bf2 is a cloud service that enables you to implement Kafka data-streaming functionality in your applications without having to install, configure, run, and maintain your own Kafka clusters.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have access to an application or service that you want to connect to a Kafka instance in bf2fc6cc711aee1a0c2a.</p>
+</li>
+</ul>
+</div>
+<div id="description" class="paragraph">
+<p>Learn how to create and set up your first Apache Kafka instance in bf2fc6cc711aee1a0c2a.</p>
+</div>
+<div id="introduction" class="paragraph">
+<p>Welcome to the bf2fc6cc711aee1a0c2a Getting Started quick start. In this quick start, you&#8217;ll learn how to create and inspect a Kafka instance, create a service account to connect an application or service to the instance, and create a topic in the instance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="con-product-overview_getting-started">bf2fc6cc711aee1a0c2a</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>bf2fc6cc711aee1a0c2a is a fully managed cloud service running on <a href="https://www.openshift.com/products/dedicated/">OpenShift Dedicated</a>. bf2 enables you to implement Kafka data-streaming functionality in your applications without having to install, configure, run, and maintain your own Kafka clusters. With bf2, you can share data between microservices and other applications with high throughput and low latency.</p>
+</div>
+<div class="paragraph">
+<p>bf2 also has the following key attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Scales with your application needs</strong>: As your applications and services grow and require more Kafka instances, topics, and data, bf2 can scale to meet those needs.</p>
+</li>
+<li>
+<p><strong>Provides flexible user control</strong>: You can use the bf2 web console UI or the relevant bf2 API to configure the service as you desire.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proc-creating-kafka-instance_getting-started">Creating a Kafka instance in bf2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Kafka instance in bf2 includes a Kafka cluster, bootstrap server, and other required configurations for connecting to Kafka producer and consumer services. You can use the bf2 web console to create and configure a Kafka instance for your applications or services.</p>
+</div>
+<div class="ulist">
+<div class="title">Verification</div>
+<ul>
+<li>
+<p>Is the new Kafka instance listed in the instances table?</p>
+</li>
+<li>
+<p>Is the state of the new Kafka instance shown as <strong>Ready</strong>?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proc-creating-service-account_getting-started">Creating a service account to connect to a Kafka instance in bf2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To connect your applications or services to a Kafka instance in the bf2 web console, you must create a service account, copy and save the generated credentials, and copy and save the bootstrap server location. bf2fc6cc711aee1a0c2a uses the SASL/OAUTHBEARER authentication mechanism over TLS to provide secure connections between your applications and Kafka instances. SASL/PLAIN authentication is also available for tools and libraries that do not support SASL/OAUTHBEARER, but SASL/OAUTHBEARER is recommended whenever possible. When you generate credentials for a Kafka instance, bf2 creates a service account that contains the generated user name and password associated with the instance.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have created a Kafka instance in the bf2 web console and the instance is in <strong>Ready</strong> state.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Verification</div>
+<ul>
+<li>
+<p>Did you save the bootstrap server endpoint to a secure location?</p>
+</li>
+<li>
+<p>Did you save the client credentials to a secure location?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proc-creating-kafka-topic_getting-started">Creating a Kafka topic in bf2</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After you create a Kafka instance, you can create Kafka topics to start producing and consuming messages in your services.</p>
+</div>
+<div class="ulist">
+<div class="title">Prerequisites</div>
+<ul>
+<li>
+<p>You have created a Kafka instance in the bf2 web console and the instance is in <strong>Ready</strong> state.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Verification</div>
+<ul>
+<li>
+<p>Is the new Kafka topic listed in the topics table?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1 _additional-resources">
+<h2 id="_additional_resources">Additional resources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://kafka.apache.org/081/documentation.html#configuration">Configuration</a> in Kafka</p>
+</li>
+</ul>
+</div>
+<div id="conclusion" class="paragraph">
+<p>Congratulations! You successfully completed the bf2 Getting Started quick start, and are now ready to use the service.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2021-04-01 11:52:02 -0400
+</div>
+</div>
+</body>
+</html>
