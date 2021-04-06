@@ -9,7 +9,6 @@ import {
   TextList,
   TextListItem,
 } from "@patternfly/react-core";
-import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
 import {
   QuickStart,
   QuickStartTaskStatus,
@@ -101,7 +100,7 @@ export const Tasks = () => {
             const items = prereq
               ? Array.from(prereq?.querySelectorAll("p")).map((p, pIndex) => (
                   <TextListItem key={`${index}/${pIndex}`}>
-                    <QuickStartMarkdownView content={p.innerHTML} />
+                    <div dangerouslySetInnerHTML={{ __html: p.innerHTML }} />
                   </TextListItem>
                 ))
               : [];
@@ -130,8 +129,7 @@ export const Tasks = () => {
               reviewBlock.appendChild(p);
             });
             const reviewInstructions =
-              reviewBlock?.innerHTML ||
-              "Did you complete the task?";
+              reviewBlock?.innerHTML || "Did you complete the task?";
 
             review = {
               instructions: reviewInstructions,
@@ -141,18 +139,20 @@ export const Tasks = () => {
 
           const onTaskReview = (status: any) => {};
 
-          let nextButtonText = 'Next';
+          let nextButtonText = "Next";
           if (tutorial.spec.tasks && index === tutorial.spec.tasks.length - 1) {
-            nextButtonText = 'Review';
+            nextButtonText = "Review";
           }
           taskSteps.push({
             id: index + 1,
-            name: <QuickStartMarkdownView content={title} />,
+            name: <div dangerouslySetInnerHTML={{ __html: title }} />,
             nextButtonText,
             component: (
               <>
-                <QuickStartMarkdownView content={wrappedTitle} />
-                <QuickStartMarkdownView content={template.innerHTML || ""} />
+                <div dangerouslySetInnerHTML={{ __html: wrappedTitle }} />
+                <div
+                  dangerouslySetInnerHTML={{ __html: template.innerHTML || "" }}
+                />
                 {prereqComponent}
                 <div className="tut-app-launch">{externalLinkComponent}</div>
                 <TaskReview
@@ -170,10 +170,12 @@ export const Tasks = () => {
         name: "Review",
         component: (
           <div>
-            <QuickStartMarkdownView
-              content={
-                tutorial.spec.conclusion || "You have completed this tutorial."
-              }
+            <div
+              dangerouslySetInnerHTML={{
+                __html:
+                  tutorial.spec.conclusion ||
+                  "You have completed this tutorial.",
+              }}
             />
           </div>
         ),

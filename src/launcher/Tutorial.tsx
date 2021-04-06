@@ -9,7 +9,6 @@ import {
   TextListItem,
 } from "@patternfly/react-core";
 import { QuickStart } from "@cloudmosaic/quickstarts";
-import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
 import { useHistory, useParams } from "react-router-dom";
 import { removeParagraphWrap } from './utils';
 import "./asciidoctor-skins/adoc-github.css";
@@ -36,11 +35,11 @@ export const Tutorial = () => {
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
           <Text component="h1">{removeParagraphWrap(tutorial.spec.displayName)}</Text>
-          <QuickStartMarkdownView content={tutorial.spec.description} />
+          <div dangerouslySetInnerHTML={{ __html: tutorial.spec.description }} />
         </TextContent>
       </PageSection>
       <PageSection>
-        <QuickStartMarkdownView content={tutorial.spec.introduction || ""} />
+        <div dangerouslySetInnerHTML={{ __html: tutorial.spec.introduction || "" }} />
       </PageSection>
       {tutorial.spec.prerequisites && (
         <PageSection>

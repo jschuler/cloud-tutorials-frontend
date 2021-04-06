@@ -1,7 +1,6 @@
 import * as React from 'react';
 import cx from 'classnames';
 import { Alert, Radio } from '@patternfly/react-core';
-import QuickStartMarkdownView from '../quickstarts/components/QuickStartMarkdownView';
 import { QuickStartTaskStatus, QuickStartTaskReview } from '@cloudmosaic/quickstarts';
 
 type TaskReviewProps = {
@@ -39,7 +38,7 @@ export const TaskReview: React.FC<TaskReviewProps> = ({
 
   return (
     <Alert variant={getAlertVariant(taskStatusState)} title={title} isInline>
-      <QuickStartMarkdownView content={instructions || ''} />
+      <div dangerouslySetInnerHTML={{ __html: instructions || '' }} />
       <span className="co-quick-start-task-review__actions">
         <Radio
           id="review-success"
@@ -59,7 +58,7 @@ export const TaskReview: React.FC<TaskReviewProps> = ({
         />
       </span>
       {taskStatus === QuickStartTaskStatus.FAILED && taskHelp && (
-        <QuickStartMarkdownView content={taskHelp} exactHeight />
+        <div dangerouslySetInnerHTML={{ __html: taskHelp }} />
       )}
     </Alert>
   );

@@ -14,7 +14,6 @@ import {
 } from "@patternfly/react-core";
 import { useHistory } from 'react-router-dom';
 import { QuickStart } from "@cloudmosaic/quickstarts";
-import QuickStartMarkdownView from "../quickstarts/components/QuickStartMarkdownView";
 import { loadJSONTutorials } from './tutorialLoader';
 import { removeParagraphWrap } from './utils';
 
@@ -51,7 +50,7 @@ export const Catalog: React.FC = () => {
                   {removeParagraphWrap(tutorial.spec.displayName)}
                 </CardTitle>
                 <CardBody>
-                  <QuickStartMarkdownView content={tutorial.spec.description} />
+                  <div dangerouslySetInnerHTML={{ __html: tutorial.spec.description }} />
                 </CardBody>
                 <CardFooter>
                   <Button variant="primary">Start</Button>
