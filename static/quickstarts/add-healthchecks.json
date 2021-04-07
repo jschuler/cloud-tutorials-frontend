@@ -3,51 +3,51 @@
     "name": "add-healthchecks"
   },
   "spec": {
-    "displayName": "<p>Add health checks to your sample application</p>",
+    "displayName": "Add health checks to your sample application",
     "durationMinutes": 10,
-    "description": "<p>You just created a sample application. Now, let’s add health checks to it.</p>",
+    "description": "You just created a sample application. Now, let’s add health checks to it.",
     "prerequisites": [
-      "<p>You completed the \"Getting started with a sample\" quick start.</p>"
+      "You completed the \"Getting started with a sample\" quick start."
     ],
-    "introduction": "<h3>This quick start shows you how to add health checks to your sample application.</h3>\n<p>You should have previously created the <strong>sample-app</strong> application and <strong>nodejs-sample</strong> deployment using the <strong>Get started with a sample</strong> quick start. If you haven't, you may be able to follow these tasks with any existing deployment without configured health checks.</p>",
+    "introduction": "<h3>This quick start shows you how to add health checks to your sample application.</h3>\n<p>You should have previously created the <strong>sample-app</strong> application and <strong>nodejs-sample</strong> deployment using the <strong>Get started with a sample</strong> quick start. If you haven't, you may be able to follow these tasks with any existing deployment without configured health checks.",
     "tasks": [
       {
-        "title": "<p>View the details of your sample application</p>",
-        "description": "<p>To view the details of your sample application:</p>\n<ol>\n<li>\n<p>Go to the project your sample application was created in.</p>\n</li>\n<li>\n<p>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</p>\n</li>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>Click on the <strong>nodejs-sample</strong> deployment to view its details.</p>\n</li>\n</ol>\n<p>A side panel is displayed containing the details of your sample application.</p>",
+        "title": "View the details of your sample application",
+        "description": "To view the details of your sample application:</p>\n<ol>\n<li>\n<p>Go to the project your sample application was created in.</p>\n</li>\n<li>\n<p>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</p>\n</li>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>Click on the <strong>nodejs-sample</strong> deployment to view its details.</p>\n</li>\n</ol>\n<p>A side panel is displayed containing the details of your sample application.",
         "review": {
-          "instructions": "<h4>To verify you are viewing the details of your sample application:</h4>\n<p>Is the side panel titled <strong>nodejs-sample</strong>?</p>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+          "instructions": "<h4>To verify you are viewing the details of your sample application:</h4>\n<p>Is the side panel titled <strong>nodejs-sample</strong>?",
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
         },
         "summary": {
-          "success": "<p>You have viewed the details of your sample app!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have viewed the details of your sample app!",
+          "failed": "Try the steps again."
         }
       },
       {
-        "title": "<p>Verify that there are no health checks</p>",
+        "title": "Verify that there are no health checks",
         "description": "<h3>To verify that there your sample application has no health checks configured:</h3>\n<ol>\n<li>View the information in the <strong>Resources</strong> tab in the side panel.</li>\n</ol>",
         "review": {
-          "instructions": "<h4>To verify there are no health checks configured:</h4>\n<p>Do you see an inline alert stating that <strong>nodejs-sample</strong> does not have health checks?</p>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+          "instructions": "<h4>To verify there are no health checks configured:</h4>\n<p>Do you see an inline alert stating that <strong>nodejs-sample</strong> does not have health checks?",
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
         },
         "summary": {
-          "success": "<p>You have verified that there are no existing health checks!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have verified that there are no existing health checks!",
+          "failed": "Try the steps again."
         }
       },
       {
-        "title": "<p>Add health checks to your sample</p>",
-        "description": "<h3>To add health checks to your sample:</h3>\n<ol>\n<li>Add health checks to your <strong>nodejs-sample</strong> deployment in one of the following ways: (a) On the side panel, click on the <strong>Actions</strong> menu, where you will see an <strong>Add Health Checks</strong> menu item or (b) Click on the <strong>Add Health Checks</strong> link on the inline notification in the side panel.</li>\n<li>In the Add Health Checks form, click on the <strong>Add Readiness Probe</strong> link.  Leave the default values, and click on the check to add the Readiness Probe.</li>\n<li>Click on the <strong>Add Liveness Probe</strong> link.  Leave the default values, and click on the check to add the Liveness Probe.</li>\n<li>Click on the <strong>Add Startup Probe</strong> link.  Leave the default values, and click on the check to add the Startup Probe.</li>\n<li>Click <strong>Add</strong> when you’re done.</li>\n</ol>\n<p>You will be brought back to the Topology View.</p>",
+        "title": "Add health checks to your sample",
+        "description": "<h3>To add health checks to your sample:</h3>\n<ol>\n<li>Add health checks to your <strong>nodejs-sample</strong> deployment in one of the following ways: (a) On the side panel, click on the <strong>Actions</strong> menu, where you will see an <strong>Add Health Checks</strong> menu item or (b) Click on the <strong>Add Health Checks</strong> link on the inline notification in the side panel.</li>\n<li>In the Add Health Checks form, click on the <strong>Add Readiness Probe</strong> link.  Leave the default values, and click on the check to add the Readiness Probe.</li>\n<li>Click on the <strong>Add Liveness Probe</strong> link.  Leave the default values, and click on the check to add the Liveness Probe.</li>\n<li>Click on the <strong>Add Startup Probe</strong> link.  Leave the default values, and click on the check to add the Startup Probe.</li>\n<li>Click <strong>Add</strong> when you’re done.</li>\n</ol>\n<p>You will be brought back to the Topology View.",
         "review": {
-          "instructions": "<h4>Verify that health checks are now configured:</h4>\n<p>Is the inline notification gone?</p>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again, or <a href=\"https://docs.openshift.com/container-platform/4.6/applications/application-health.html#odc-adding-health-checks\">read more</a> about this topic.</p>"
+          "instructions": "<h4>Verify that health checks are now configured:</h4>\n<p>Is the inline notification gone?",
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again, or <a href=\"https://docs.openshift.com/container-platform/4.6/applications/application-health.html#odc-adding-health-checks\">read more</a> about this topic."
         },
         "summary": {
-          "success": "<p>You have added health checks to your sample app!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have added health checks to your sample app!",
+          "failed": "Try the steps again."
         }
       }
     ],
-    "conclusion": "<p>Your sample application now has health checks. To ensure that your application is running correctly, take the <strong>Monitor your sample application</strong> quick start.</p>"
+    "conclusion": "Your sample application now has health checks. To ensure that your application is running correctly, take the <strong>Monitor your sample application</strong> quick start."
   }
 }

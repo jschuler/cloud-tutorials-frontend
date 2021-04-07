@@ -3,25 +3,25 @@
     "name": "demo"
   },
   "spec": {
-    "displayName": "<p>Quick starts demo</p>",
+    "displayName": "Quick starts demo",
     "durationMinutes": 5,
     "icon": "",
-    "description": "<p>This demo will walk you through quick start features</p>",
+    "description": "This demo will walk you through quick start features",
     "introduction": "<h3>This demo will walk you through quick start features</h3>",
     "tasks": [
       {
-        "title": "<p>Highlighting (yaml+markdown)</p>",
-        "description": "<h2>Test</h2>\n<p>Hello world</p>",
+        "title": "Highlighting (yaml+markdown)",
+        "description": "<h2>Test</h2>\n<p>Hello world",
         "review": {
-          "instructions": "<h4>To verify:</h4>\n<p>Did you see the elements highlighted?</p>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+          "instructions": "<h4>To verify:</h4>\n<p>Did you see the elements highlighted?",
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
         },
         "summary": {
-          "success": "<p>You have learned about highlighting elements!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have learned about highlighting elements!",
+          "failed": "Try the steps again."
         }
       }
     ],
-    "conclusion": "<p>You have finished the quick starts features overview</p>"
+    "conclusion": "You have finished the quick starts features overview"
   }
 }

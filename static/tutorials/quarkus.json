@@ -3,37 +3,62 @@
     "name": "quarkus"
   },
   "spec": {
-    "displayName": "<p>Using Quarkus with Kafka instances in bf2fc6cc711aee1a0c2a</p>",
+    "displayName": "Using Quarkus with Kafka instances in bf2fc6cc711aee1a0c2a",
     "durationMinutes": 10,
     "icon": "",
-    "description": "<p>Learn how to use Quarkus to produce messages to and consume messages from a Kafka instance in bf2fc6cc711aee1a0c2a.</p>",
+    "description": "Learn how to use Quarkus to produce messages to and consume messages from a Kafka instance in bf2fc6cc711aee1a0c2a.",
     "prerequisites": [
-      "<p>A running Kafka instance (see the Getting Started quick start)</p>",
-      "<p>A command-line terminal application</p>",
-      "<p>Git</p>",
-      "<p>Java</p>",
-      "<p>An IDE</p>",
-      "<p>Apache Maven</p>"
+      "A running Kafka instance (see the Getting Started quick start)",
+      "A command-line terminal application",
+      "Git",
+      "Java",
+      "An IDE",
+      "Apache Maven"
     ],
-    "introduction": "<p>Welcome to the bf2fc6cc711aee1a0c2a Quarkus quick start. In this quick start, you’ll learn how to use <a href=\"https://quarkus.io/\">Quarkus</a> to produce messages to and consume messages from your Kafka instances in bf2fc6cc711aee1a0c2a.</p>",
+    "introduction": "Welcome to the bf2fc6cc711aee1a0c2a Quarkus quick start. In this quick start, you’ll learn how to use <a href=\"https://quarkus.io/\">Quarkus</a> to produce messages to and consume messages from your Kafka instances in bf2fc6cc711aee1a0c2a.",
+    "form": {
+      "fields": [
+        {
+          "component": "text-field",
+          "name": "login",
+          "label": "Your login name",
+          "validate": [
+            {
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "component": "text-field",
+          "type": "password",
+          "name": "password",
+          "label": "Password",
+          "validate": [
+            {
+              "type": "required"
+            }
+          ]
+        }
+      ]
+    },
     "tasks": [
       {
-        "title": "<p>Getting the same code</p>",
+        "title": "Getting the same code",
         "description": "<div class=\"paragraph\">\n<p>Quarkus is a Kubernetes Native Java stack tailored for OpenJDK HotSpot and GraalVM, crafted from the best of breed Java libraries and standards. Applications built for Quarkus can produce messages to and consume messages to bf2 using MicroProfile Reactive Messaging.</p>\n</div>\n<div class=\"paragraph\">\n<p>In order to follow this quick start get the sample from GitHub and open it in your IDE.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com\" class=\"tutorial-external\" target=\"_blank\" rel=\"noopener\">Red Hat</a></p>\n</div>\n<div class=\"ulist\">\n<div class=\"title\">Verification</div>\n<ul>\n<li>\n<p>You have the quarkus project imported into your IDE and the IDE has configured the project with the needed Java libraries from the Maven <code>pom.xml</code>.</p>\n</li>\n</ul>\n</div>"
       },
       {
-        "title": "<p>Configuring your Quarkus application to connect to a Kafka instance</p>",
+        "title": "Configuring your Quarkus application to connect to a Kafka instance",
         "description": "<div class=\"paragraph\">\n<p>To enable your Quarkus application to access a Kafka instance, you must configure the connection using the bootstrap server endpoint and the generated credentials for your bf2 service account. For Quarkus, you can configure connection information by using the <code>application.properties</code> configuration file. This example sets environment variables and then references them in <code>application.properties</code>.</p>\n</div>\n<div class=\"paragraph\">\n<p>For more information about Quarkus configuration options for using Kafka with MicroProfile Reactive Messaging, see <a href=\"https://quarkus.io/guides/kafka\">the guide</a> in the Quarkus documentation.</p>\n</div>\n<div class=\"ulist\">\n<div class=\"title\">Prerequisites</div>\n<ul>\n<li>\n<p>You have the bootstrap server endpoint (external server endpoint) and the generated credentials for your service account. You retrieved this information previously for the Kafka instance in bf2 by selecting the options menu (three vertical dots), clicking <strong>Connect to instance</strong>, and generating the service account.</p>\n</li>\n</ul>\n</div>"
       },
       {
-        "title": "<p>Create the prices topic</p>",
+        "title": "Create the prices topic",
         "description": "<div class=\"paragraph\">\n<p>This example uses a topic called <code>prices</code></p>\n</div>\n<div class=\"ulist\">\n<div class=\"title\">Prerequisites</div>\n<ul>\n<li>\n<p>You have created a Kafka instance in the bf2 web console and the instance is in <strong>Ready</strong> state.</p>\n</li>\n</ul>\n</div>\n<div class=\"ulist\">\n<div class=\"title\">Verification</div>\n<ul>\n<li>\n<p>Is the new Kafka topic <code>prices</code> listed in the topics table?</p>\n</li>\n</ul>\n</div>"
       },
       {
-        "title": "<p>Running the Quarkus application</p>",
+        "title": "Running the Quarkus application",
         "description": "<div class=\"paragraph\">\n<p>This example is a small Quarkus application. It has three application scoped beans, one of which generates a random number between 0 and 100 and produces it to a Kafka topic, another that consumes it from the Kafka topic, and a final bean that exposes it as a REST UI (using Server Sent events).</p>\n</div>\n<div class=\"ulist\">\n<div class=\"title\">Prerequisites</div>\n<ul>\n<li>\n<p>You have a running Kafka instance in bf2.</p>\n</li>\n<li>\n<p>You have <a href=\"https://github.com/git-guides/\">git</a> installed</p>\n</li>\n<li>\n<p>You have an <a href=\"https://en.wikipedia.org/wiki/Comparison_of_integrated_development_environments#Java\">IDE</a> like <a href=\"https://www.jetbrains.com/idea/download/\">IntelliJ IDEA</a>, <a href=\"https://www.eclipse.org/downloads/\">Eclipse</a>, <a href=\"https://code.visualstudio.com/Download\">VSCode</a> or even <a href=\"https://spacevim.org/use-vim-as-a-java-ide/\">Vim</a> or <a href=\"http://spacemacs.org/\">Emacs</a>!</p>\n</li>\n<li>\n<p>You need a <a href=\"https://adoptopenjdk.net/\">JDK 8 (8u262-b10 or later) or 11+</a> (any distribution)</p>\n</li>\n<li>\n<p>You need <a href=\"https://maven.apache.org/\">Apache Maven 3.6.2+</a></p>\n</li>\n</ul>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Check that there are no error messages being produced by Quarkus</p>\n</li>\n<li>\n<p>Visit <a href=\"http://localhost:8080/prices.html\" class=\"bare\">http://localhost:8080/prices.html</a> and check that the Last price updates</p>\n</li>\n</ol>\n</div>\n<div id=\"conclusion\" class=\"paragraph\">\n<p>Congratulations! You successfully completed the bf2 Quarkus quick start, and are now ready to add bf2 to your own Quarkus application.</p>\n</div>"
       }
     ],
-    "conclusion": "<p>Congratulations! You successfully completed the bf2 Quarkus quick start, and are now ready to add bf2 to your own Quarkus application.</p>"
+    "conclusion": "Congratulations! You successfully completed the bf2 Quarkus quick start, and are now ready to add bf2 to your own Quarkus application."
   }
 }

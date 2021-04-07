@@ -21,7 +21,7 @@ function renderMD(quickstart) {
   Object.entries(quickstart).forEach(([key, val]) => {
     if (typeof val === 'string' && key !== 'icon') {
       val = processor.processSync(val);
-      quickstart[key] = val.contents;
+      quickstart[key] = removeParagraphWrap(val.contents);
     }
     else if (typeof val === 'object') {
       renderMD(val);
@@ -29,4 +29,9 @@ function renderMD(quickstart) {
   });
 }
 
-module.exports = { renderMD };
+function removeParagraphWrap(html) {
+  return html.replace(/^<p>|<\/p>$/g, '');
+}
+
+
+module.exports = { renderMD, removeParagraphWrap };

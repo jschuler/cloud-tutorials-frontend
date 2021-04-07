@@ -3,51 +3,51 @@
     "name": "monitor-sampleapp"
   },
   "spec": {
-    "displayName": "<p>Monitor your sample application</p>",
+    "displayName": "Monitor your sample application",
     "durationMinutes": 10,
-    "description": "<p>Now that you’ve created a sample application and added health checks, let’s monitor your application.</p>",
+    "description": "Now that you’ve created a sample application and added health checks, let’s monitor your application.",
     "prerequisites": [
-      "<p>You completed the \"Getting started with a sample\" quick start.</p>"
+      "You completed the \"Getting started with a sample\" quick start."
     ],
-    "introduction": "<h3>This quick start shows you how to monitor your sample application.</h3>\n<p>You should have previously created the <strong>sample-app</strong> application and <strong>nodejs-sample</strong> deployment via the <strong>Get started with a sample</strong> quick start. If you haven't, you may be able to follow these tasks with any existing deployment.</p>",
+    "introduction": "<h3>This quick start shows you how to monitor your sample application.</h3>\n<p>You should have previously created the <strong>sample-app</strong> application and <strong>nodejs-sample</strong> deployment via the <strong>Get started with a sample</strong> quick start. If you haven't, you may be able to follow these tasks with any existing deployment.",
     "tasks": [
       {
-        "title": "<p>View the monitoring details of your sample application</p>",
-        "description": "<p>To view the details of your sample application:</p>\n<ol>\n<li>\n<p>Go to the project your sample application was created in.</p>\n</li>\n<li>\n<p>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</p>\n</li>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>Click on the <strong>nodejs-sample</strong> deployment to view its details.</p>\n</li>\n<li>\n<p>Click on the <strong>Monitoring</strong> tab in the side panel.</p>\n</li>\n</ol>\n<p>You can see context sensitive metrics and alerts in the <strong>Monitoring</strong> tab.</p>",
+        "title": "View the monitoring details of your sample application",
+        "description": "To view the details of your sample application:</p>\n<ol>\n<li>\n<p>Go to the project your sample application was created in.</p>\n</li>\n<li>\n<p>Click on the [perspective switcher]{{highlight qs-perspective-switcher}} at the top of the navigation, and select <strong>Developer</strong>.</p>\n</li>\n<li>\n<p>In the navigation menu, click [Topology]{{highlight qs-nav-topology}}.</p>\n</li>\n<li>\n<p>Click on the <strong>nodejs-sample</strong> deployment to view its details.</p>\n</li>\n<li>\n<p>Click on the <strong>Monitoring</strong> tab in the side panel.</p>\n</li>\n</ol>\n<p>You can see context sensitive metrics and alerts in the <strong>Monitoring</strong> tab.",
         "review": {
           "instructions": "<h4>To verify you can view the monitoring information:</h4>\n<ol>\n<li>Do you see a <strong>Metrics</strong> accordion in the side panel?</li>\n<li>Do you see a <strong>View monitoring dashboard</strong> link in the <strong>Metrics</strong> accordion?</li>\n<li>Do you see three charts in the <strong>Metrics</strong> accordion: <strong>CPU Usage</strong>, <strong>Memory Usage</strong> and <strong>Receive Bandwidth</strong>?</li>\n</ol>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
         },
         "summary": {
-          "success": "<p>You have learned how you can monitor your sample app!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have learned how you can monitor your sample app!",
+          "failed": "Try the steps again."
         }
       },
       {
-        "title": "<p>View your project monitoring dashboard</p>",
+        "title": "View your project monitoring dashboard",
         "description": "<h3>To view the project monitoring dashboard in the context of <strong>nodejs-sample</strong>:</h3>\n<ol>\n<li>Click on the <strong>View monitoring dashboard</strong> link in the side panel.</li>\n<li>You can change the <strong>Time Range</strong> and <strong>Refresh Interval</strong> of the dashboard.</li>\n<li>You can change the context of the dashboard as well by clicking on the drop-down list. Select a specific workload or <strong>All Workloads</strong> to view the dashboard in the context of the entire project.</li>\n</ol>",
         "review": {
-          "instructions": "<h4>To verify that you are able to view the monitoring dashboard:</h4>\n<p>Do you see metrics charts in the dashboard?</p>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+          "instructions": "<h4>To verify that you are able to view the monitoring dashboard:</h4>\n<p>Do you see metrics charts in the dashboard?",
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
         },
         "summary": {
-          "success": "<p>You have learned how to view the dashboard in the context of your sample app!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have learned how to view the dashboard in the context of your sample app!",
+          "failed": "Try the steps again."
         }
       },
       {
-        "title": "<p>View custom metrics</p>",
+        "title": "View custom metrics",
         "description": "<h3>To view custom metrics:</h3>\n<ol>\n<li>Click on the <strong>Metrics</strong> tab of the <strong>Monitoring</strong> page.</li>\n<li>Click the <strong>Select Query</strong> drop-down list to see the available queries.</li>\n<li>Click on <strong>Filesystem Usage</strong> from the list to run the query.</li>\n</ol>",
         "review": {
-          "instructions": "<h4>Verify you can see the chart associated with the query:</h4>\n<p>Do you see a chart displayed with filesystem usage for your project?  Note: select <strong>Custom Query</strong> from the dropdown to create and run a custom query utilizing PromQL.</p>",
-          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+          "instructions": "<h4>Verify you can see the chart associated with the query:</h4>\n<p>Do you see a chart displayed with filesystem usage for your project?  Note: select <strong>Custom Query</strong> from the dropdown to create and run a custom query utilizing PromQL.",
+          "failedTaskHelp": "This task isn’t verified yet. Try the task again."
         },
         "summary": {
-          "success": "<p>You have learned how to run a query!</p>",
-          "failed": "<p>Try the steps again.</p>"
+          "success": "You have learned how to run a query!",
+          "failed": "Try the steps again."
         }
       }
     ],
-    "conclusion": "<p>You have learned how to access workload monitoring and metrics!</p>"
+    "conclusion": "You have learned how to access workload monitoring and metrics!"
   }
 }

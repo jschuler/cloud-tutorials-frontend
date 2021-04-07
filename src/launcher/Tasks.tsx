@@ -143,6 +143,7 @@ export const Tasks = () => {
           if (tutorial.spec.tasks && index === tutorial.spec.tasks.length - 1) {
             nextButtonText = "Review";
           }
+          
           taskSteps.push({
             id: index + 1,
             name: <div dangerouslySetInnerHTML={{ __html: title }} />,

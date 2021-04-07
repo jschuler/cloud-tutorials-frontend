@@ -34,7 +34,8 @@ const requiredProps = [
 const allowedProps = requiredProps.concat(...[
   'durationMinutes',
   'icon',
-  'prerequisites'
+  'prerequisites',
+  'form'
 ]);
 
 const schema = yaml.DEFAULT_SCHEMA.extend([ snippetTag, taskTag, titleTag ]);
