@@ -1,0 +1,24 @@
+metadata:
+  name: demo
+spec:
+  displayName: Quick starts demo
+  durationMinutes: 5
+  icon: ''
+  description: This demo will walk you through quick start features
+  introduction: |-
+    ### This demo will walk you through quick start features
+  tasks:
+    - title: Highlighting (yaml+markdown)
+      description: |-
+        ## Test
+        Hello world
+      review:
+        instructions: |-
+          #### To verify:
+          Did you see the elements highlighted?
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+      summary:
+        success: You have learned about highlighting elements!
+        failed: Try the steps again.
+  conclusion: You have finished the quick starts features overview
+  nextQuickStart: []

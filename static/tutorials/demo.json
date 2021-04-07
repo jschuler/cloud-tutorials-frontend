@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "name": "demo"
+  },
+  "spec": {
+    "displayName": "<p>Quick starts demo</p>",
+    "durationMinutes": 5,
+    "icon": "",
+    "description": "<p>This demo will walk you through quick start features</p>",
+    "introduction": "<h3>This demo will walk you through quick start features</h3>",
+    "tasks": [
+      {
+        "title": "<p>Highlighting (yaml+markdown)</p>",
+        "description": "<h2>Test</h2>\n<p>Hello world</p>",
+        "review": {
+          "instructions": "<h4>To verify:</h4>\n<p>Did you see the elements highlighted?</p>",
+          "failedTaskHelp": "<p>This task isn’t verified yet. Try the task again.</p>"
+        },
+        "summary": {
+          "success": "<p>You have learned about highlighting elements!</p>",
+          "failed": "<p>Try the steps again.</p>"
+        }
+      }
+    ],
+    "conclusion": "<p>You have finished the quick starts features overview</p>"
+  }
+}

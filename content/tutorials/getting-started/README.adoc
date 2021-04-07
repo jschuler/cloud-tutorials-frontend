@@ -1,0 +1,126 @@
+:community:
+:imagesdir: ./images
+:product-long: bf2fc6cc711aee1a0c2a
+:product: bf2
+// Placeholder URL, when we get a HOST UI for the service we can put it here properly
+:service_url: https://localhost:1234/
+
+[id="chap-getting-started"]
+= Getting Started with {product-long}
+ifdef::context[:parent-context: {context}]
+:context: getting-started
+
+// Purpose statement for the assembly
+[role="_abstract"]
+As a developer of applications and services, you can use the {product-long} cloud service to create and set up Kafka instances and connect your applications and services to these instances. {product} is a cloud service that enables you to implement Kafka data-streaming functionality in your applications without having to install, configure, run, and maintain your own Kafka clusters.
+
+.Prerequisites
+ifndef::community[]
+* You have a Red Hat account.
+endif::[]
+//* You have a subscription to {product-long}. For more information about signing up, see *<@SME: Where to link?>*.
+* You have access to an application or service that you want to connect to a Kafka instance in {product-long}.
+
+// Condition out QS-only content so that it doesn't appear in docs.
+// All QS anchor IDs must be in this alternate anchor ID format `[#anchor-id]` because the ascii splitter relies on the other format `[id="anchor-id"]` to generate module files.
+ifdef::qs[]
+[#description]
+Learn how to create and set up your first Apache Kafka instance in {product-long}.
+
+[#introduction]
+Welcome to the {product-long} Getting Started quick start. In this quick start, you'll learn how to create and inspect a Kafka instance, create a service account to connect an application or service to the instance, and create a topic in the instance.
+endif::[]
+
+[id="con-product-overview_{context}"]
+== {product-long}
+
+{product-long} is a fully managed cloud service running on https://www.openshift.com/products/dedicated/[OpenShift Dedicated]. {product} enables you to implement Kafka data-streaming functionality in your applications without having to install, configure, run, and maintain your own Kafka clusters. With {product}, you can share data between microservices and other applications with high throughput and low latency.
+
+{product} also has the following key attributes:
+
+* *Scales with your application needs*: As your applications and services grow and require more Kafka instances, topics, and data, {product} can scale to meet those needs.
+* *Provides flexible user control*: You can use the {product} web console UI or the relevant {product} API to configure the service as you desire.
+ifndef::community[]
+* *Offers a Service Level Agreement (SLA)*: You can rely on the service functionality as defined in the SLA.
+endif::[]
+
+[id="proc-creating-kafka-instance_{context}"]
+== Creating a Kafka instance in {product}
+
+A Kafka instance in {product} includes a Kafka cluster, bootstrap server, and other required configurations for connecting to Kafka producer and consumer services. You can use the {product} web console to create and configure a Kafka instance for your applications or services.
+
+ifndef::qs[]
+.Prerequisites
+* You are logged in to the {product} web console at {service-url}.
+endif::[]
+
+.Verification
+ifdef::qs[]
+* Is the new Kafka instance listed in the instances table?
+* Is the state of the new Kafka instance shown as *Ready*?
+endif::[]
+ifndef::qs[]
+. Verify that the new Kafka instance is listed in the instances table.
+. Verify that the state of the new Kafka instance is shown as *Ready*.
+endif::[]
+
+
+////
+// Commenting out the following for now, which belongs in an onboarding tour (Stetson, 4 March 2021)
+
+When you're in the {Product_short} environment, you will see a left menu panel. This panel provides access to all resources related to the service, including the `Quick Starts` and `Documentation`.
+
+In the lower left of the screen you'll see a lightbulb icon. This icon gives access to the `Resource Center`. Here you can find the latest information about the service, like product updates, upcoming events, etc.
+
+image::sak-crc-resource-center.png[Image of Resource Center in web console]
+
+The center of the page shows you the list of Kafka instances that are currently running within your organisation. If this is your, or your organisations, first interaction with {Product_short}, this list will be empty.
+
+image::sak-kafka-overview.png[Image of initial empty instances table]
+////
+
+[id="proc-creating-service-account_{context}"]
+== Creating a service account to connect to a Kafka instance in {product}
+
+To connect your applications or services to a Kafka instance in the {product} web console, you must create a service account, copy and save the generated credentials, and copy and save the bootstrap server location. {product-long} uses the SASL/OAUTHBEARER authentication mechanism over TLS to provide secure connections between your applications and Kafka instances. SASL/PLAIN authentication is also available for tools and libraries that do not support SASL/OAUTHBEARER, but SASL/OAUTHBEARER is recommended whenever possible. When you generate credentials for a Kafka instance, {product} creates a service account that contains the generated user name and password associated with the instance.
+
+.Prerequisites
+* You have created a Kafka instance in the {product} web console and the instance is in *Ready* state.
+
+.Verification
+ifdef::qs[]
+* Did you save the bootstrap server endpoint to a secure location?
+* Did you save the client credentials to a secure location?
+endif::[]
+ifndef::qs[]
+. Verify that the bootstrap server endpoint is saved to a secure location.
+. Verify that the client credentials are saved to a secure location.
+endif::[]
+
+[id="proc-creating-kafka-topic_{context}"]
+== Creating a Kafka topic in {product}
+
+After you create a Kafka instance, you can create Kafka topics to start producing and consuming messages in your services.
+
+.Prerequisites
+* You have created a Kafka instance in the {product} web console and the instance is in *Ready* state.
+
+.Verification
+ifdef::qs[]
+* Is the new Kafka topic listed in the topics table?
+endif::[]
+ifndef::qs[]
+* Verify that the new Kafka topic is listed in the topics table.
+endif::[]
+
+[role="_additional-resources"]
+== Additional resources
+* https://kafka.apache.org/081/documentation.html#configuration[Configuration] in Kafka
+
+ifdef::qs[]
+[#conclusion]
+Congratulations! You successfully completed the {product} Getting Started quick start, and are now ready to use the service.
+endif::[]
+
+ifdef::parent-context[:context: {parent-context}]
+ifndef::parent-context[:!context:]

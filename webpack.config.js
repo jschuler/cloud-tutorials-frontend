@@ -7,6 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const { getProxyPaths, getHtmlReplacements } = require('@redhat-cloud-services/insights-standalone');
+const AssetsPlugin = require('assets-webpack-plugin');
 const { name } = require('./package.json');
 
 const fileRegEx = /\.(png|woff|woff2|eot|ttf|svg|gif|jpe?g|png)(\?[a-z0-9=.]+)?$/;
@@ -79,7 +80,9 @@ module.exports = (_env, argv) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`
+        'APP_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}"`,
+        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`,
+        'TUTORIALS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}tutorials"`
       }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -110,11 +113,18 @@ module.exports = (_env, argv) => {
         { from: path.resolve('node_modules/@patternfly/patternfly/utilities/Accessibility/accessibility.css'), to: '' }
       ]}),
       new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('node_modules/@patternfly/patternfly/patternfly-addons.css'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css'), to: '' }
       ]}),
       new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@patternfly/patternfly/assets'), to: 'assets' }
       ]}),
+      new AssetsPlugin({
+        path: 'static',
+        removeFullPathAutoPrefix: true
+      }),
     ],
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
