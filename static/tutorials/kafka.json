@@ -7,7 +7,7 @@
     "icon": "",
     "displayName": "Connecting Kafka topics to a Quarkus application",
     "description": "In this tutorial, you will set up a Kafka instance and create topics to be used with a Quarkus application",
-    "introduction": "We will be using Apache Kafka, an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.</p>\n<p>You can learn more about Apache Kafka by visiting <a href=\"https://kafka.apache.org/\">https://kafka.apache.org/</a>.</p>\n<p>Quarkus is an open source, Kubernetes-native Java framework that allows developers to optimize container-native applications for peak performance.</p>\n<p>You can learn more about Quarkus by visiting <a href=\"https://quarkus.io/\">https://quarkus.io/</a>.",
+    "introduction": "We will be using Apache Kafka, an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.",
     "prerequisites": [
       "Red Hat OpenShift",
       "Red Hat Streams for Apache Kafka"
@@ -50,9 +50,13 @@
     "tasks": [
       {
         "title": "Kafka",
-        "description": "<div class=\"paragraph\">\n<p>In this step, you will create a Kafka instance and connect topics to them.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Kafka Instances</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started\" class=\"tutorial-external\" target=\"_blank\" rel=\"noopener\">Create a Kafka instance</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a Kafka instance?</p>\n</li>\n<li>\n<p>Did you create a Kafka topic?</p>\n</li>\n</ol>\n</div>\n<div id=\"conclusion\" class=\"paragraph\">\n<p>Congratulations! You successfully completed the {product} {quarkus} quick start, and are now ready to add {product} to your own {quarkus} application.</p>\n</div>"
+        "description": "<div class=\"paragraph\">\n<p>In this step, you will create a Kafka instance and connect topics to them.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Launch RHOSAK</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started\" class=\"tutorial-external\">Launch RHOSAK</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a Kafka instance?</p>\n</li>\n<li>\n<p>Did you create a Kafka topic?</p>\n</li>\n</ol>\n</div>"
+      },
+      {
+        "title": "Connecting kafka to OpenShift",
+        "description": "<div class=\"paragraph\">\n<p>Now that you’ve set up a kafka with topics, you’ll be connecting that to an application that you create on OpenShift.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Launch OpenShift</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-dev/graph?quickstart=quarkus\" class=\"tutorial-external\">Launch OpenShift</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a quarkus app?</p>\n</li>\n<li>\n<p>Did you connect a Kafka topic to it?</p>\n</li>\n</ol>\n</div>\n<div id=\"conclusion\" class=\"paragraph\">\n<p>Congratulations! You successfully completed the quick start.</p>\n</div>"
       }
     ],
-    "conclusion": "Congratulations! You successfully completed the {product} {quarkus} quick start, and are now ready to add {product} to your own {quarkus} application."
+    "conclusion": "Congratulations! You successfully completed the quick start."
   }
 }

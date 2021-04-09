@@ -1,3 +1,4 @@
+
 function injectStylesheet(href) {
   var link = document.createElement("link");
   link.href = href;
@@ -7,11 +8,15 @@ function injectStylesheet(href) {
   document.getElementsByTagName("head")[0].prepend(link);
 }
 
+var count = 0;
 var checkExist = setInterval(function () {
-  if (document.querySelector('[data-ouia-app-id="controlPlane-streams"]')) {
+  console.log(count);
+  if (count >= 50 || document.querySelector('[data-ouia-app-id="controlPlane-streams"]')) {
+    console.log('injecting quick starts');
     injectQuickStarts();
     clearInterval(checkExist);
   }
+  count++;
 }, 100); // check every 100ms
 
 function injectQuickStarts() {

@@ -20,7 +20,10 @@
     "activeTab"
   ],
   "content_scripts": [{
-    "matches": ["https://cloud.redhat.com/*"],
+    "matches": [
+      "https://cloud.redhat.com/*",
+      "https://*.openshiftapps.com/*"
+    ],
     "js": ["inject.js"]
   }]
 }

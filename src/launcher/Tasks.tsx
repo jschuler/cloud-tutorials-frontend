@@ -22,11 +22,14 @@ import { TaskReview } from "./TaskReview";
 // import FormTemplate from "@data-driven-forms/pf4-component-mapper/form-template";
 // import TextField from "@data-driven-forms/pf4-component-mapper/text-field";
 import { FormMapper } from './FormMapper';
+import { Task } from './Task';
 import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
 
 declare const QUICKSTARTS_BASE: string;
 declare const TUTORIALS_BASE: string;
+
+export const TasksContext = React.createContext<any | null>(null);
 
 const buildTutorialInput = (element: Element | DocumentFragment) => {
   const field: any = {};
@@ -79,7 +82,7 @@ export const Tasks = () => {
     .slice(0, locationChunks.length - 1)
     .join("/");
   // @ts-ignore
-  const { name, task: taskNumber } = useParams();
+  const { name: taskName, task: taskNumber } = useParams();
   const handleClose = () => history.push(parentPath);
   const handleNext = ({ id, name }: WizardStep) => {
     history.push(`${tasksPath}/${id}`);
@@ -93,7 +96,7 @@ export const Tasks = () => {
   const [tutorial, setTutorial] = React.useState<QuickStart>();
   const [steps, setSteps] = React.useState<WizardStep[]>([]);
   React.useEffect(() => {
-    fetch(`${TUTORIALS_BASE}/${name}.json`)
+    fetch(`${TUTORIALS_BASE}/${taskName}.json`)
       .then((res) => res.json())
       .then((json) => {
         setTutorial(json);
@@ -117,10 +120,11 @@ export const Tasks = () => {
                   // parse external app links
                   const node = c.querySelector(".tutorial-external");
                   if (node) {
+                    debugger;
                     let url = node.getAttribute("href") || '';
                     url = url.replace('?quickstart=', '?tutorialid=')
                     const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
-                      location.pathname
+                      `/${taskName}/${taskNumber}`
                     )}`;
                     return (
                       <div
@@ -252,17 +256,13 @@ export const Tasks = () => {
   }, [tutorial]);
 
   return tutorial && steps.length ? (
-    <PageSection variant="light" padding={{ default: "noPadding" }}>
-      <div id="lala"></div>
-      <Wizard
-        steps={steps}
-        onClose={handleClose}
-        onNext={handleNext}
-        onBack={handleBack}
-        onGoToStep={handleGoToStep}
-        className="tut-tasks"
-        startAtStep={Number.parseInt(taskNumber)}
-      />
-    </PageSection>
+    <TasksContext.Provider value={{
+      tutorial,
+      steps
+    }}>
+      <PageSection variant="light" padding={{ default: "noPadding" }}>
+        <Task />
+      </PageSection>
+    </TasksContext.Provider>
   ) : null;
 };

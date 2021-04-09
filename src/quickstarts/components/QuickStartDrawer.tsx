@@ -29,7 +29,6 @@ const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
   if (tutorialPath?.startsWith('/')) {
     tutorialPath = tutorialPath.substring(1);
   }
-  debugger;
   const [activeQuickStartID, setActiveQuickStartID] = React.useState(tutorialId);
   const [allQuickStartStates, setAllQuickStartStates] = React.useState<AllQuickStartStates>({
     [tutorialId]: {
