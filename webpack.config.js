@@ -19,7 +19,7 @@ module.exports = (_env, argv) => {
   const gitBranch = process.env.TRAVIS_BRANCH || process.env.BRANCH || gitRevisionPlugin.branch();
   const isProduction = argv.mode === 'production';
   const appDeployment = (isProduction && betaBranches.includes(gitBranch)) ? '/beta' : '';
-  const publicPath = `${appDeployment}/apps/${name}/`;
+  const publicPath = `${appDeployment}/mosaic/${name}`;
   const port = 4567;
 
   console.log('~~~Using variables~~~');
@@ -76,13 +76,17 @@ module.exports = (_env, argv) => {
           test: fileRegEx,
           type: 'asset/resource',
         },
+        {
+          test: /\.(png|jpg|jpeg)$/,
+          loader: 'url-loader'
+        }
       ],
     },
     plugins: [
       new webpack.DefinePlugin({
         'APP_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}"`,
-        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}quickstarts"`,
-        'TUTORIALS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}tutorials"`
+        'QUICKSTARTS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}/quickstarts"`,
+        'TUTORIALS_BASE': `"https://${isProduction ? 'cloud.redhat.com' : 'localhost:' + port}${publicPath}/tutorials"`
       }),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
@@ -102,6 +106,9 @@ module.exports = (_env, argv) => {
       }),
       new CopyWebpackPlugin({ patterns: [
         { from: path.join(__dirname, 'static'), to: '' }
+      ]}),
+      new CopyWebpackPlugin({ patterns: [
+        { from: path.resolve('src/quickstarts/chrome-plugin/plugin.css'), to: '' }
       ]}),
       new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@cloudmosaic/quickstarts/dist/quickstarts.min.css'), to: '' }
@@ -145,7 +152,7 @@ module.exports = (_env, argv) => {
       hot: false,
       injectHot: false,
       historyApiFallback: {
-        index: `${publicPath}index.html`
+        index: `${publicPath}/index.html`
       },
       proxy: getProxyPaths({ publicPath, webpackPort: port }),
     },

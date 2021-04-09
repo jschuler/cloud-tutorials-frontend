@@ -10,7 +10,6 @@ import {
 } from "@patternfly/react-core";
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import { useHistory, useParams } from "react-router-dom";
-import { removeParagraphWrap } from "./utils";
 import FormRenderer from "@data-driven-forms/react-form-renderer/form-renderer";
 import componentTypes from "@data-driven-forms/react-form-renderer/component-types";
 import FormTemplate from "@data-driven-forms/pf4-component-mapper/form-template";
@@ -34,19 +33,38 @@ export const Tutorial = () => {
       });
   }, []);
 
+  // @ts-ignore
+  const onFormSubmit = (values, formApi) => {
+    console.log(values);
+    handleClick(`/${name}/1`);
+  };
   let form;
   // @ts-ignore
   if (tutorial && tutorial.spec.form) {
     const componentMapper = {
-      [componentTypes.TEXT_FIELD]: TextField,
+      [componentTypes.TEXT_FIELD]: (props: any) => <TextField {...props} />,
+      'description': ({component, name, label, text, ...props }: any) => {
+        return <h3 id={name} {...props}>{text}</h3>
+      }
     };
     form = (
       <FormRenderer
-        FormTemplate={FormTemplate}
+        FormTemplate={(props) => (
+          <FormTemplate
+            {...props}
+            buttonsProps={{
+              submit: {
+                isLarge: true,
+                label: 'Start tutorial'
+              },
+            }}
+            disableSubmit={['hasValidationErrors']}
+          />
+        )}
         componentMapper={componentMapper}
         // @ts-ignore
-        schema={tutorial.spec.form}
-        onSubmit={console.log}
+        schema={tutorial.spec.form.schema}
+        onSubmit={onFormSubmit}
       />
     );
   }
@@ -55,9 +73,7 @@ export const Tutorial = () => {
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Text component="h1">
-            {removeParagraphWrap(tutorial.spec.displayName)}
-          </Text>
+          <Text component="h1">{tutorial.spec.displayName}</Text>
           <div
             dangerouslySetInnerHTML={{ __html: tutorial.spec.description }}
           />
@@ -74,9 +90,7 @@ export const Tutorial = () => {
             <Text component="h2">Prerequisites</Text>
             <TextList>
               {tutorial.spec.prerequisites.map((prereq, index) => (
-                <TextListItem key={index}>
-                  {removeParagraphWrap(prereq)}
-                </TextListItem>
+                <TextListItem key={index}>{prereq}</TextListItem>
               ))}
             </TextList>
           </TextContent>
@@ -85,14 +99,23 @@ export const Tutorial = () => {
       {form && (
         <PageSection>
           <TextContent>
-            <Text component="h2">The following fields are required before we get started</Text>
+            <Text component="h2">
+              {/* @ts-ignore */}
+              {tutorial.spec.form.title}
+            </Text>
             {form}
           </TextContent>
         </PageSection>
       )}
-      <Button variant="primary" onClick={() => handleClick(`/${name}/1`)}>
-        Start tutorial
-      </Button>
+      {!form && <PageSection>
+        <Button
+          variant="primary"
+          isLarge
+          onClick={() => handleClick(`/${name}/1`)}
+        >
+          Start tutorial
+        </Button>
+      </PageSection>}
     </>
   ) : null;
 };

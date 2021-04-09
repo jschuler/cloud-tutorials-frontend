@@ -15,7 +15,6 @@ import {
 import { useHistory } from 'react-router-dom';
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import { loadJSONTutorials } from './tutorialLoader';
-import { removeParagraphWrap } from './utils';
 
 export const Catalog: React.FC = () => {
   const history = useHistory();
@@ -25,7 +24,7 @@ export const Catalog: React.FC = () => {
 
   React.useEffect(() => {
     const load = async () => {
-      const allTutorials = await loadJSONTutorials("/apps/cloud-tutorials/");
+      const allTutorials = await loadJSONTutorials("/mosaic/cloud-tutorials");
       setTutorials(allTutorials);
     };
     load();
@@ -47,7 +46,7 @@ export const Catalog: React.FC = () => {
             <GalleryItem key={i}>
               <Card isHoverable onClick={() => handleClick(`/${tutorial.metadata.name}`)}>
                 <CardTitle>
-                  {removeParagraphWrap(tutorial.spec.displayName)}
+                  {tutorial.spec.displayName}
                 </CardTitle>
                 <CardBody>
                   <div dangerouslySetInnerHTML={{ __html: tutorial.spec.description }} />

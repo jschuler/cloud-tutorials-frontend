@@ -6,10 +6,10 @@ import { TutorialBreadcrumb } from './components/Breadcrumb';
 
 declare const QUICKSTARTS_BASE: string;
 declare const APP_BASE: string;
-const tutorialHeaderHeight = 44;
+const tutorialHeaderHeight = 49;
 
 const queryParams = new URLSearchParams(window.location.search);
-const searchQuery = queryParams.get("quickstart");
+const searchQuery = queryParams.get("tutorialid");
 if (searchQuery) {
   fetch(`${QUICKSTARTS_BASE}/${searchQuery}.json`)
     .then((res) => res.json())
@@ -73,16 +73,9 @@ document.addEventListener(
     /*
      * Tutorial header
      */
-    const tutorialHeader = makeDiv("tut-header pf-u-box-shadow-inset", {
-      padding: "10px 16px",
-      // background: "#555",
-      // color: "#f1f1f1",
-      position: "fixed",
-      top: 0,
-      width: "100%",
-    });
+    const tutorialHeader = makeDiv("tut-main");
     const params = new URLSearchParams(location.search);
-    const tutorialPath = params.get('tutorial');
+    const tutorialPath = params.get('tutorialpath');
     ReactDOM.render(
       React.createElement(TutorialBreadcrumb, {
         basename: APP_BASE,

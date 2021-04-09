@@ -1,0 +1,30 @@
+
+.tut-main .tut-img-fluid {
+  max-width: 120px;
+  max-height: 30px;
+  padding-right: 8px;
+}
+
+.tut-main .pf-c-page__main-breadcrumb,
+.tut-main .tut-header {
+  padding: 0;
+  background-color: gray;
+  box-shadow: 0 4px 14px 0 rgba(155, 155, 155, 0.2);
+  top: 0px;
+  width: 100%;
+  /* background-image: url("../images/bg_grid-our-code-is-open.jpeg"); */
+  background-image: url("https://www.redhat.com/cms/managed-files/bg_grid-our-code-is-open.jpg");
+  background-size: cover;
+  background-position: bottom right;
+}
+
+.tut-main .tut-header__body {
+  padding: 10px 16px;
+}
+
+.tut-main .tut-header__body .pf-c-breadcrumb__item a {
+  color: white;
+}
+.tut-main .tut-header__body .pf-c-breadcrumb__item a:hover {
+  color: white;
+}

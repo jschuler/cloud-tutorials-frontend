@@ -18,5 +18,9 @@
     "http://*/*",
     "tabs",
     "activeTab"
-  ]
+  ],
+  "content_scripts": [{
+    "matches": ["https://cloud.redhat.com/*"],
+    "js": ["inject.js"]
+  }]
 }

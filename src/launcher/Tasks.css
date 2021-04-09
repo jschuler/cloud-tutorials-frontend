@@ -8,6 +8,16 @@
     flex-direction: column;
 }
 
+.tut-tasks.pf-c-wizard .pf-c-wizard__main-body .tut-template-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tut-tasks.pf-c-wizard .pf-c-wizard__main-body .pf-c-alert.pf-m-inline {
+    margin-top: auto;
+}
+
 .tut-app-launch {
     padding: 15px 0;
     flex-grow: 1;

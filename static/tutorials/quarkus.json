@@ -3,10 +3,11 @@
     "name": "quarkus"
   },
   "spec": {
-    "displayName": "Using Quarkus with Kafka instances in bf2fc6cc711aee1a0c2a",
     "durationMinutes": 10,
     "icon": "",
+    "displayName": "Using Quarkus with Kafka instances in bf2fc6cc711aee1a0c2a",
     "description": "Learn how to use Quarkus to produce messages to and consume messages from a Kafka instance in bf2fc6cc711aee1a0c2a.",
+    "introduction": "Welcome to the bf2fc6cc711aee1a0c2a Quarkus quick start. In this quick start, you’ll learn how to use <a href=\"https://quarkus.io/\">Quarkus</a> to produce messages to and consume messages from your Kafka instances in bf2fc6cc711aee1a0c2a.",
     "prerequisites": [
       "A running Kafka instance (see the Getting Started quick start)",
       "A command-line terminal application",
@@ -15,33 +16,47 @@
       "An IDE",
       "Apache Maven"
     ],
-    "introduction": "Welcome to the bf2fc6cc711aee1a0c2a Quarkus quick start. In this quick start, you’ll learn how to use <a href=\"https://quarkus.io/\">Quarkus</a> to produce messages to and consume messages from your Kafka instances in bf2fc6cc711aee1a0c2a.",
     "form": {
-      "fields": [
-        {
-          "component": "text-field",
-          "name": "login",
-          "label": "Your login name",
-          "validate": [
-            {
-              "type": "required"
-            }
-          ]
-        },
-        {
-          "component": "text-field",
-          "type": "password",
-          "name": "password",
-          "label": "Password",
-          "validate": [
-            {
-              "type": "required"
-            }
-          ]
-        }
-      ]
+      "title": "The following fields are required before we can get started",
+      "schema": {
+        "fields": [
+          {
+            "component": "description",
+            "name": "login-description",
+            "text": "Test"
+          },
+          {
+            "component": "text-field",
+            "name": "login",
+            "label": "Your login name",
+            "description": "Fill in your login name",
+            "isRequired": true,
+            "helperText": "You can find this information on cloud.redhat.com",
+            "validate": [
+              {
+                "type": "required"
+              }
+            ]
+          },
+          {
+            "component": "text-field",
+            "type": "password",
+            "name": "password",
+            "label": "Password",
+            "validate": [
+              {
+                "type": "required"
+              }
+            ]
+          }
+        ]
+      }
     },
     "tasks": [
+      {
+        "title": "Gather required info",
+        "description": "<div class=\"paragraph\">\n<p>Howdy, this is some text</p>\n</div>\n<div class=\"exampleblock tutorial-input\">\n<div class=\"content\">\n<div class=\"dlist\">\n<dl>\n<dt class=\"hdlist1\">component</dt>\n<dd>\n<p>text-field</p>\n</dd>\n<dt class=\"hdlist1\">name</dt>\n<dd>\n<p>asd-login</p>\n</dd>\n<dt class=\"hdlist1\">label</dt>\n<dd>\n<p>asd Your login name</p>\n</dd>\n<dt class=\"hdlist1\">description</dt>\n<dd>\n<p>asd Fill in your login name</p>\n</dd>\n<dt class=\"hdlist1\">isRequired</dt>\n<dd>\n<p>true</p>\n</dd>\n<dt class=\"hdlist1\">helperText</dt>\n<dd>\n<p>asd You can find this information on cloud.redhat.com</p>\n</dd>\n<dt class=\"hdlist1\">validate</dt>\n<dd>\n<div class=\"dlist\">\n<dl>\n<dt class=\"hdlist1\">type</dt>\n<dd>\n<p>required</p>\n</dd>\n</dl>\n</div>\n</dd>\n</dl>\n</div>\n</div>\n</div>\n<div class=\"paragraph\">\n<p>This is more text</p>\n</div>"
+      },
       {
         "title": "Getting the same code",
         "description": "<div class=\"paragraph\">\n<p>Quarkus is a Kubernetes Native Java stack tailored for OpenJDK HotSpot and GraalVM, crafted from the best of breed Java libraries and standards. Applications built for Quarkus can produce messages to and consume messages to bf2 using MicroProfile Reactive Messaging.</p>\n</div>\n<div class=\"paragraph\">\n<p>In order to follow this quick start get the sample from GitHub and open it in your IDE.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com\" class=\"tutorial-external\" target=\"_blank\" rel=\"noopener\">Red Hat</a></p>\n</div>\n<div class=\"ulist\">\n<div class=\"title\">Verification</div>\n<ul>\n<li>\n<p>You have the quarkus project imported into your IDE and the IDE has configured the project with the needed Java libraries from the Maven <code>pom.xml</code>.</p>\n</li>\n</ul>\n</div>"

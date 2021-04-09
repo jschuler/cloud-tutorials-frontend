@@ -11,6 +11,9 @@ import {
   BreadcrumbHeading,
 } from "@patternfly/react-core";
 import { Link, useLocation } from "react-router-dom";
+import './App.css';
+// @ts-ignore
+import logo from '../images/illustration_rhel-isometric.svg';
 
 declare global {
   interface Window {
@@ -45,7 +48,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
   const AppSidebar = <PageSidebar isNavOpen nav={AppNav} />;
 
   const PageBreadcrumb = (
-    <Breadcrumb>
+    <Breadcrumb className="tut-header__body">
       {locationChunks.map((chunk, index) => {
         if (index === 0) {
           return (
@@ -57,7 +60,12 @@ const App = ({ children }: { children: React.ReactNode }) => {
                   to=""
                   className={className}
                 >
-                  Resources
+                  <img
+                    src={logo}
+                    alt="Red Hat Enterprise Linux isometric illustration"
+                    className="tut-img-fluid"
+                  />
+                  <span>Resources</span>
                 </Link>
               )}
             />
@@ -85,7 +93,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
   );
 
   return (
-    <Page sidebar={AppSidebar} isManagedSidebar breadcrumb={PageBreadcrumb}>
+    <Page sidebar={AppSidebar} isManagedSidebar breadcrumb={PageBreadcrumb} className="tut-main">
       {children}
     </Page>
   );
