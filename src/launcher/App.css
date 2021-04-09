@@ -1,25 +1,31 @@
 
 .tut-main .tut-img-fluid {
   max-width: 120px;
-  max-height: 30px;
-  padding-right: 8px;
+  max-height: 60px;
+  padding-right: 16px;
 }
 
 .tut-main .pf-c-page__main-breadcrumb,
 .tut-main .tut-header {
+  display: flex;
+  align-items: center;
+  background-color: #0088ce;
   padding: 0;
-  background-color: gray;
   box-shadow: 0 4px 14px 0 rgba(155, 155, 155, 0.2);
   top: 0px;
   width: 100%;
   /* background-image: url("../images/bg_grid-our-code-is-open.jpeg"); */
-  background-image: url("https://www.redhat.com/cms/managed-files/bg_grid-our-code-is-open.jpg");
-  background-size: cover;
-  background-position: bottom right;
+  /* background-image: url("https://www.redhat.com/cms/managed-files/bg_grid-our-code-is-open.jpg"); */
+  /* background-size: cover; */
+  /* background-position: bottom right; */
 }
 
 .tut-main .tut-header__body {
   padding: 10px 16px;
+}
+
+.tut-main .tut-header__body .pf-c-breadcrumb__item-divider {
+  color: white;
 }
 
 .tut-main .tut-header__body .pf-c-breadcrumb__item a {
@@ -27,4 +33,13 @@
 }
 .tut-main .tut-header__body .pf-c-breadcrumb__item a:hover {
   color: white;
+}
+
+.tut-main-title {
+  display: inline-block;
+}
+
+.tut-main-intro {
+  padding-top: 16px;
+  margin-bottom: 0;
 }

@@ -10,11 +10,13 @@ import {
   CardTitle,
   CardBody,
   CardFooter,
-  Button
+  Button,
 } from "@patternfly/react-core";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { QuickStart } from "@cloudmosaic/quickstarts";
-import { loadJSONTutorials } from './tutorialLoader';
+import { loadJSONTutorials } from "./tutorialLoader";
+// @ts-ignore
+import logo from '../images/illustration_rhel-isometric.svg';
 
 export const Catalog: React.FC = () => {
   const history = useHistory();
@@ -34,27 +36,36 @@ export const Catalog: React.FC = () => {
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Text component="h1">Cloud tutorials</Text>
-          <Text component="p">
-            Follow along with an interactive tutorial
-          </Text>
+          <img
+            src={logo}
+            alt="Red Hat Enterprise Linux isometric illustration"
+            className="tut-img-fluid"
+          />
+          <Text component="h1" className="tut-main-title">Cloud tutorials</Text>
+          <Text component="p" className="tut-main-intro">Follow along with an interactive tutorial</Text>
         </TextContent>
       </PageSection>
       <PageSection>
         <Gallery hasGutter>
           {tutorials.map((tutorial, i) => (
             <GalleryItem key={i}>
-              <Card isHoverable onClick={() => handleClick(`/${tutorial.metadata.name}`)} style={{ height: '100%' }}>
-                <CardTitle>
-                  {tutorial.spec.displayName}
-                </CardTitle>
+              <Card
+                isHoverable
+                onClick={() => handleClick(`/${tutorial.metadata.name}`)}
+                style={{ height: "100%" }}
+              >
+                <CardTitle>{tutorial.spec.displayName}</CardTitle>
                 <CardBody>
-                  <div dangerouslySetInnerHTML={{ __html: tutorial.spec.description }} />
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: tutorial.spec.description,
+                    }}
+                  />
                 </CardBody>
                 <CardFooter>
                   <Button variant="primary">Start</Button>
                 </CardFooter>
-            </Card>
+              </Card>
             </GalleryItem>
           ))}
         </Gallery>

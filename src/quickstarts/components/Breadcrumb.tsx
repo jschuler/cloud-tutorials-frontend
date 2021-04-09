@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem } from "@patternfly/react-core";
+import { Breadcrumb, BreadcrumbItem, Button } from "@patternfly/react-core";
 import "../../launcher/App.css";
 
 export const TutorialBreadcrumb = ({
@@ -42,6 +42,9 @@ export const TutorialBreadcrumb = ({
           );
         })}
       </Breadcrumb>
+      <Button variant="link" style={{ color: 'white' }} onClick={ () => window.location.replace(basename) }>
+        Return to tutorials
+      </Button>
     </div>
   );
 };

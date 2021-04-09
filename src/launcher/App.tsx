@@ -12,8 +12,6 @@ import {
 } from "@patternfly/react-core";
 import { Link, useLocation } from "react-router-dom";
 import './App.css';
-// @ts-ignore
-import logo from '../images/illustration_rhel-isometric.svg';
 
 declare global {
   interface Window {
@@ -60,12 +58,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
                   to=""
                   className={className}
                 >
-                  <img
-                    src={logo}
-                    alt="Red Hat Enterprise Linux isometric illustration"
-                    className="tut-img-fluid"
-                  />
-                  <span>Resources</span>
+                  Resources
                 </Link>
               )}
             />
