@@ -78,7 +78,7 @@ document.addEventListener(
      * Wrap document body so we can move it to the drawer content
      */
     const wrappedDocBody = makeDiv("tut-doc-body", {
-      height: `calc(100vh - ${tutorialHeaderHeight}px)`
+      height: `calc(100vh - ${tutorialHeaderHeight}px - 10px)`
     });
     copyAttrs(document.body, wrappedDocBody);
     while (document.body.firstChild) {
