@@ -1,4 +1,9 @@
 
+/* For demo purposes, hide the side bar */
+.tut-main #page-sidebar {
+  display: none;
+}
+
 .tut-main .tut-img-fluid {
   max-width: 120px;
   max-height: 60px;
