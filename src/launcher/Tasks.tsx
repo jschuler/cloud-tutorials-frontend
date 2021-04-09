@@ -106,25 +106,24 @@ export const Tasks = () => {
     const taskSteps: WizardStep[] = [];
     if (tutorial) {
       (tutorial.spec.tasks as QuickStartTask[]).forEach(
-        (task: QuickStartTask, index: number) => {
-          const title = task.title || `Task ${index + 1}`;
+        (task: QuickStartTask, taskIndex: number) => {
+          const title = task.title || `Task ${taskIndex + 1}`;
           const wrappedTitle = `<h2>${title}</h2>`;
 
           const template = document.createElement("template");
           template.innerHTML = task.description?.trim() || "<p></p>";
 
           const templateComponent = (
-            <div key={`template-${index}`} className="tut-template-container">
+            <div key={`template-${taskIndex}`} className="tut-template-container">
               {Array.from(template.content.children).map((c, index) => {
                 if (c.querySelector(".tutorial-external")) {
                   // parse external app links
                   const node = c.querySelector(".tutorial-external");
                   if (node) {
-                    debugger;
                     let url = node.getAttribute("href") || '';
                     url = url.replace('?quickstart=', '?tutorialid=')
                     const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
-                      `/${taskName}/${taskNumber}`
+                      `/${taskName}/${taskIndex + 1}`
                     )}`;
                     return (
                       <div
@@ -135,7 +134,6 @@ export const Tasks = () => {
                           component="a"
                           href={fullUrl}
                           variant="primary"
-                          target="__blank"
                         >
                           {node.textContent}
                         </Button>
@@ -221,12 +219,12 @@ export const Tasks = () => {
           );
 
           let nextButtonText = "Next";
-          if (tutorial.spec.tasks && index === tutorial.spec.tasks.length - 1) {
+          if (tutorial.spec.tasks && taskIndex === tutorial.spec.tasks.length - 1) {
             nextButtonText = "Review";
           }
 
           taskSteps.push({
-            id: index + 1,
+            id: taskIndex + 1,
             name: <div dangerouslySetInnerHTML={{ __html: title }} />,
             nextButtonText,
             component: (
@@ -241,6 +239,7 @@ export const Tasks = () => {
       taskSteps.push({
         id: taskSteps.length + 1,
         name: "Review",
+        nextButtonText: "Close",
         component: (
           <div
             dangerouslySetInnerHTML={{
@@ -248,8 +247,7 @@ export const Tasks = () => {
                 tutorial.spec.conclusion || "You have completed this tutorial.",
             }}
           />
-        ),
-        isFinishedStep: true,
+        )
       });
       setSteps(taskSteps);
     }

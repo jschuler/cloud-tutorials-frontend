@@ -34,7 +34,7 @@ export const TutorialBreadcrumb = ({
           return (
             <BreadcrumbItem
               key={`breadcrumb-${chunk || "/"}`}
-              isActive={index === crumbs.length - 1}
+              // isActive={index === crumbs.length - 1}
               to={`${basename}${crumbs.slice(0, index + 1).join("/")}`}
             >
               {chunk}

@@ -42,7 +42,8 @@ export const Task = () => {
     .join("/");
   // @ts-ignore
   const { name: taskName, task: taskNumber } = useParams();
-  const handleClose = () => history.push(parentPath);
+  const handleClose = () => history.push('/');
+//   const handleClose = () => history.push(parentPath);
   const handleNext = ({ id, name }: WizardStep) => {
     history.push(`${tasksPath}/${id}`);
   };

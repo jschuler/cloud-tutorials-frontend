@@ -32,6 +32,14 @@
   color: white;
 }
 
+.tut-drawer {
+  position: fixed;
+  top: 49px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .tut-drawer .imageblock.screencapture {
     display: none;
 }

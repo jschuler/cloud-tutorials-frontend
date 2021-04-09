@@ -61,16 +61,6 @@ document.addEventListener(
   "tutorial-load-success",
   function (e) {
     /*
-     * First hide the in-built quick starts (if applicable)
-     */
-    const inBuiltDrawer = document.querySelector(
-      ".co-quick-start-panel-content"
-    );
-    if (inBuiltDrawer) {
-      (inBuiltDrawer as HTMLElement).style.display = "none";
-    }
-
-    /*
      * Tutorial header
      */
     const tutorialHeader = makeDiv("tut-main");
@@ -95,11 +85,7 @@ document.addEventListener(
       wrappedDocBody.appendChild(document.body.firstChild);
     }
 
-    const tutorialDrawer = makeDiv("tut-drawer", {
-      position: "fixed",
-      top: `${tutorialHeaderHeight}px`,
-      bottom: 0,
-    });
+    const tutorialDrawer = makeDiv("tut-drawer");
 
     document.body.append(tutorialHeader);
     document.body.append(tutorialDrawer);

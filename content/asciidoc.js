@@ -6,7 +6,9 @@ const asciidoctor = require('asciidoctor')();
 // Adds yaml tags to parse asciidoc into Openshift quickstart format
 const docs = {}; // filename: asciidoctor.load
 const attributes = {
-  qs: 'true'
+  qs: 'true',
+  'product-long': 'Red Hat Streams for Apache Kafka',
+  'product': 'Streams for Apache Kafka'
 };
 
 function getDoc(filename) {
