@@ -37,7 +37,7 @@ export const TutorialBreadcrumb = ({
               // isActive={index === crumbs.length - 1}
               to={`${basename}${crumbs.slice(0, index + 1).join("/")}`}
             >
-              {chunk}
+              {chunk.charAt(0).toUpperCase() + chunk.slice(1)}
             </BreadcrumbItem>
           );
         })}

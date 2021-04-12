@@ -24,20 +24,20 @@ In this step, you will create a Kafka instance and connect topics to them.
 
 Click on the *Launch RHOSAK* button to launch _Red Hat OpenShift Streams for Apache Kafka_. Once launched, follow the quick start within it.
 
-https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started[Launch RHOSAK,role="tutorial-external"]
+https://cloud.redhat.com/beta/application-services/overview?quickstart=getting-started[Launch RHOSAK,role="tutorial-external"]
 
 .Verification
 . Did you create a Kafka instance?
 . Did you create a Kafka topic?
 
 [#task-2]
-== Connecting kafka to OpenShift
+== Connecting Kafka to OpenShift
 
 Now that you've set up a kafka with topics, you'll be connecting that to an application that you create on OpenShift.
 
 Click on the *Launch OpenShift* button to launch _Red Hat OpenShift Streams for Apache Kafka_. Once launched, follow the quick start within it.
 
-https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-dev/graph?quickstart=quarkus[Launch OpenShift,role="tutorial-external"]
+https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=quarkus[Launch OpenShift,role="tutorial-external"]
 
 .Verification
 . Did you create a quarkus app?

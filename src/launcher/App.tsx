@@ -74,7 +74,7 @@ const App = ({ children }: { children: React.ReactNode }) => {
                   to={locationChunks.slice(0, index + 1).join("/")}
                   className={className}
                 >
-                  {chunk}
+                  {chunk.charAt(0).toUpperCase() + chunk.slice(1)}
                 </Link>
               )}
             />

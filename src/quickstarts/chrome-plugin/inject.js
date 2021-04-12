@@ -8,24 +8,6 @@ function injectStylesheet(href) {
   // document.getElementsByTagName("head")[0].prepend(link);
 }
 
-var count = 0;
-var checkExist = setInterval(function () {
-  console.log(count);
-  if (count >= 100) {
-    clearInterval(checkExist);
-  } else {
-    // First hide the in-built quick starts (if applicable)
-    const inBuiltDrawer = document.querySelectorAll(
-      ".co-quick-start-panel-content"
-    );
-    if (inBuiltDrawer.length > 1) {
-      inBuiltDrawer[0].style.display = "none";
-      clearInterval(checkExist);
-    }
-    count++;
-  }
-}, 100); // check every 100ms
-
 function injectQuickStarts() {
   injectStylesheet("https://localhost:4567/mosaic/cloud-tutorials/plugin.css");
   // injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/src_launcher_bootstrap_tsx.css');
@@ -43,17 +25,10 @@ function injectQuickStarts() {
   document.body.appendChild(quickstart);
 }
 
-function changeAllLinks() {
-  const params = new URLSearchParams(location.search);
-  const tutorialId = params.get('tutorialid');
-  let tutorialPath = params.get('tutorialpath');
-  for (i=0; i < document.links.length; i++) {
-    document.links[i].href = `${document.links[i].href}?tutorialid=${tutorialId}&tutorialpath=${encodeURIComponent(tutorialPath)}`;
-  }
-}
-
-injectQuickStarts();
-
 window.onload = function() {
-  changeAllLinks();
+  const queryParams = new URLSearchParams(window.location.search);
+  const searchQuery = queryParams.get("tutorialid");
+  if (searchQuery) {
+    injectQuickStarts();
+  }
 };
