@@ -24,7 +24,7 @@ In this step, you will create a Kafka instance and connect topics to them.
 
 Click on the *Launch RHOSAK* button to launch _Red Hat OpenShift Streams for Apache Kafka_. Once launched, follow the quick start within it.
 
-https://cloud.redhat.com/beta/application-services/overview?quickstart=getting-started[Launch RHOSAK,role="tutorial-external"]
+https://cloud.redhat.com/beta/application-services/streams/service-accounts?quickstart=getting-started[Launch RHOSAK,role="tutorial-external"]
 
 .Verification
 . Did you create a Kafka instance?

@@ -2,7 +2,7 @@ metadata:
   name: kafka
 spec:
   version: 0.1
-  durationMinutes: 10
+  durationMinutes: 20
   icon: ''
   displayName: !snippet/title README.adoc#title
   description: !snippet README.adoc#description
@@ -18,7 +18,6 @@ spec:
           name: openshift
           label: Your OpenShift URL
           description: Fill in the URL
-          initialValue: https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com
           isRequired: true
           helperText: Need OpenShift? Create a sandbox environment here - https://developers.redhat.com/developer-sandbox
           validate:
@@ -27,7 +26,6 @@ spec:
           name: kafka
           label: URL to Application Services -> Streams for Apache Kafka
           description: Fill in the URL
-          initialValue: https://cloud.redhat.com/beta/application-services/openshift-streams
           isRequired: true
           helperText: Streams for Apache Kafka is offered as part of Application Services and can be found at https://cloud.redhat.com
           validate:

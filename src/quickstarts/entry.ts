@@ -60,15 +60,15 @@ function copyAttrs(src: HTMLElement, target: HTMLElement) {
   }
 }
 
-function duplicateChildNodes (from: HTMLElement, to: HTMLElement){
+function duplicateChildNodes(from: HTMLElement, to: HTMLElement) {
   var children = Array.from(from.childNodes);
-  children.forEach(function(item){
+  children.forEach(function (item) {
     // var cln = item.cloneNode(true);
     // to.appendChild(cln);
     // (item as HTMLElement).style.display = "none";
     (item as HTMLElement).remove();
   });
-};
+}
 
 function wrapBody(e: Event) {
   /*
@@ -117,7 +117,7 @@ function wrapBody(e: Event) {
   ReactDOM.render(
     React.createElement(QuickStartDrawer, {
       children: React.createElement(VanillaChildren, {}, wrappedDocBody),
-      tutorial
+      tutorial,
       // tutorial: (e as CustomEvent).detail,
     }),
     tutorialDrawer
@@ -155,6 +155,37 @@ function changeAllLinks() {
     }
   }
 }
+
+// function interceptClickEvent(e: Event) {
+//   const params = new URLSearchParams(location.search);
+//   const tutorialId = params.get("tutorialid");
+//   let tutorialPath = params.get("tutorialpath") || "";
+//   var href;
+//   var newHref;
+//   var target = e.target || e.srcElement;
+//   // @ts-ignore
+//   if (target.tagName === "A") {
+//     // @ts-ignore
+//     href = target.getAttribute("href");
+//     if (!href.includes("tutorialid")) {
+//       newHref = `${href}?tutorialid=${tutorialId}&tutorialpath=${encodeURIComponent(
+//         tutorialPath
+//       )}`;
+//     } else {
+//       newHref = href;
+//     }
+//     window.location.replace(newHref);
+//   }
+// }
+
+// //listen for link click events at the document level
+// if (document.addEventListener) {
+//   document.addEventListener("click", interceptClickEvent);
+//   // @ts-ignore
+// } else if (document.attachEvent) {
+//   // @ts-ignore
+//   document.attachEvent("onclick", interceptClickEvent);
+// }
 
 document.addEventListener(
   "tutorial-load-success",

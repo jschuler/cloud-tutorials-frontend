@@ -11,12 +11,14 @@ import {
   CardBody,
   CardFooter,
   Button,
+  Label,
 } from "@patternfly/react-core";
+import { OutlinedClockIcon } from "@patternfly/react-icons";
 import { useHistory } from "react-router-dom";
 import { QuickStart } from "@cloudmosaic/quickstarts";
 import { loadJSONTutorials } from "./tutorialLoader";
 // @ts-ignore
-import logo from '../images/illustration_rhel-isometric.svg';
+import logo from "../images/illustration_rhel-isometric.svg";
 
 export const Catalog: React.FC = () => {
   const history = useHistory();
@@ -41,8 +43,12 @@ export const Catalog: React.FC = () => {
             alt="Red Hat Enterprise Linux isometric illustration"
             className="tut-img-fluid"
           />
-          <Text component="h1" className="tut-main-title">Cloud tutorials</Text>
-          <Text component="p" className="tut-main-intro">Follow along with an interactive tutorial</Text>
+          <Text component="h1" className="tut-main-title">
+            Cloud tutorials
+          </Text>
+          <Text component="p" className="tut-main-intro">
+            Follow along with an interactive tutorial
+          </Text>
         </TextContent>
       </PageSection>
       <PageSection>
@@ -54,7 +60,21 @@ export const Catalog: React.FC = () => {
                 onClick={() => handleClick(`/${tutorial.metadata.name}`)}
                 style={{ height: "100%" }}
               >
-                <CardTitle>{tutorial.spec.displayName}</CardTitle>
+                <CardTitle>
+                  <div>{tutorial.spec.displayName}</div>
+                  <div>
+                    <Label
+                      variant="outline"
+                      icon={<OutlinedClockIcon />}
+                      style={{
+                        marginTop: '8px',
+                        marginLeft: '-5px'
+                      }}
+                    >
+                      {tutorial.spec.durationMinutes} minutes
+                    </Label>
+                  </div>
+                </CardTitle>
                 <CardBody>
                   <div
                     dangerouslySetInnerHTML={{

@@ -3,7 +3,7 @@
     "name": "kafka"
   },
   "spec": {
-    "durationMinutes": 10,
+    "durationMinutes": 20,
     "icon": "",
     "displayName": "Connecting Kafka topics to a Quarkus application",
     "description": "In this tutorial, you will set up a Kafka instance and create topics to be used with a Quarkus application",
@@ -21,7 +21,6 @@
             "name": "openshift",
             "label": "Your OpenShift URL",
             "description": "Fill in the URL",
-            "initialValue": "https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com",
             "isRequired": true,
             "helperText": "Need OpenShift? Create a sandbox environment here - https://developers.redhat.com/developer-sandbox",
             "validate": [
@@ -35,7 +34,6 @@
             "name": "kafka",
             "label": "URL to Application Services -> Streams for Apache Kafka",
             "description": "Fill in the URL",
-            "initialValue": "https://cloud.redhat.com/beta/application-services/openshift-streams",
             "isRequired": true,
             "helperText": "Streams for Apache Kafka is offered as part of Application Services and can be found at https://cloud.redhat.com",
             "validate": [
@@ -50,7 +48,7 @@
     "tasks": [
       {
         "title": "Kafka",
-        "description": "<div class=\"paragraph\">\n<p>In this step, you will create a Kafka instance and connect topics to them.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Launch RHOSAK</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com/beta/application-services/overview?quickstart=getting-started\" class=\"tutorial-external\">Launch RHOSAK</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a Kafka instance?</p>\n</li>\n<li>\n<p>Did you create a Kafka topic?</p>\n</li>\n</ol>\n</div>"
+        "description": "<div class=\"paragraph\">\n<p>In this step, you will create a Kafka instance and connect topics to them.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Launch RHOSAK</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com/beta/application-services/streams/service-accounts?quickstart=getting-started\" class=\"tutorial-external\">Launch RHOSAK</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a Kafka instance?</p>\n</li>\n<li>\n<p>Did you create a Kafka topic?</p>\n</li>\n</ol>\n</div>"
       },
       {
         "title": "Connecting Kafka to OpenShift",
