@@ -1,7 +1,14 @@
-import * as React from 'react';
-import cx from 'classnames';
-import { Alert, Radio } from '@patternfly/react-core';
-import { QuickStartTaskStatus, QuickStartTaskReview } from '@cloudmosaic/quickstarts';
+import * as React from "react";
+import cx from "classnames";
+import { Alert, Radio } from "@patternfly/react-core";
+import {
+  QuickStart,
+  QuickStartTaskStatus,
+  QuickStartTaskReview,
+  QuickStartTask,
+  QuickStartContextValues,
+  QuickStartContext,
+} from "@cloudmosaic/quickstarts";
 
 type TaskReviewProps = {
   review: QuickStartTaskReview;
@@ -12,11 +19,11 @@ type TaskReviewProps = {
 const getAlertVariant = (status: any) => {
   switch (status) {
     case QuickStartTaskStatus.SUCCESS:
-      return 'success';
+      return "success";
     case QuickStartTaskStatus.FAILED:
-      return 'danger';
+      return "danger";
     default:
-      return 'info';
+      return "info";
   }
 };
 
@@ -25,20 +32,35 @@ export const TaskReview: React.FC<TaskReviewProps> = ({
   taskStatus,
   onTaskReview,
 }) => {
+  const { setQuickStartTaskStatus } = React.useContext<QuickStartContextValues>(
+    QuickStartContext
+  );
+
   const { instructions, failedTaskHelp: taskHelp } = review;
 
-  const [taskStatusState, setTaskStatusState] = React.useState<QuickStartTaskStatus>(QuickStartTaskStatus.INIT);
+  const [
+    taskStatusState,
+    setTaskStatusState,
+  ] = React.useState<QuickStartTaskStatus>(QuickStartTaskStatus.INIT);
 
-  const alertClassNames = cx('co-quick-start-task-review', {
-    'co-quick-start-task-review--success': taskStatus === QuickStartTaskStatus.SUCCESS,
-    'co-quick-start-task-review--failed': taskStatus === QuickStartTaskStatus.FAILED,
+  const alertClassNames = cx("co-quick-start-task-review", {
+    "co-quick-start-task-review--success":
+      taskStatus === QuickStartTaskStatus.SUCCESS,
+    "co-quick-start-task-review--failed":
+      taskStatus === QuickStartTaskStatus.FAILED,
   });
 
   const title = <span className={alertClassNames}>Check your work</span>;
 
+  const onTaskReviewChange = (status: QuickStartTaskStatus) => {
+    setTaskStatusState(status);
+    setQuickStartTaskStatus && setQuickStartTaskStatus(status);
+    onTaskReview(status);
+  };
+
   return (
     <Alert variant={getAlertVariant(taskStatusState)} title={title} isInline>
-      <div dangerouslySetInnerHTML={{ __html: instructions || '' }} />
+      <div dangerouslySetInnerHTML={{ __html: instructions || "" }} />
       <span className="co-quick-start-task-review__actions">
         <Radio
           id="review-success"
@@ -46,7 +68,7 @@ export const TaskReview: React.FC<TaskReviewProps> = ({
           label="Yes"
           className="co-quick-start-task-review__radio"
           isChecked={taskStatusState === QuickStartTaskStatus.SUCCESS}
-          onChange={() => setTaskStatusState(QuickStartTaskStatus.SUCCESS)}
+          onChange={() => onTaskReviewChange(QuickStartTaskStatus.SUCCESS)}
         />
         <Radio
           id="review-failed"
@@ -54,7 +76,7 @@ export const TaskReview: React.FC<TaskReviewProps> = ({
           label="No"
           className="co-quick-start-task-review__radio"
           isChecked={taskStatusState === QuickStartTaskStatus.FAILED}
-          onChange={() => setTaskStatusState(QuickStartTaskStatus.FAILED)}
+          onChange={() => onTaskReviewChange(QuickStartTaskStatus.FAILED)}
         />
       </span>
       {taskStatus === QuickStartTaskStatus.FAILED && taskHelp && (

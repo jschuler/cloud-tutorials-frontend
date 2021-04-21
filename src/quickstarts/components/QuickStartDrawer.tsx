@@ -15,20 +15,25 @@ declare const APP_BASE: string;
 export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   basePath?: string;
   tutorial: QuickStart;
+  search?: string;
+  onConfirm?: any;
 }
 
 const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
   children,
   basePath,
   tutorial,
+  search,
+  onConfirm,
   ...props
 }) => {
-  const params = new URLSearchParams(location.search);
+  const params = new URLSearchParams(search || location.search);
   const tutorialId = params.get('tutorialid') || '';
   let tutorialPath = params.get('tutorialpath');
   if (tutorialPath?.startsWith('/')) {
     tutorialPath = tutorialPath.substring(1);
   }
+  const [tutorialPathState, setTutorialPathState] = React.useState(tutorialPath);
   const [activeQuickStartID, setActiveQuickStartID] = React.useState(tutorialId);
   const [allQuickStartStates, setAllQuickStartStates] = React.useState<AllQuickStartStates>({
     [tutorialId]: {
@@ -44,7 +49,7 @@ const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
     setIsModalOpen(false);
   }
   const handleModalConfirm = () => {
-    window.location.assign(`${APP_BASE}/${tutorialPath}`);
+    window.location.assign(`${APP_BASE}/${tutorialPathState}`);
   }
   const checkState = (state: any) => {
     if (!state()) {
@@ -61,11 +66,12 @@ const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
     setAllQuickStartStates,
     allQuickStarts
   });
+
   return (
     <QuickStartContext.Provider value={valuesForQuickstartContext}>
       <QuickStartDrawerLib {...props}>
         {children}
-        <QuitModal isOpen={isModalOpen} onClose={handleModalToggle} onConfirm={handleModalConfirm} />
+        <QuitModal isOpen={isModalOpen} onClose={handleModalToggle} onConfirm={onConfirm || handleModalConfirm} />
       </QuickStartDrawerLib>
     </QuickStartContext.Provider>
   );

@@ -1,10 +1,11 @@
 [#title]
-= Connecting Kafka topics to a Quarkus application
+= Using Quarkus applications with Kafka instances in Red Hat OpenShift Streams for Apache Kafka
 
 [#description]
 In this tutorial, you will set up a Kafka instance and create topics to be used with a Quarkus application
 
 [#introduction]
+
 We will be using Apache Kafka, an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
     
 You can learn more about Apache Kafka by visiting [https://kafka.apache.org/](https://kafka.apache.org/).
@@ -18,30 +19,58 @@ You can learn more about Quarkus by visiting [https://quarkus.io/](https://quark
 * Red Hat Streams for Apache Kafka
 
 [#task-1]
-== Kafka
+== Introduction to Apache Kafka and Quarkus
 
-In this step, you will create a Kafka instance and connect topics to them.
+The following videos give a brief introduction into Apache Kafka and Quarkus.
+If you are already familiar with these you can advance to the next step.
 
-Click on the *Launch RHOSAK* button to launch _Red Hat OpenShift Streams for Apache Kafka_. Once launched, follow the quick start within it.
+*What is Apache Kafka?*
 
-https://cloud.redhat.com/beta/application-services/streams/service-accounts?quickstart=getting-started[Launch RHOSAK,role="tutorial-external"]
+https://www.youtube.com/embed/FKgi3n-FyNU[What is Apache Kafka?, role="tutorial-youtube"]
 
-.Verification
-. Did you create a Kafka instance?
-. Did you create a Kafka topic?
+*Quarkus: Supersonic, Subatomic Java*
+
+https://www.youtube.com/embed/hhHgurtI674[Quarkus, role="tutorial-youtube"]
+
+=== In the next step, you will create a Kafka instance and connect topics.
 
 [#task-2]
-== Connecting Kafka to OpenShift
+== Creating Kafka topics
 
-Now that you've set up a kafka with topics, you'll be connecting that to an application that you create on OpenShift.
+The Kafka topic that the Quarkus example application references is called prices. You need to create this topic in Streams for Apache Kafka so that the Quarkus application can interact with it.
 
-Click on the *Launch OpenShift* button to launch _Red Hat OpenShift Streams for Apache Kafka_. Once launched, follow the quick start within it.
+A typical Kafka architecture might look like this:
 
-https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=quarkus[Launch OpenShift,role="tutorial-external"]
+image::https://quarkus.io/guides/images/kafka-streams-guide-architecture.png[Kafka architecture]
+
+Click on the *Connect to RHOSAK* button to connect to _Red Hat OpenShift Streams for Apache Kafka_. Once connected, follow the quick start within it.
+
+https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started[Connect to RHOSAK,role="tutorial-external"]
+
+// https://www.patternfly.org?quickstart=getting-started[Launch PatternFly iframe,role="tutorial-iframe"]
+// https://www.google.com?quickstart=getting-started[Launch Google iframe,role="tutorial-iframe"]
 
 .Verification
-. Did you create a quarkus app?
+. Did you connect to RHOAS and create a Kafka instance?
+. Did you create a Kafka topic?
+
+
+[#task-3]
+== Connecting Kafka to OpenShift
+
+Now that you've set up a Kafka with topics, you'll be connecting that to an application that you create on OpenShift.
+
+To enable your Quarkus application to access a Kafka instance, configure the connection using the bootstrap server endpoint, the generated credentials for your Streams for Apache Kafka service account, and the SASL/OAUTHBEARER token endpoint for the Kafka instance. For Quarkus, you can configure connection information by using the `+application.properties+` configuration file. The example in this task sets environment variables and then references them in the `+application.properties+` file.
+
+Click on the *Connect to OpenShift* button to connect to _Red Hat OpenShift Streams for Apache Kafka_. Once connected, follow the quick start within it.
+
+https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-dev/graph?quickstart=quarkus[Connect to OpenShift,role="tutorial-external"]
+
+.Verification
+. Did you connect to OpenShift and create a quarkus app?
 . Did you connect a Kafka topic to it?
 
+////
 [#conclusion]
 Congratulations! You successfully completed the quick start.
+////

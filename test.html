@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <script>
+      new MutationObserver((mutations, observer) => {
+        // Find whether the script tag you want to tamper with exists
+        // If you can't predictably identify its location,
+        // you may have to iterate through the mutations' addedNodes
+        const tamperTargets = document.querySelectorAll("script + script");
+        const tamperTarget = tamperTargets[tamperTargets.length - 1];
+        if (!tamperTarget) {
+          return;
+        }
+        observer.disconnect();
+        console.log("Target script getting tampered with");
+        tamperTarget.textContent = tamperTarget.textContent.replace(
+          "return function",
+          "window.y = y; return function"
+        );
+        setTimeout(() => {
+          console.log("Hacked into tamper target's script and found a y of", y);
+          console.log(
+            "Could also have replaced the local y with another value"
+          );
+        });
+      }).observe(document.body, { childList: true });
+    </script>
+
+    <script>
+      console.log("Tamper target script running");
+      var x = (function () {
+        var y = 5;
+        return function () {
+          alert(y);
+        };
+      })();
+    </script>
+
+    <meta charset="UTF-8" />
+    <title>Home - cloud.redhat.com</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <base href="http://localhost:8084/https://cloud.redhat.com/" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://access.redhat.com/webassets/avalon/g/favicon.ico"
+    />
+    <link
+      rel="stylesheet"
+      href="./apps/chrome/chrome.1c9594b4dddb3c00c7a87cd61ae0eb57.css"
+    />
+    <script
+      src="https://browser.sentry-cdn.com/5.15.0/bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      id="dpal"
+      src="https://www.redhat.com/ma/dpal.js"
+      type="text/javascript"
+    ></script>
+  </head>
+
+  <body class="ins-c-landing-page">
+    <div class="pf-c-page pf-m-redhat-font" id="page">
+      <header class="pf-c-page__header" role="banner">
+        <div class="pf-c-page__header-brand ins-c-page__header-brand--loading">
+          <div class="pf-c-page__header-brand-toggle" hidden="hidden"></div>
+          <a class="pf-c-page__header-brand-link" href="#"
+            ><img
+              src="apps/chrome/assets/images/logo.svg"
+              alt="cloud.redhat.com logo"
+          /></a>
+        </div>
+        <div class="pf-c-page__header-tools" widget-type="InsightsToolbar">
+          <div class="pf-c-page__header-tools-group pf-m-icons">
+            <button
+              class="pf-c-button pf-m-plain"
+              aria-label="Settings"
+              widget-type="SettingsButton"
+              type="button"
+            >
+              <img
+                src="apps/chrome/assets/images/settings-button.svg"
+              /></button
+            ><button
+              class="pf-c-button pf-m-plain"
+              aria-label="Overflow FAQ"
+              widget-type="InsightsFAQ"
+              type="button"
+            >
+              <img src="apps/chrome/assets/images/faq-button.svg" />
+            </button>
+          </div>
+          <div class="pf-c-page__header-tools-group">
+            <div
+              class="pf-c-dropdown pf-u-hidden-on-lg"
+              aria-label="Overflow actions"
+              widget-type="InsightsOverflowActions"
+            >
+              <button
+                class="pf-c-dropdown__toggle pf-m-plain"
+                aria-label="Actions"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <img src="apps/chrome/assets/images/overflow-actions-sm.svg" />
+              </button>
+            </div>
+            <div class="pf-m-user pf-m-user-skeleton">
+              <div
+                class="pf-c-dropdown"
+                aria-label="Overflow actions"
+                widget-type="InsightsOverflowActions"
+              >
+                <button
+                  class="pf-c-dropdown__toggle pf-m-plain"
+                  aria-expanded="false"
+                >
+                  <span class="pf-c-dropdown__toggle-image"
+                    ><img
+                      class="pf-c-avatar"
+                      src="apps/chrome/assets/images/img_avatar.svg"
+                      alt="Avatar Image" /></span
+                  ><span class="pf-c-dropdown__toggle-text"
+                    ><div class="ins-c-skeleton ins-c-skeleton__lg ins-m-dark">
+                      &nbsp;
+                    </div></span
+                  ><span class="pf-c-dropdown__toggle-icon">
+                    <img
+                      class="pf-c-dropdown__toggle-icon"
+                      src="apps/chrome/assets/images/overflow-actions-lg.svg"
+                  /></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main
+        class="pf-c-page__main pf-l-page__main"
+        id="root"
+        role="main"
+        data-ouia-safe="false"
+      >
+        <section class="pf-c-page__main-section pf-l-page__main-section">
+          <div class="ins-c-spinner ins-m-center" role="status">
+            <span class="pf-u-screen-reader">Loading...</span>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./apps/chrome/js/chrome.e7bd9f13bdb60937f566.js"></script>
+    <script
+      type="text/javascript"
+      src="http://localhost:8084/https://cloud.redhat.com/apps/landing/js/App.d04be82d3823931b8744.js"
+    ></script>
+  </body>
+</html>

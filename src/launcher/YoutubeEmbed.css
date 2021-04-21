@@ -1,0 +1,18 @@
+.tut-embed-container {
+  height: 315px;
+  width: 560px;
+  position: relative;
+}
+
+.tut-embed-video {
+  height: 315px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tut-embed-spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

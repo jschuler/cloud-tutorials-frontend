@@ -5,56 +5,27 @@
   "spec": {
     "durationMinutes": 20,
     "icon": "",
-    "displayName": "Connecting Kafka topics to a Quarkus application",
+    "displayName": "Using Quarkus applications with Kafka instances in Red Hat OpenShift Streams for Apache Kafka",
     "description": "In this tutorial, you will set up a Kafka instance and create topics to be used with a Quarkus application",
     "introduction": "We will be using Apache Kafka, an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.",
     "prerequisites": [
       "Red Hat OpenShift",
       "Red Hat Streams for Apache Kafka"
     ],
-    "form": {
-      "title": "The following information is required before we can get started",
-      "schema": {
-        "fields": [
-          {
-            "component": "text-field",
-            "name": "openshift",
-            "label": "Your OpenShift URL",
-            "description": "Fill in the URL",
-            "isRequired": true,
-            "helperText": "Need OpenShift? Create a sandbox environment here - https://developers.redhat.com/developer-sandbox",
-            "validate": [
-              {
-                "type": "required"
-              }
-            ]
-          },
-          {
-            "component": "text-field",
-            "name": "kafka",
-            "label": "URL to Application Services -> Streams for Apache Kafka",
-            "description": "Fill in the URL",
-            "isRequired": true,
-            "helperText": "Streams for Apache Kafka is offered as part of Application Services and can be found at https://cloud.redhat.com",
-            "validate": [
-              {
-                "type": "required"
-              }
-            ]
-          }
-        ]
-      }
-    },
     "tasks": [
       {
-        "title": "Kafka",
-        "description": "<div class=\"paragraph\">\n<p>In this step, you will create a Kafka instance and connect topics to them.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Launch RHOSAK</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com/beta/application-services/streams/service-accounts?quickstart=getting-started\" class=\"tutorial-external\">Launch RHOSAK</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a Kafka instance?</p>\n</li>\n<li>\n<p>Did you create a Kafka topic?</p>\n</li>\n</ol>\n</div>"
+        "title": "Introduction to Apache Kafka and Quarkus",
+        "description": "<div class=\"paragraph\">\n<p>The following videos give a brief introduction into Apache Kafka and Quarkus.\nIf you are already familiar with these you can advance to the next step.</p>\n</div>\n<div class=\"paragraph\">\n<p><strong>What is Apache Kafka?</strong></p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://www.youtube.com/embed/FKgi3n-FyNU\" class=\"tutorial-youtube\">What is Apache Kafka?</a></p>\n</div>\n<div class=\"paragraph\">\n<p><strong>Quarkus: Supersonic, Subatomic Java</strong></p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://www.youtube.com/embed/hhHgurtI674\" class=\"tutorial-youtube\">Quarkus</a></p>\n</div>\n<div class=\"sect2\">\n<h3 id=\"_in_the_next_step_you_will_create_a_kafka_instance_and_connect_topics_to_them\">In the next step, you will create a Kafka instance and connect topics to them.</h3>\n</div>"
+      },
+      {
+        "title": "Creating Kafka topics",
+        "description": "<div class=\"paragraph\">\n<p>The Kafka topic that the Quarkus example application references is called prices. You need to create this topic in Streams for Apache Kafka so that the Quarkus application can interact with it.</p>\n</div>\n<div class=\"paragraph\">\n<p>A typical Kafka architecture might look like this:</p>\n</div>\n<div class=\"imageblock\">\n<div class=\"content\">\n<img src=\"https://quarkus.io/guides/images/kafka-streams-guide-architecture.png\" alt=\"Kafka architecture\">\n</div>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Connect to RHOSAK</strong> button to connect to <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once connected, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started\" class=\"tutorial-external\">Connect to RHOSAK</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you connect to RHOAS and create a Kafka instance?</p>\n</li>\n<li>\n<p>Did you create a Kafka topic?</p>\n</li>\n</ol>\n</div>"
       },
       {
         "title": "Connecting Kafka to OpenShift",
-        "description": "<div class=\"paragraph\">\n<p>Now that you’ve set up a kafka with topics, you’ll be connecting that to an application that you create on OpenShift.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Launch OpenShift</strong> button to launch <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once launched, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=quarkus\" class=\"tutorial-external\">Launch OpenShift</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you create a quarkus app?</p>\n</li>\n<li>\n<p>Did you connect a Kafka topic to it?</p>\n</li>\n</ol>\n</div>\n<div id=\"conclusion\" class=\"paragraph\">\n<p>Congratulations! You successfully completed the quick start.</p>\n</div>"
+        "description": "<div class=\"paragraph\">\n<p>Now that you’ve set up a Kafka with topics, you’ll be connecting that to an application that you create on OpenShift.</p>\n</div>\n<div class=\"paragraph\">\n<p>To enable your Quarkus application to access a Kafka instance, configure the connection using the bootstrap server endpoint, the generated credentials for your Streams for Apache Kafka service account, and the SASL/OAUTHBEARER token endpoint for the Kafka instance. For Quarkus, you can configure connection information by using the <code>application.properties</code> configuration file. The example in this task sets environment variables and then references them in the <code>application.properties</code> file.</p>\n</div>\n<div class=\"paragraph\">\n<p>Click on the <strong>Connect to OpenShift</strong> button to connect to <em>Red Hat OpenShift Streams for Apache Kafka</em>. Once connected, follow the quick start within it.</p>\n</div>\n<div class=\"paragraph\">\n<p><a href=\"https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-dev/graph?quickstart=quarkus\" class=\"tutorial-external\">Connect to OpenShift</a></p>\n</div>\n<div class=\"olist arabic\">\n<div class=\"title\">Verification</div>\n<ol class=\"arabic\">\n<li>\n<p>Did you connect to OpenShift and create a quarkus app?</p>\n</li>\n<li>\n<p>Did you connect a Kafka topic to it?</p>\n</li>\n</ol>\n</div>"
       }
     ],
-    "conclusion": "Congratulations! You successfully completed the quick start."
+    "conclusion": "Congratulations! You have successfully completed the Quarkus applications with Kafka tutorial."
   }
 }

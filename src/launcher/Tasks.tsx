@@ -8,12 +8,18 @@ import {
   Text,
   TextList,
   TextListItem,
+  BackgroundImage,
+  Bullseye,
+  Alert,
 } from "@patternfly/react-core";
+import ConnectDevelopIcon from "@patternfly/react-icons/dist/js/icons/connectdevelop-icon";
 import {
   QuickStart,
   QuickStartTaskStatus,
   QuickStartTaskReview,
   QuickStartTask,
+  QuickStartContextValues,
+  QuickStartContext,
 } from "@cloudmosaic/quickstarts";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TaskReview } from "./TaskReview";
@@ -21,10 +27,12 @@ import { TaskReview } from "./TaskReview";
 // import componentTypes from "@data-driven-forms/react-form-renderer/component-types";
 // import FormTemplate from "@data-driven-forms/pf4-component-mapper/form-template";
 // import TextField from "@data-driven-forms/pf4-component-mapper/text-field";
-import { FormMapper } from './FormMapper';
-import { Task } from './Task';
+import { FormMapper } from "./FormMapper";
+import { Task } from "./Task";
+import { AppModal } from "./AppModal";
 import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
+import { YoutubeEmbed } from "./YoutubeEmbed";
 
 declare const QUICKSTARTS_BASE: string;
 declare const TUTORIALS_BASE: string;
@@ -72,6 +80,17 @@ const removeAllChildNodes = (parent: Element) => {
 };
 
 export const Tasks = () => {
+  const {
+    activeQuickStartID,
+    allQuickStartStates,
+    activeQuickStartState,
+    setQuickStartTaskStatus,
+    setActiveQuickStart,
+    setQuickStartTaskNumber,
+    nextStep,
+    previousStep,
+    allQuickStarts,
+  } = React.useContext<QuickStartContextValues>(QuickStartContext);
   const history = useHistory();
   const location = useLocation();
   const locationChunks = location.pathname.split("/");
@@ -101,12 +120,17 @@ export const Tasks = () => {
       .then((json) => {
         setTutorial(json);
       });
+
+    if (!activeQuickStartID) {
+      setActiveQuickStart && setActiveQuickStart(taskName);
+    }
   }, []);
   React.useEffect(() => {
     const taskSteps: WizardStep[] = [];
     if (tutorial) {
       (tutorial.spec.tasks as QuickStartTask[]).forEach(
         (task: QuickStartTask, taskIndex: number) => {
+          let hasVerificationBlock = false;
           const title = task.title || `Task ${taskIndex + 1}`;
           const wrappedTitle = `<h2>${title}</h2>`;
 
@@ -114,33 +138,87 @@ export const Tasks = () => {
           template.innerHTML = task.description?.trim() || "<p></p>";
 
           const templateComponent = (
-            <div key={`template-${taskIndex}`} className="tut-template-container">
+            <div
+              key={`template-${taskIndex}`}
+              className="tut-template-container"
+            >
               {Array.from(template.content.children).map((c, index) => {
+                const returnArray = [];
+                if (c.querySelector(".tutorial-youtube")) {
+                  Array.from(c.querySelectorAll(".tutorial-youtube")).forEach(
+                    (node, nIndex) => {
+                      const url = node.getAttribute("href") || "";
+                      returnArray.push(
+                        <div
+                          className="tut-app-launch"
+                          key={`task-${taskNumber}-${index}-${nIndex}-tutorial-youtube`}
+                        >
+                          <YoutubeEmbed url={url} />
+                        </div>
+                      );
+                    }
+                  );
+                }
                 if (c.querySelector(".tutorial-external")) {
                   // parse external app links
-                  const node = c.querySelector(".tutorial-external");
-                  if (node) {
-                    let url = node.getAttribute("href") || '';
-                    url = url.replace('?quickstart=', '?tutorialid=')
-                    const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
-                      `/${taskName}/${taskIndex + 1}`
-                    )}`;
-                    return (
-                      <div
-                        className="tut-app-launch"
-                        key={`task-${taskNumber}-${index}`}
-                      >
-                        <Button
-                          component="a"
-                          href={fullUrl}
-                          variant="primary"
+                  Array.from(c.querySelectorAll(".tutorial-external")).forEach(
+                    (node, nIndex) => {
+                      let url = node.getAttribute("href") || "";
+                      url = url.replace("?quickstart=", "?tutorialid=");
+                      const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
+                        `/${taskName}/${taskIndex + 1}`
+                      )}`;
+                      returnArray.push(
+                        <div
+                          className="tut-app-launch"
+                          key={`task-${taskNumber}-${index}-${nIndex}-tutorial-external`}
                         >
-                          {node.textContent}
-                        </Button>
-                      </div>
-                    );
-                  }
-                } else if (c.className.includes("tutorial-input")) {
+                          <Alert
+                            customIcon={<ConnectDevelopIcon />}
+                            variant="info"
+                            title="Connect to the following application before proceeding to the next step"
+                          >
+                            <Bullseye>
+                              <Button
+                                component="a"
+                                href={fullUrl}
+                                variant="primary"
+                                isLarge
+                                className="tut-cta"
+                              >
+                                {node.textContent}
+                              </Button>
+                            </Bullseye>
+                          </Alert>
+                        </div>
+                      );
+                    }
+                  );
+                }
+                if (c.querySelector(".tutorial-iframe")) {
+                  // parse iframe app links
+                  Array.from(c.querySelectorAll(".tutorial-iframe")).forEach(
+                    (node, nIndex) => {
+                      let url = node.getAttribute("href") || "";
+                      url = url.replace("?quickstart=", "?tutorialid=");
+                      const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
+                        `/${taskName}/${taskIndex + 1}`
+                      )}`;
+                      returnArray.push(
+                        <div
+                          className="tut-app-launch"
+                          key={`task-${taskNumber}-${index}-${nIndex}-tutorial-iframe`}
+                        >
+                          <AppModal
+                            text={node.textContent as string}
+                            url={fullUrl}
+                          />
+                        </div>
+                      );
+                    }
+                  );
+                }
+                if (c.className.includes("tutorial-input")) {
                   let inputSchema: {
                     fields: any[];
                   } = {
@@ -148,10 +226,14 @@ export const Tasks = () => {
                   };
                   const field = buildTutorialInput(template.content);
                   inputSchema.fields.push(field);
-                  return (
-                    <FormMapper schema={inputSchema} />
+                  returnArray.push(
+                    <FormMapper
+                      schema={inputSchema}
+                      key={`task-${taskNumber}-${index}-tutorial-input`}
+                    />
                   );
-                } else if (c.innerHTML.includes("Prerequisites")) {
+                }
+                if (c.innerHTML.includes("Prerequisites")) {
                   // parse prerequisites block
                   let prereq;
                   const prereqNode = Array.from(c.querySelectorAll("div")).find(
@@ -173,14 +255,18 @@ export const Tasks = () => {
                           )
                         )
                       : [];
-                    return (
-                      <TextContent key={`task-${taskNumber}-${index}`}>
+                    returnArray.push(
+                      <TextContent
+                        key={`task-${taskNumber}-${index}-tutorial-prerequisites`}
+                      >
                         <Text component="h3">Prerequisites</Text>
                         <TextList>{items}</TextList>
                       </TextContent>
                     );
                   }
-                } else if (c.innerHTML.includes("Verification")) {
+                }
+                if (c.innerHTML.includes("Verification")) {
+                  hasVerificationBlock = true;
                   let verification;
                   const verificationNode = Array.from(
                     c.querySelectorAll("div")
@@ -198,9 +284,9 @@ export const Tasks = () => {
                       failedTaskHelp: "Complete the task before continuing on",
                     };
                     const onTaskReview = (status: any) => {};
-                    return (
+                    returnArray.push(
                       <TaskReview
-                        key={`task-${taskNumber}-${index}`}
+                        key={`task-${taskNumber}-${index}-tutorial-verification`}
                         review={review}
                         taskStatus={QuickStartTaskStatus.INIT}
                         onTaskReview={onTaskReview}
@@ -208,18 +294,24 @@ export const Tasks = () => {
                     );
                   }
                 }
-                return (
-                  <div
-                    key={`task-${taskNumber}-${index}`}
-                    dangerouslySetInnerHTML={{ __html: c.innerHTML }}
-                  />
-                );
+                if (returnArray.length === 0) {
+                  returnArray.push(
+                    <div
+                      key={`task-${taskNumber}-${index}-tutorial-general`}
+                      dangerouslySetInnerHTML={{ __html: c.innerHTML }}
+                    />
+                  );
+                }
+                return returnArray;
               })}
             </div>
           );
 
           let nextButtonText = "Next";
-          if (tutorial.spec.tasks && taskIndex === tutorial.spec.tasks.length - 1) {
+          if (
+            tutorial.spec.tasks &&
+            taskIndex === tutorial.spec.tasks.length - 1
+          ) {
             nextButtonText = "Review";
           }
 
@@ -233,6 +325,7 @@ export const Tasks = () => {
                 {templateComponent}
               </>
             ),
+            enableNext: hasVerificationBlock ? false : true
           });
         }
       );
@@ -254,10 +347,12 @@ export const Tasks = () => {
   }, [tutorial]);
 
   return tutorial && steps.length ? (
-    <TasksContext.Provider value={{
-      tutorial,
-      steps
-    }}>
+    <TasksContext.Provider
+      value={{
+        tutorial,
+        steps,
+      }}
+    >
       <PageSection variant="light" padding={{ default: "noPadding" }}>
         <Task />
       </PageSection>

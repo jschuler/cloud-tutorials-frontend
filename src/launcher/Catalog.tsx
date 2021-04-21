@@ -19,77 +19,81 @@ import { QuickStart } from "@cloudmosaic/quickstarts";
 import { loadJSONTutorials } from "./tutorialLoader";
 // @ts-ignore
 import logo from "../images/illustration_rhel-isometric.svg";
+import {
+  QuickStartContext,
+  useLocalStorage,
+  useValuesForQuickStartContext,
+  LoadingBox,
+  QuickStartsLoader,
+} from "@cloudmosaic/quickstarts";
+import { QsCatalog } from "./QsCatalog";
 
 export const Catalog: React.FC = () => {
   const history = useHistory();
   const handleClick = (path: string) => history.push(path);
 
-  const [tutorials, setTutorials] = React.useState<QuickStart[]>([]);
+  // const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage(
+  //   "quickstartId",
+  //   ""
+  // );
+  // const [allQuickStartStates, setAllQuickStartStates] = useLocalStorage(
+  //   "quickstarts",
+  //   {}
+  // );
+  // const checkStates = (a: any) => {
+  //   const asd = setAllQuickStartStates(a);
+  //   debugger;
+  //   // handleClick();
+  // }
+  // const [allQuickStartsLoaded, setAllQuickStartsLoaded] = React.useState<boolean>(false);
+  // const [tutorials, setTutorials] = React.useState<QuickStart[]>([]);
 
-  React.useEffect(() => {
-    const load = async () => {
-      const allTutorials = await loadJSONTutorials("/mosaic/cloud-tutorials");
-      setTutorials(allTutorials);
-    };
-    load();
-  }, []);
+  // React.useEffect(() => {
+  //   const load = async () => {
+  //     const allTutorials = await loadJSONTutorials("/mosaic/cloud-tutorials");
+  //     setTutorials(allTutorials);
+  //   };
+  //   load();
+  // }, []);
+
+  // const valuesForQuickstartContext = useValuesForQuickStartContext({
+  //   activeQuickStartID,
+  //   setActiveQuickStartID,
+  //   allQuickStartStates,
+  //   setAllQuickStartStates: checkStates,
+  //   allQuickStarts: tutorials,
+  //   useQueryParams: false,
+  //   footer: {
+  //     showAllLink: false
+  //   }
+  // });
 
   return (
-    <>
-      <PageSection variant={PageSectionVariants.light}>
-        <TextContent>
-          <img
-            src={logo}
-            alt="Red Hat Enterprise Linux isometric illustration"
-            className="tut-img-fluid"
-          />
-          <Text component="h1" className="tut-main-title">
-            Cloud tutorials
-          </Text>
-          <Text component="p" className="tut-main-intro">
-            Follow along with an interactive tutorial
-          </Text>
-        </TextContent>
-      </PageSection>
-      <PageSection>
-        <Gallery hasGutter>
-          {tutorials.map((tutorial, i) => (
-            <GalleryItem key={i}>
-              <Card
-                isHoverable
-                onClick={() => handleClick(`/${tutorial.metadata.name}`)}
-                style={{ height: "100%" }}
-              >
-                <CardTitle>
-                  <div>{tutorial.spec.displayName}</div>
-                  <div>
-                    <Label
-                      variant="outline"
-                      icon={<OutlinedClockIcon />}
-                      style={{
-                        marginTop: '8px',
-                        marginLeft: '-5px'
-                      }}
-                    >
-                      {tutorial.spec.durationMinutes} minutes
-                    </Label>
-                  </div>
-                </CardTitle>
-                <CardBody>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: tutorial.spec.description,
-                    }}
-                  />
-                </CardBody>
-                <CardFooter>
-                  <Button variant="primary">Start</Button>
-                </CardFooter>
-              </Card>
-            </GalleryItem>
-          ))}
-        </Gallery>
-      </PageSection>
-    </>
+    <QuickStartsLoader>
+      {(quickStarts: QuickStart[], loaded: boolean) => {
+        return loaded && quickStarts.length ? (
+          <>
+            <PageSection variant={PageSectionVariants.light}>
+              <TextContent>
+                <img
+                  src={logo}
+                  alt="Red Hat Enterprise Linux isometric illustration"
+                  className="tut-img-fluid"
+                />
+                <Text component="h1" className="tut-main-title">
+                  Cloud tutorials
+                </Text>
+                <Text component="p" className="tut-main-intro">
+                  Follow along with an interactive tutorial
+                </Text>
+              </TextContent>
+            </PageSection>
+            <QsCatalog quickStarts={quickStarts} />
+          </>
+        ) : (
+          <LoadingBox />
+        );
+      }}
+    </QuickStartsLoader>
   );
 };

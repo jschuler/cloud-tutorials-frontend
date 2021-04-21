@@ -20,5 +20,13 @@
 
 .tut-app-launch {
     padding: 15px 0;
-    flex-grow: 1;
+    /* flex-grow: 1; */
+}
+
+.tut-cta {
+    margin: 50px;
+}
+
+.tut-template-container img {
+    padding: 30px 0;
 }

@@ -10,27 +10,9 @@ spec:
   prerequisites:
     - Red Hat OpenShift
     - Red Hat Streams for Apache Kafka
-  form:
-    title: The following information is required before we can get started
-    schema:
-      fields:
-        - component: text-field
-          name: openshift
-          label: Your OpenShift URL
-          description: Fill in the URL
-          isRequired: true
-          helperText: Need OpenShift? Create a sandbox environment here - https://developers.redhat.com/developer-sandbox
-          validate:
-            - type: required
-        - component: text-field
-          name: kafka
-          label: URL to Application Services -> Streams for Apache Kafka
-          description: Fill in the URL
-          isRequired: true
-          helperText: Streams for Apache Kafka is offered as part of Application Services and can be found at https://cloud.redhat.com
-          validate:
-            - type: required
   tasks:
     - !snippet/proc README.adoc#task-1
     - !snippet/proc README.adoc#task-2
-  conclusion: !snippet README.adoc#conclusion
+    - !snippet/proc README.adoc#task-3
+  # conclusion: !snippet README.adoc#conclusion
+  conclusion: Congratulations! You have successfully completed the Quarkus applications with Kafka tutorial.

@@ -13,7 +13,9 @@
     "start": "npm-run-all -p start:backend start:frontend",
     "start:backend": "insights-standalone",
     "start:frontend": "webpack serve",
-    "test": "true"
+    "test": "true",
+    "cors": "node cors.js",
+    "debug": "nodemon --inspect cors.js"
   },
   "dependencies": {
     "@cloudmosaic/quickstarts": "0.0.19",
@@ -22,6 +24,7 @@
     "@patternfly/react-core": "^4.101.3",
     "@patternfly/react-table": "^4.23.14",
     "classnames": "^2.2.6",
+    "cors-anywhere": "^0.4.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0"
@@ -45,6 +48,7 @@
     "html-webpack-plugin": "^5.3.1",
     "js-yaml": "^4.0.0",
     "mini-css-extract-plugin": "^1.3.9",
+    "nodemon": "^2.0.7",
     "npm-run-all": "4.1.5",
     "null-loader": "^4.0.1",
     "rehype-raw": "^5.1.0",

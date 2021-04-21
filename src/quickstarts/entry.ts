@@ -96,10 +96,18 @@ function wrapBody(e: Event) {
   }
   copyAttrs(document.body, wrappedDocBody);
 
-  // const wrappedDocBody = document.createElement('iframe');
+  // const iframeWrapper = document.createElement('iframe');
   // wrappedDocBody.height = `calc(100vh - ${tutorialHeaderHeight}px - 10px)`;
   // // duplicateChildNodes(document.body, wrappedDocBody);
-  // wrappedDocBody.src = `${window.location.origin}${window.location.pathname}`;
+  // iframeWrapper.src = `${window.location.origin}${window.location.pathname}`;
+  // iframeWrapper.src = "https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph";
+  // iframeWrapper.src = 'data:text/html;charset=utf-8,' + encodeURI(document.body.innerHTML);
+  // if (iframeWrapper?.contentWindow) {
+  //   iframeWrapper.contentWindow.document.open();
+  //   iframeWrapper.contentWindow.document.write(document.body.innerHTML);
+  //   iframeWrapper.contentWindow.document.close();
+  // }
+  // document.body.append(iframeWrapper);
 
   /*
   while (document.body.firstChild) {
@@ -110,10 +118,8 @@ function wrapBody(e: Event) {
   */
 
   const tutorialDrawer = makeDiv("tut-drawer");
-
   document.body.append(tutorialHeader);
   document.body.append(tutorialDrawer);
-
   ReactDOM.render(
     React.createElement(QuickStartDrawer, {
       children: React.createElement(VanillaChildren, {}, wrappedDocBody),
@@ -125,7 +131,7 @@ function wrapBody(e: Event) {
 
   var checkExist = setInterval(function () {
     // console.log(count);
-    if (count >= 100) {
+    if (count >= 200) {
       clearInterval(checkExist);
     } else {
       // First hide the in-built quick starts (if applicable)
@@ -138,7 +144,7 @@ function wrapBody(e: Event) {
       }
       count++;
     }
-  }, 200); // check every 100ms
+  }, 250); // check every 100ms
 }
 
 function changeAllLinks() {
@@ -156,36 +162,29 @@ function changeAllLinks() {
   }
 }
 
-// function interceptClickEvent(e: Event) {
-//   const params = new URLSearchParams(location.search);
-//   const tutorialId = params.get("tutorialid");
-//   let tutorialPath = params.get("tutorialpath") || "";
-//   var href;
-//   var newHref;
-//   var target = e.target || e.srcElement;
-//   // @ts-ignore
-//   if (target.tagName === "A") {
-//     // @ts-ignore
-//     href = target.getAttribute("href");
-//     if (!href.includes("tutorialid")) {
-//       newHref = `${href}?tutorialid=${tutorialId}&tutorialpath=${encodeURIComponent(
-//         tutorialPath
-//       )}`;
-//     } else {
-//       newHref = href;
-//     }
-//     window.location.replace(newHref);
-//   }
-// }
-
-// //listen for link click events at the document level
-// if (document.addEventListener) {
-//   document.addEventListener("click", interceptClickEvent);
-//   // @ts-ignore
-// } else if (document.attachEvent) {
-//   // @ts-ignore
-//   document.attachEvent("onclick", interceptClickEvent);
-// }
+function interceptClickEvent(e: Event) {
+  const params = new URLSearchParams(location.search);
+  const tutorialId = params.get("tutorialid");
+  let tutorialPath = params.get("tutorialpath") || "";
+  var href;
+  var newHref;
+  var target = e.target as HTMLElement;
+  // @ts-ignore
+  if (target.tagName === "A") {
+    e.preventDefault;
+    window.location.href = `${target.getAttribute("href")}${location.search}`;
+    // @ts-ignore
+    // href = target.getAttribute("href");
+    // if (!href.includes("tutorialid")) {
+    //   newHref = `${href}?tutorialid=${tutorialId}&tutorialpath=${encodeURIComponent(
+    //     tutorialPath
+    //   )}`;
+    // } else {
+    //   newHref = href;
+    // }
+    // window.location.replace(newHref);
+  }
+}
 
 document.addEventListener(
   "tutorial-load-success",
@@ -197,3 +196,5 @@ document.addEventListener(
   },
   false
 );
+
+// document.addEventListener("click", interceptClickEvent);
