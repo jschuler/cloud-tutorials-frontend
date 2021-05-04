@@ -9,6 +9,8 @@ declare const APP_BASE: string;
 const tutorialHeaderHeight = 49;
 var count = 0;
 let tutorial: any;
+let rootNode: Node;
+let bodyCopy: Node;
 
 const queryParams = new URLSearchParams(window.location.search);
 const searchQuery = queryParams.get("tutorialid");
@@ -96,27 +98,6 @@ function wrapBody(e: Event) {
   }
   copyAttrs(document.body, wrappedDocBody);
 
-  // const iframeWrapper = document.createElement('iframe');
-  // wrappedDocBody.height = `calc(100vh - ${tutorialHeaderHeight}px - 10px)`;
-  // // duplicateChildNodes(document.body, wrappedDocBody);
-  // iframeWrapper.src = `${window.location.origin}${window.location.pathname}`;
-  // iframeWrapper.src = "https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph";
-  // iframeWrapper.src = 'data:text/html;charset=utf-8,' + encodeURI(document.body.innerHTML);
-  // if (iframeWrapper?.contentWindow) {
-  //   iframeWrapper.contentWindow.document.open();
-  //   iframeWrapper.contentWindow.document.write(document.body.innerHTML);
-  //   iframeWrapper.contentWindow.document.close();
-  // }
-  // document.body.append(iframeWrapper);
-
-  /*
-  while (document.body.firstChild) {
-    const clonedNode = document.body.firstChild.cloneNode(true);
-    (document.body.firstChild as HTMLElement).style.display = "none";
-    wrappedDocBody.appendChild(clonedNode);
-  }
-  */
-
   const tutorialDrawer = makeDiv("tut-drawer");
   document.body.append(tutorialHeader);
   document.body.append(tutorialDrawer);
@@ -172,6 +153,7 @@ function interceptClickEvent(e: Event) {
   // @ts-ignore
   if (target.tagName === "A") {
     e.preventDefault;
+    // rootNode.replaceChild(bodyCopy, document.body);
     window.location.href = `${target.getAttribute("href")}${location.search}`;
     // @ts-ignore
     // href = target.getAttribute("href");
@@ -189,12 +171,17 @@ function interceptClickEvent(e: Event) {
 document.addEventListener(
   "tutorial-load-success",
   function (e) {
+    // setTimeout(() => {
+    //   wrapBody(e);
+    // }, 500);
     setTimeout(() => {
+      // rootNode = document.documentElement;
+      // bodyCopy = document.body.cloneNode(true);
       wrapBody(e);
       changeAllLinks();
-    }, 1000);
+    }, 3000);
   },
   false
 );
 
-// document.addEventListener("click", interceptClickEvent);
+document.addEventListener("click", interceptClickEvent);

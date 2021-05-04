@@ -2,6 +2,13 @@
   height: inherit !important;
 }
 
+.tut-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
 .tut-main .tut-img-fluid {
   max-width: 120px;
   max-height: 30px;

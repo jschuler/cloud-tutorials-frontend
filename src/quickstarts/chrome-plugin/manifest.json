@@ -22,8 +22,10 @@
   "content_scripts": [{
     "matches": [
       "https://cloud.redhat.com/*",
+      "https://*.cloud.redhat.com/*",
       "https://*.openshiftapps.com/*",
-      "https://www.google.com/*"
+      "https://www.google.com/*",
+      "https://codeready-codeready-workspaces-operator.apps.sandbox-m2.ll9k.p1.openshiftapps.com/*"
     ],
     "js": ["inject.js"]
   }]
