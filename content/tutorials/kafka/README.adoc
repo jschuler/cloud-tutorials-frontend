@@ -45,7 +45,7 @@ image::https://quarkus.io/guides/images/kafka-streams-guide-architecture.png[Kaf
 
 Click on the *Connect to RHOSAK* button to connect to _Red Hat OpenShift Streams for Apache Kafka_. Once connected, follow the quick start within it.
 
-https://qaprodauth.cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started[Connect to Application Services - Streams for Apache Kafka,role="tutorial-external"]
+https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=getting-started[Connect to Application Services - Streams for Apache Kafka,role="tutorial-external"]
 
 // https://www.patternfly.org?quickstart=getting-started[Launch PatternFly iframe,role="tutorial-iframe"]
 // https://www.google.com?quickstart=getting-started[Launch Google iframe,role="tutorial-iframe"]
@@ -69,7 +69,7 @@ image::/mosaic/cloud-tutorials/openshift.png[OpenShift]
 
 Click on the *Connect to OpenShift* button to connect to _Red Hat OpenShift Streams for Apache Kafka_. Once connected, follow the quick start within it.
 
-https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=quarkus[Connect to OpenShift,role="tutorial-external"]
+https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=quarkus[Connect to OpenShift,role="tutorial-external"]
 
 .Verification
 . Did you connect to OpenShift and create a quarkus app?
