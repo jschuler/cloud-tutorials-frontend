@@ -33,6 +33,7 @@ import { AppModal } from "./AppModal";
 import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
 import { YoutubeEmbed } from "./YoutubeEmbed";
+import { loadJSONQuickstarts } from './quickstartsLoader';
 
 declare const QUICKSTARTS_BASE: string;
 declare const TUTORIALS_BASE: string;
@@ -113,7 +114,16 @@ export const Tasks = () => {
     history.push(`${tasksPath}/${id}`);
   };
   const [tutorial, setTutorial] = React.useState<QuickStart>();
+  const [quickstarts, setQuickstarts] = React.useState<QuickStart[]>();
   const [steps, setSteps] = React.useState<WizardStep[]>([]);
+  React.useEffect(() => {
+    const load = async () => {
+      const allQuickstarts = await loadJSONQuickstarts("/mosaic/cloud-tutorials");
+      // debugger;
+      setQuickstarts(allQuickstarts);
+    };
+    load();
+  }, []);
   React.useEffect(() => {
     fetch(`${TUTORIALS_BASE}/${taskName}.json`)
       .then((res) => res.json())
@@ -127,7 +137,7 @@ export const Tasks = () => {
   }, []);
   React.useEffect(() => {
     const taskSteps: WizardStep[] = [];
-    if (tutorial) {
+    if (tutorial && quickstarts) {
       (tutorial.spec.tasks as QuickStartTask[]).forEach(
         (task: QuickStartTask, taskIndex: number) => {
           let hasVerificationBlock = false;
@@ -165,7 +175,7 @@ export const Tasks = () => {
                     (node, nIndex) => {
                       let url = node.getAttribute("href") || "";
                       url = url.replace("?quickstart=", "?tutorialid=");
-                      const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
+                      const fullUrl = `${url}${url.includes('?') ? '&' : '?'}tutorialpath=${encodeURIComponent(
                         `/${taskName}/${taskIndex + 1}`
                       )}`;
                       returnArray.push(
@@ -185,6 +195,22 @@ export const Tasks = () => {
                                 variant="primary"
                                 isLarge
                                 className="tut-cta"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  console.log(`nav to ${fullUrl}`);
+                                  localStorage.setItem('quickStartCrossDomain', JSON.stringify({
+                                    host: `${window.location.origin}/mosaic/cloud-tutorials`,
+                                    // the current tutorial name
+                                    tutorial: taskName,
+                                    // the current task step
+                                    step: taskIndex + 1,
+                                    // the quick start id we want to load in the target app
+                                    // quickstartId: 'add-healthchecks', // 'add-healthchecks', 'sample-application'
+                                    // or the quickstart content we want to inject and use in the target app
+                                    quickstartContent: quickstarts?.find((qs: QuickStart) => qs.metadata.name === 'host-provided')
+                                  }));
+                                  window.location.replace(`${fullUrl}${fullUrl.includes('?') ? '&' : '?'}learning=true`);
+                                }}
                               >
                                 {node.textContent}
                               </Button>
@@ -344,9 +370,9 @@ export const Tasks = () => {
       });
       setSteps(taskSteps);
     }
-  }, [tutorial]);
+  }, [tutorial, quickstarts]);
 
-  return tutorial && steps.length ? (
+  return tutorial && quickstarts && steps.length ? (
     <TasksContext.Provider
       value={{
         tutorial,

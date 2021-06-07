@@ -13,6 +13,16 @@ import {
 import { QsCatalog } from './QsCatalog';
 import { loadJSONTutorials } from "./tutorialLoader";
 
+const createHost = require('cross-domain-storage/host');
+// array of guests that can connect
+const storageHost = createHost([
+  {
+      // quickstart app
+      origin: 'http://localhost:3000',
+      allowedMethods: ['get', 'set', 'remove'],
+  }
+]);
+
 const AppEntry = () => {
   // qs
   const [activeQuickStartID, setActiveQuickStartID] = useLocalStorage(

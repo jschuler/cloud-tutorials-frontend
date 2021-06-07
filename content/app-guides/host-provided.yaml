@@ -1,0 +1,23 @@
+metadata:
+  name: host-provided
+spec:
+  displayName: Injected by host
+  durationMinutes: 5
+  icon: ''
+  description: This quick start was injected by the host
+  introduction: |-
+    ### Hello world
+  tasks:
+    - title: Completing a task
+      description: |-
+        Task description
+      review:
+        instructions: |-
+          #### To verify:
+          Did you finish the task?
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+      summary:
+        success: You have completed the task!
+        failed: Try the steps again.
+  conclusion: You have finished the injected quick start.
+  nextQuickStart: []

@@ -34,3 +34,7 @@
 .tut-template-container > div {
     padding: 10px 0;
 }
+
+pre {
+    color: black;
+}

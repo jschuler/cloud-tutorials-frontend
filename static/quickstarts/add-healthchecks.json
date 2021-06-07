@@ -3,8 +3,8 @@
     "name": "add-healthchecks"
   },
   "spec": {
-    "displayName": "Hello world Live preview changes Add health checks to your sample application",
-    "durationMinutes": 20,
+    "displayName": "Add health checks to your sample application",
+    "durationMinutes": 10,
     "description": "You just created a sample application. Now, let’s add health checks to it.",
     "prerequisites": [
       "You completed the \"Getting started with a sample\" quick start."

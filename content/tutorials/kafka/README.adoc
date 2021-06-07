@@ -75,6 +75,46 @@ https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topolog
 . Did you connect to OpenShift and create a quarkus app?
 . Did you connect a Kafka topic to it?
 
+[#task-4]
+== Connecting to the quick start sample app
+
+We will set the following code in this (host) app:
+....
+<Button
+    component="a"
+    href={fullUrl}
+    variant="primary"
+    isLarge
+    className="tut-cta"
+    onClick={(e) => {
+        e.preventDefault();
+        localStorage.setItem('quickStartCrossDomain', JSON.stringify({
+            host: `${window.location.origin}/mosaic/cloud-tutorials`,
+            // the current tutorial name
+            tutorial: taskName,
+            // the current task step
+            step: taskIndex + 1,
+            // the quick start id we want to load in the target app
+            quickstartId: 'sample-application', // 'add-healthchecks', 'sample-application'
+            // or the quickstart content we want to inject and use in the target app
+            quickstartContent: quickstarts?.find((qs: QuickStart) => qs.metadata.name === 'host-provided')
+        }));
+        window.location.replace(`${fullUrl}${fullUrl.includes('?') ? '&' : '?'}learning=true`);
+    }}
+    >
+    {node.textContent}
+</Button>
+....
+
+In the guest app, we will be able to retrieve the value of 'quickStartCrossDomain'.
+
+Click on the *Connect to sample app* button to connect to _Quick start sample app_. Once connected, follow the quick start within it.
+
+http://localhost:3000[Connect to sample app,role="tutorial-external"]
+
+.Verification
+. Did you connect to the sample app?
+
 ////
 [#conclusion]
 Congratulations! You successfully completed the quick start.
