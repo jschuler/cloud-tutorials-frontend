@@ -13,7 +13,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import './App.css';
 import "@patternfly/react-catalog-view-extension/dist/css/react-catalog-view-extension.css";
-import "@cloudmosaic/quickstarts/dist/quickstarts.css";
+import "@patternfly/quickstarts/dist/quickstarts.css";
 
 declare global {
   interface Window {

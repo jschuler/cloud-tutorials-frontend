@@ -3,11 +3,12 @@ import {
   QuickStart,
   QuickStartContext,
   QuickStartDrawer as QuickStartDrawerLib,
+  QuickStartPanelContent,
   useValuesForQuickStartContext,
   AllQuickStartStates,
-  QuickStartStatus
-} from "@cloudmosaic/quickstarts";
-import { QuitModal } from './QuitModal';
+  QuickStartStatus,
+} from "@patternfly/quickstarts";
+import { QuitModal, ExitTutorialModal } from "./QuitModal";
 
 declare const QUICKSTARTS_BASE: string;
 declare const APP_BASE: string;
@@ -17,6 +18,8 @@ export interface QuickStartDrawerProps extends React.HTMLProps<HTMLDivElement> {
   tutorial: QuickStart;
   search?: string;
   onConfirm?: any;
+  tutorialId: string;
+  tutorialPath: string;
 }
 
 const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
@@ -25,53 +28,84 @@ const QuickStartDrawer: FunctionComponent<QuickStartDrawerProps> = ({
   tutorial,
   search,
   onConfirm,
+  tutorialId,
+  tutorialPath,
   ...props
 }) => {
   const params = new URLSearchParams(search || location.search);
-  const tutorialId = params.get('tutorialid') || '';
-  let tutorialPath = params.get('tutorialpath');
-  if (tutorialPath?.startsWith('/')) {
+  if (tutorialPath?.startsWith("/")) {
     tutorialPath = tutorialPath.substring(1);
   }
-  const [tutorialPathState, setTutorialPathState] = React.useState(tutorialPath);
-  const [activeQuickStartID, setActiveQuickStartID] = React.useState(tutorialId);
-  const [allQuickStartStates, setAllQuickStartStates] = React.useState<AllQuickStartStates>({
-    [tutorialId]: {
-      status: QuickStartStatus.NOT_STARTED,
-      taskNumber: -1
-    }
-  });
+  const [tutorialPathState, setTutorialPathState] =
+    React.useState(tutorialPath);
+  const [activeQuickStartID, setActiveQuickStartID] =
+    React.useState(tutorialId);
+  const [allQuickStartStates, setAllQuickStartStates] =
+    React.useState<AllQuickStartStates>({
+      [tutorialId]: {
+        status: QuickStartStatus.NOT_STARTED,
+        taskNumber: -1,
+      },
+    });
   const [allQuickStarts, setAllQuickStarts] = useState<QuickStart[]>([
     tutorial,
   ]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const handleModalToggle = () => {
     setIsModalOpen(false);
-  }
+  };
   const handleModalConfirm = () => {
     window.location.assign(`${APP_BASE}/${tutorialPathState}`);
-  }
+  };
+
   const checkState = (state: any) => {
     if (!state()) {
       setIsModalOpen(true);
       return;
     }
     setActiveQuickStartID(state());
-  }
+  };
 
   const valuesForQuickstartContext = useValuesForQuickStartContext({
     activeQuickStartID,
     setActiveQuickStartID: checkState,
     allQuickStartStates,
     setAllQuickStartStates,
-    allQuickStarts
+    allQuickStarts,
   });
+
+  // return (
+  //   <QuickStartPanelContent
+  //     quickStarts={allQuickStarts}
+  //     activeQuickStartID={activeQuickStartID}
+  //     handleClose={() => {}}
+  //   />
+  // );
+
+  const onCloseInProgress = () => {
+    console.log('in progress');
+    setIsModalOpen(true);
+  };
+
+  const onCloseNotInProgress = () => {
+    console.log('not in progress');
+    setIsModalOpen(true);
+  };
 
   return (
     <QuickStartContext.Provider value={valuesForQuickstartContext}>
-      <QuickStartDrawerLib {...props}>
+      <QuickStartDrawerLib
+        fullWidth
+        onCloseInProgress={onCloseInProgress}
+        onCloseNotInProgress={onCloseNotInProgress}
+        {...props}
+      >
         {children}
-        <QuitModal isOpen={isModalOpen} onClose={handleModalToggle} onConfirm={onConfirm || handleModalConfirm} />
+        <QuitModal
+          isOpen={isModalOpen}
+          onClose={handleModalToggle}
+          onConfirm={onConfirm || handleModalConfirm}
+        />
       </QuickStartDrawerLib>
     </QuickStartContext.Provider>
   );

@@ -8,7 +8,7 @@ import {
   QuickStartTask,
   QuickStartContextValues,
   QuickStartContext,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 
 type TaskReviewProps = {
   review: QuickStartTaskReview;

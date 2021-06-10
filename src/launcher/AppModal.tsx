@@ -10,7 +10,7 @@ import {
   QuickStartTask,
   QuickStartContextValues,
   QuickStartContext,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 import "./AppModal.css";
 
 declare const APP_BASE: string;
@@ -126,6 +126,8 @@ export const AppModal = ({ text, url }: { text: string; url: string }) => {
                 tutorial={tutorial}
                 search={fullUrl.search}
                 onConfirm={onConfirm}
+                tutorialId={tutorialIdQuery || ''}
+                tutorialPath={tutorialPathQuery || ''}
               >
                 <>
                   <Bullseye className="tut-bullseye">

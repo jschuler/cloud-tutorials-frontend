@@ -1,3 +1,10 @@
+.tutorial-mode {
+  height: calc(100% - 50px);
+  border-style: solid;
+  border-width: 0 0 5px 5px;
+  border-color: #0088ce;
+}
+
 .tut-drawer .mas-quickstart-drawer {
   height: inherit !important;
 }
@@ -33,6 +40,7 @@
 .tut-main .tut-header__body {
   padding: 10px 16px;
   flex-grow: 1;
+  display: flex;
 }
 
 .tut-main .tut-header__body .pf-c-breadcrumb__item-divider {
@@ -46,6 +54,11 @@
   color: white;
 }
 
+.tut-main .tut-header__body .info-popover {
+  margin-left: 15px;
+  margin-top: 1px;
+}
+
 .tut-drawer {
   position: fixed;
   top: 49px;
@@ -55,7 +68,22 @@
   border: 5px solid #0088ce;
 }
 
-.tut-drawer .imageblock.screencapture {
+.tut-drawer-static {
+  position: fixed;
+  top: 49px;
+  bottom: 0;
+  right: 0;
+  width: 450px;
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  border-color: #0088ce;
+}
+.tut-drawer-static .pf-c-drawer__main {
+  margin-right: 5px;
+}
+
+.tut-drawer .imageblock.screencapture,
+.tut-drawer-static .imageblock.screencapture {
     display: none;
 }
 

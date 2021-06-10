@@ -25,7 +25,7 @@ import {
   QuickStartsLoader,
   LoadingBox,
   QuickStartCatalog,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 import { useHistory } from "react-router-dom";
 
 type QsCatalogProps = {
@@ -98,7 +98,7 @@ export const QsCatalog: React.FC<QsCatalogProps> = ({ quickStarts }) => {
                   <QuickStartTile
                     quickStart={quickStart}
                     isActive={false/*id === activeQuickStartID*/}
-                    status={getQuickStartStatus(allQuickStartStates, id)}
+                    status={getQuickStartStatus(allQuickStartStates, id as string)}
                   />
                 </GalleryItem>
               );

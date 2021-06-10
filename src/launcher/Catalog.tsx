@@ -15,7 +15,7 @@ import {
 } from "@patternfly/react-core";
 import { OutlinedClockIcon } from "@patternfly/react-icons";
 import { useHistory } from "react-router-dom";
-import { QuickStart } from "@cloudmosaic/quickstarts";
+import { QuickStart } from "@patternfly/quickstarts";
 import { loadJSONTutorials } from "./tutorialLoader";
 // @ts-ignore
 import logo from "../images/illustration_rhel-isometric.svg";
@@ -25,7 +25,7 @@ import {
   useValuesForQuickStartContext,
   LoadingBox,
   QuickStartsLoader,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 import { QsCatalog } from "./QsCatalog";
 
 export const Catalog: React.FC = () => {

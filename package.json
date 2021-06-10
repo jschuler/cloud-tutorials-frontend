@@ -18,9 +18,9 @@
     "debug": "nodemon --inspect cors.js"
   },
   "dependencies": {
-    "@cloudmosaic/quickstarts": "0.0.19",
     "@data-driven-forms/pf4-component-mapper": "^3.4.1",
     "@data-driven-forms/react-form-renderer": "^3.4.1",
+    "@patternfly/quickstarts": "1.0.0-rc.8",
     "@patternfly/react-core": "^4.101.3",
     "@patternfly/react-table": "^4.23.14",
     "classnames": "^2.2.6",

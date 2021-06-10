@@ -24,7 +24,7 @@ import {
   QuickStartTask,
   QuickStartContextValues,
   QuickStartContext,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 
 declare const QUICKSTARTS_BASE: string;
 declare const TUTORIALS_BASE: string;

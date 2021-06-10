@@ -9,7 +9,7 @@ import {
   QuickStartContext,
   useLocalStorage,
   useValuesForQuickStartContext,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 import { QsCatalog } from './QsCatalog';
 import { loadJSONTutorials } from "./tutorialLoader";
 

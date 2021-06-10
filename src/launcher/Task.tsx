@@ -17,7 +17,7 @@ import {
   QuickStartContextValues,
   QuickStartContext,
   getQuickStartStatus
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TaskReview } from "./TaskReview";
 // import FormRenderer from "@data-driven-forms/react-form-renderer/form-renderer";

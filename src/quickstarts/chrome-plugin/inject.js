@@ -26,9 +26,40 @@ function injectQuickStarts() {
 }
 
 window.onload = function() {
+  console.log('quick starts plugin loaded');
   const queryParams = new URLSearchParams(window.location.search);
-  const searchQuery = queryParams.get("tutorialid");
-  if (searchQuery) {
+  let tutorialId = queryParams.get("tutorialid");
+  let tutorialPath = queryParams.get("tutorialpath");
+  if (!tutorialId && !tutorialPath) {
+    if (document.location.hash) {
+      // params could be after # hash
+      const hash = window.location.hash.substring(window.location.hash.indexOf('?') + 1);
+      var params = {}
+      hash.split('&').map(hk => { 
+        let temp = hk.split('='); 
+          params[temp[0]] = temp[1] 
+      });
+      console.log(params);
+      if (params['tutorialid']) {
+        tutorialId = params['tutorialid'];
+      }
+      if (params['tutorialpath']) {
+        tutorialPath = params['tutorialpath'];
+      }
+    }
+    
+    if (!tutorialId && !tutorialPath) {
+      // check if it's in localStorage
+      tutorialId = localStorage.getItem('tutorialId');
+      tutorialPath = localStorage.getItem('tutorialPath');
+    }
+  }
+  console.log(`tutorialId: ${tutorialId}`);
+  console.log(`tutorialPath: ${tutorialPath}`);
+  tutorialId && localStorage.setItem('tutorialId', tutorialId);
+  tutorialPath && localStorage.setItem('tutorialPath', tutorialPath);
+  if (tutorialId || tutorialPath) {
+    console.log(`injecting quick starts`);
     injectQuickStarts();
   }
 };

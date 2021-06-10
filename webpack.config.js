@@ -111,7 +111,7 @@ module.exports = (_env, argv) => {
         { from: path.resolve('src/quickstarts/chrome-plugin/plugin.css'), to: '' }
       ]}),
       new CopyWebpackPlugin({ patterns: [
-        { from: path.resolve('node_modules/@cloudmosaic/quickstarts/dist/quickstarts.min.css'), to: '' }
+        { from: path.resolve('node_modules/@patternfly/quickstarts/dist/quickstarts.min.css'), to: '' }
       ]}),
       new CopyWebpackPlugin({ patterns: [
         { from: path.resolve('node_modules/@patternfly/patternfly/patternfly.min.css'), to: '' }

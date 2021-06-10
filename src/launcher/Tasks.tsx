@@ -20,7 +20,7 @@ import {
   QuickStartTask,
   QuickStartContextValues,
   QuickStartContext,
-} from "@cloudmosaic/quickstarts";
+} from "@patternfly/quickstarts";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 import { TaskReview } from "./TaskReview";
 // import FormRenderer from "@data-driven-forms/react-form-renderer/form-renderer";
@@ -175,9 +175,10 @@ export const Tasks = () => {
                     (node, nIndex) => {
                       let url = node.getAttribute("href") || "";
                       url = url.replace("?quickstart=", "?tutorialid=");
-                      const fullUrl = `${url}${url.includes('?') ? '&' : '?'}tutorialpath=${encodeURIComponent(
+                      let fullUrl = `${url}${url.includes('?') ? '&' : '?'}tutorialpath=${encodeURIComponent(
                         `/${taskName}/${taskIndex + 1}`
                       )}`;
+                      // fullUrl = `${fullUrl}?tutorialdesc=${encodeURIComponent(task.description || '')}`;
                       returnArray.push(
                         <div
                           className="tut-app-launch"

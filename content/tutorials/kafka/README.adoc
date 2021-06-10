@@ -115,6 +115,16 @@ http://localhost:3000[Connect to sample app,role="tutorial-external"]
 .Verification
 . Did you connect to the sample app?
 
+[#task-crw]
+== Connecting to your CodeReady Workspace
+
+Click on the *Connect to CRW* button to connect to your _CodeReady Workspace_. Once connected, follow the quick start within it.
+
+https://workspaces.openshift.com/f?url=https://gist.githubusercontent.com/jschuler/348793f148320cd36119a37ed1b0b36e/raw/266baea83c99bfeae5af44bae41a7d57c36641aa/devfile.yaml[Connect to CRW,role="tutorial-external"]
+
+.Verification
+. Did you complete the quick start in your CodeReady Workspace?
+
 ////
 [#conclusion]
 Congratulations! You successfully completed the quick start.
