@@ -8,7 +8,8 @@ const { renderMD } = require('./md');
 const sourcePatterns = [
   'console-operator/quickstarts/*.{yaml,yml}',
   'mas-guides/!(external-*)/*.{yaml,yml}',
-  'app-guides/*.{yaml,yml}'
+  'app-guides/*.{yaml,yml}',
+  'other-quick-starts/*.{yaml,yml}'
 ];
 
 const tutorialPatterns = [

@@ -12,10 +12,10 @@ spec:
     - Red Hat OpenShift
     - Red Hat Streams for Apache Kafka
   tasks:
-    - !snippet/proc README.adoc#task-1
-    - !snippet/proc README.adoc#task-2
-    - !snippet/proc README.adoc#task-3
+    - !snippet/proc README.adoc#task-intro
+    - !snippet/proc README.adoc#task-kafka
     - !snippet/proc README.adoc#task-crw
+    - !snippet/proc README.adoc#task-openshift
     # - !snippet/proc README.adoc#task-4
   # conclusion: !snippet README.adoc#conclusion
   conclusion: Congratulations! You have successfully completed the Quarkus applications with Kafka tutorial.

@@ -174,7 +174,7 @@ export const Tasks = () => {
                   Array.from(c.querySelectorAll(".tutorial-external")).forEach(
                     (node, nIndex) => {
                       let url = node.getAttribute("href") || "";
-                      url = url.replace("?quickstart=", "?tutorialid=");
+                      url = url.replace("quickstart=", "tutorialid=");
                       let fullUrl = `${url}${url.includes('?') ? '&' : '?'}tutorialpath=${encodeURIComponent(
                         `/${taskName}/${taskIndex + 1}`
                       )}`;

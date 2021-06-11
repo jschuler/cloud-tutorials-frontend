@@ -18,7 +18,7 @@ You can learn more about Quarkus by visiting [https://quarkus.io/](https://quark
 * Red Hat OpenShift
 * Red Hat Streams for Apache Kafka
 
-[#task-1]
+[#task-intro]
 == Introduction to Apache Kafka and Quarkus
 
 The following videos give a brief introduction into Apache Kafka and Quarkus.
@@ -34,7 +34,7 @@ https://www.youtube.com/embed/hhHgurtI674[Quarkus, role="tutorial-youtube"]
 
 === In the next step, you will create a Kafka instance and connect topics.
 
-[#task-2]
+[#task-kafka]
 == Creating Kafka topics
 
 The Kafka topic that the Quarkus example application references is called prices. You need to create this topic in Streams for Apache Kafka so that the Quarkus application can interact with it.
@@ -55,7 +55,7 @@ https://cloud.redhat.com/beta/application-services/streams/kafkas?quickstart=get
 . Did you create a Kafka topic?
 
 
-[#task-3]
+[#task-openshift]
 == Connecting Kafka to OpenShift
 
 Now that you've set up a Kafka with topics, you'll be connecting that to an application that you create on OpenShift.
@@ -69,13 +69,13 @@ image::/mosaic/cloud-tutorials/openshift.png[OpenShift]
 
 Click on the *Connect to OpenShift* button to connect to _Red Hat OpenShift Streams for Apache Kafka_. Once connected, follow the quick start within it.
 
-https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=quarkus[Connect to OpenShift,role="tutorial-external"]
+https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=rhosak-devsandbox-quarkus-bind-cli-toolscontainer-quickstart[Connect to OpenShift,role="tutorial-external"]
 
 .Verification
 . Did you connect to OpenShift and create a quarkus app?
 . Did you connect a Kafka topic to it?
 
-[#task-4]
+[#task-sample]
 == Connecting to the quick start sample app
 
 We will set the following code in this (host) app:
@@ -120,7 +120,7 @@ http://localhost:3000[Connect to sample app,role="tutorial-external"]
 
 Click on the *Connect to CRW* button to connect to your _CodeReady Workspace_. Once connected, follow the quick start within it.
 
-https://workspaces.openshift.com/f?url=https://gist.githubusercontent.com/jschuler/348793f148320cd36119a37ed1b0b36e/raw/266baea83c99bfeae5af44bae41a7d57c36641aa/devfile.yaml[Connect to CRW,role="tutorial-external"]
+https://workspaces.openshift.com/f?url=https://gist.githubusercontent.com/jschuler/b79ad7f610d3cdb92c395b325d88dc52/raw/961e5e2417d0eb807921fcec33e700c8e5de054a/devfile.yaml&quickstart=quarkus[Connect to CRW,role="tutorial-external"]
 
 .Verification
 . Did you complete the quick start in your CodeReady Workspace?
