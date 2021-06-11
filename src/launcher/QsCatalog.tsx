@@ -70,9 +70,12 @@ export const QsCatalog: React.FC<QsCatalogProps> = ({ quickStarts }) => {
 
   const history = useHistory();
   const handleClick = (quickStart: QuickStart, path: string) => {
-    //   debugger;
+    let fullPath = path;
     // setActiveQuickStart && setActiveQuickStart(quickStart.metadata.name, quickStart.spec.tasks?.length);
-    history.push(path);
+    if (activeQuickStartState && activeQuickStartState.taskNumber >= 0) {
+      fullPath = `${fullPath}/${Number(activeQuickStartState.taskNumber) + 1}`;
+    }
+    history.push(fullPath);
   };
 
   const CatalogWithSections = (
