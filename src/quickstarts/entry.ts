@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import QuickStartDrawer from "./components/QuickStartDrawer";
+import DrawerContext from "./components/DrawerContext";
 import VanillaChildren from "./components/VanillaChildren";
 import { TutorialBreadcrumb } from "./components/Breadcrumb";
 
@@ -134,8 +135,18 @@ function addDrawer() {
   const tutorialDrawer = makeDiv("tut-drawer-static");
   // @ts-ignore
   document.body.parentNode.insertBefore(tutorialDrawer, document.body);
+  // ReactDOM.render(
+  //   React.createElement(QuickStartDrawer, {
+  //     children: null,
+  //     tutorial,
+  //     tutorialId,
+  //     tutorialPath
+  //     // tutorial: (e as CustomEvent).detail,
+  //   }),
+  //   tutorialDrawer
+  // );
   ReactDOM.render(
-    React.createElement(QuickStartDrawer, {
+    React.createElement(DrawerContext, {
       children: null,
       tutorial,
       tutorialId,
@@ -177,12 +188,22 @@ function wrapBody(e?: Event) {
     const tutorialDrawer = makeDiv("tut-drawer");
     document.body.append(tutorialHeader);
     document.body.append(tutorialDrawer);
+    // ReactDOM.render(
+    //   React.createElement(QuickStartDrawer, {
+    //     children: React.createElement(VanillaChildren, {}, wrappedDocBody),
+    //     tutorial,
+    //     tutorialId,
+    //     tutorialPath
+    //   }),
+    //   tutorialDrawer
+    // );
     ReactDOM.render(
-      React.createElement(QuickStartDrawer, {
+      React.createElement(DrawerContext, {
         children: React.createElement(VanillaChildren, {}, wrappedDocBody),
         tutorial,
         tutorialId,
         tutorialPath
+        // tutorial: (e as CustomEvent).detail,
       }),
       tutorialDrawer
     );

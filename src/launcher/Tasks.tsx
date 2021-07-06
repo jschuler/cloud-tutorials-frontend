@@ -222,29 +222,29 @@ export const Tasks = () => {
                     }
                   );
                 }
-                if (c.querySelector(".tutorial-iframe")) {
-                  // parse iframe app links
-                  Array.from(c.querySelectorAll(".tutorial-iframe")).forEach(
-                    (node, nIndex) => {
-                      let url = node.getAttribute("href") || "";
-                      url = url.replace("?quickstart=", "?tutorialid=");
-                      const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
-                        `/${taskName}/${taskIndex + 1}`
-                      )}`;
-                      returnArray.push(
-                        <div
-                          className="tut-app-launch"
-                          key={`task-${taskNumber}-${index}-${nIndex}-tutorial-iframe`}
-                        >
-                          <AppModal
-                            text={node.textContent as string}
-                            url={fullUrl}
-                          />
-                        </div>
-                      );
-                    }
-                  );
-                }
+                // if (c.querySelector(".tutorial-iframe")) {
+                //   // parse iframe app links
+                //   Array.from(c.querySelectorAll(".tutorial-iframe")).forEach(
+                //     (node, nIndex) => {
+                //       let url = node.getAttribute("href") || "";
+                //       url = url.replace("?quickstart=", "?tutorialid=");
+                //       const fullUrl = `${url}&tutorialpath=${encodeURIComponent(
+                //         `/${taskName}/${taskIndex + 1}`
+                //       )}`;
+                //       returnArray.push(
+                //         <div
+                //           className="tut-app-launch"
+                //           key={`task-${taskNumber}-${index}-${nIndex}-tutorial-iframe`}
+                //         >
+                //           <AppModal
+                //             text={node.textContent as string}
+                //             url={fullUrl}
+                //           />
+                //         </div>
+                //       );
+                //     }
+                //   );
+                // }
                 if (c.className.includes("tutorial-input")) {
                   let inputSchema: {
                     fields: any[];

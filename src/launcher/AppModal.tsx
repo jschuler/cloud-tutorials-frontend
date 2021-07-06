@@ -122,7 +122,7 @@ export const AppModal = ({ text, url }: { text: string; url: string }) => {
               />
             </div>
             <div className="tut-drawer">
-              <QuickStartDrawer
+              {/* <QuickStartDrawer
                 tutorial={tutorial}
                 search={fullUrl.search}
                 onConfirm={onConfirm}
@@ -148,7 +148,8 @@ export const AppModal = ({ text, url }: { text: string; url: string }) => {
                     ></iframe>
                   )}
                 </>
-              </QuickStartDrawer>
+              </QuickStartDrawer> */}
+              Commented out the above since I made changes to the component
             </div>
           </div>,
           document.body
