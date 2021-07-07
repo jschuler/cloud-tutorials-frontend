@@ -16,7 +16,7 @@ import FormRenderer from "@data-driven-forms/react-form-renderer/form-renderer";
 import componentTypes from "@data-driven-forms/react-form-renderer/component-types";
 import FormTemplate from "@data-driven-forms/pf4-component-mapper/form-template";
 import TextField from "@data-driven-forms/pf4-component-mapper/text-field";
-import "./asciidoctor-skins/adoc-github.css";
+// import "./asciidoctor-skins/adoc-github.css";
 import {
   QuickStart,
   QuickStartTaskStatus,

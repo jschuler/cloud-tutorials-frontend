@@ -11,7 +11,7 @@ Requirements:
 `npm i && npm start`
 
 ### Launcher app
-Browse to https://localhost:4567/mosaic/cloud-tutorials
+Browse to http://localhost:1337/apps/cloud-tutorials/
   - Accept cert
   - Can use credentials user/user or admin/admin
 

@@ -18,7 +18,7 @@ import { useHistory } from "react-router-dom";
 import { QuickStart } from "@patternfly/quickstarts";
 import { loadJSONTutorials } from "./tutorialLoader";
 // @ts-ignore
-import logo from "../images/illustration_rhel-isometric.svg";
+import logo from "./images/illustration_rhel-isometric.svg";
 import {
   QuickStartContext,
   useLocalStorage,
@@ -50,7 +50,7 @@ export const Catalog: React.FC = () => {
 
   // React.useEffect(() => {
   //   const load = async () => {
-  //     const allTutorials = await loadJSONTutorials("/mosaic/cloud-tutorials");
+  //     const allTutorials = await loadJSONTutorials("/apps/cloud-tutorials");
   //     setTutorials(allTutorials);
   //   };
   //   load();

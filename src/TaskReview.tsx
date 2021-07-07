@@ -1,5 +1,5 @@
 import * as React from "react";
-import cx from "classnames";
+import { css } from '@patternfly/react-styles';
 import { Alert, Radio } from "@patternfly/react-core";
 import {
   QuickStart,
@@ -43,7 +43,7 @@ export const TaskReview: React.FC<TaskReviewProps> = ({
     setTaskStatusState,
   ] = React.useState<QuickStartTaskStatus>(QuickStartTaskStatus.INIT);
 
-  const alertClassNames = cx("co-quick-start-task-review", {
+  const alertClassNames = css("co-quick-start-task-review", {
     "co-quick-start-task-review--success":
       taskStatus === QuickStartTaskStatus.SUCCESS,
     "co-quick-start-task-review--failed":

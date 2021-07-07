@@ -65,11 +65,11 @@ To enable your Quarkus application to access a Kafka instance, configure the con
 .The OpenShift topology view after connecting Kafka
 [#img-openshift]
 [caption="Figure 1: "]
-image::/mosaic/cloud-tutorials/openshift.png[OpenShift]
+image::/apps/cloud-tutorials/openshift.png[OpenShift]
 
 Click on the *Connect to OpenShift* button to connect to _Red Hat OpenShift Streams for Apache Kafka_. Once connected, follow the quick start within it.
 
-https://console-openshift-console.apps.sandbox.x8i5.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev/graph?quickstart=rhosak-devsandbox-quarkus-bind-cli-toolscontainer-quickstart[Connect to OpenShift,role="tutorial-external"]
+https://console-openshift-console.apps.sandbox-m2.ll9k.p1.openshiftapps.com/topology/ns/jschuler-kafka-devexp-dev?quickstart=rhosak-devsandbox-quarkus-bind-cli-toolscontainer-quickstart[Connect to OpenShift,role="tutorial-external"]
 
 .Verification
 . Did you connect to OpenShift and create a quarkus app?
@@ -89,7 +89,7 @@ We will set the following code in this (host) app:
     onClick={(e) => {
         e.preventDefault();
         localStorage.setItem('quickStartCrossDomain', JSON.stringify({
-            host: `${window.location.origin}/mosaic/cloud-tutorials`,
+            host: `${window.location.origin}/apps/cloud-tutorials`,
             // the current tutorial name
             tutorial: taskName,
             // the current task step

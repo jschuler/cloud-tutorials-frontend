@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Modal, Button, Spinner, Bullseye } from "@patternfly/react-core";
-import { TutorialBreadcrumb } from "../quickstarts/components/Breadcrumb";
-import QuickStartDrawer from "../quickstarts/components/QuickStartDrawer";
+import { TutorialBreadcrumb } from "./quickstarts/components/Breadcrumb";
+import QuickStartDrawer from "./quickstarts/components/QuickStartDrawer";
 import {
   QuickStart,
   QuickStartTaskStatus,

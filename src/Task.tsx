@@ -25,7 +25,7 @@ import { TaskReview } from "./TaskReview";
 // import FormTemplate from "@data-driven-forms/pf4-component-mapper/form-template";
 // import TextField from "@data-driven-forms/pf4-component-mapper/text-field";
 import { FormMapper } from "./FormMapper";
-import "./asciidoctor-skins/adoc-github.css";
+// import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
 import { TasksContext } from "./Tasks";
 

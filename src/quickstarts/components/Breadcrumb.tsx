@@ -2,7 +2,7 @@ import React from "react";
 import { Breadcrumb, BreadcrumbItem, Button, Popover } from "@patternfly/react-core";
 import OutlinedQuestionCircleIcon from '@patternfly/react-icons/dist/js/icons/outlined-question-circle-icon';
 import { ExitTutorialModal } from './QuitModal';
-import "../../launcher/App.css";
+import "../../App.css";
 
 export const TutorialBreadcrumb = ({
   basename,

@@ -9,20 +9,35 @@ function injectStylesheet(href) {
 }
 
 function injectQuickStarts() {
-  injectStylesheet("https://localhost:4567/mosaic/cloud-tutorials/plugin.css");
-  // injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/src_launcher_bootstrap_tsx.css');
-  injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/patternfly.min.css');
-  injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/patternfly-addons.css');
-  injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/accessibility.css');
-  injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/react-catalog-view-extension.css');
-  injectStylesheet('https://localhost:4567/mosaic/cloud-tutorials/quickstarts.min.css');
+  // injectStylesheet("http://localhost:1337/apps/cloud-tutorials/plugin.css");
+  // // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/src_launcher_bootstrap_tsx.css');
+  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/patternfly.min.css');
+  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/patternfly-addons.css');
+  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/accessibility.css');
+  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/react-catalog-view-extension.css');
+  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/quickstarts.min.css');
 
+  console.log('adding quickstarts.js to <head> (webpack build of entrypoint qsEntry.ts)');
   const quickstart = document.createElement("script");
   quickstart.setAttribute(
     "src",
-    "https://localhost:4567/mosaic/cloud-tutorials/quickstarts.js"
+    "http://localhost:1337/apps/cloud-tutorials/quickstarts.js"
   );
-  document.body.appendChild(quickstart);
+  document.head.appendChild(quickstart);
+
+  // const script = document.createElement('script');
+  // script.setAttribute("type", "module");
+  // script.setAttribute("src", chrome.extension.getURL('quickstarts.js'));
+  // const head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
+  // head.insertBefore(script, head.lastChild);
+
+  // console.log('qs alert');
+  // var actualCode = '(' + function() {
+  //   alert(" Alert inside my_code function");
+  // } + ')();';
+  // var script = document.createElement('script');
+  // script.textContent = actualCode;
+  // (document.head||document.documentElement).appendChild(script);
 }
 
 window.onload = function() {

@@ -27,5 +27,6 @@
         "*://*.cloud.redhat.com/*"
     ],
     "js": ["inject.js"]
-  }]
+  }],
+  "web_accessible_resources": ["quickstarts.js", "my-script.js"]
 }

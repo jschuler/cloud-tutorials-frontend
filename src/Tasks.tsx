@@ -30,7 +30,7 @@ import { TaskReview } from "./TaskReview";
 import { FormMapper } from "./FormMapper";
 import { Task } from "./Task";
 import { AppModal } from "./AppModal";
-import "./asciidoctor-skins/adoc-github.css";
+// import "./asciidoctor-skins/adoc-github.css";
 import "./Tasks.css";
 import { YoutubeEmbed } from "./YoutubeEmbed";
 import { loadJSONQuickstarts } from './quickstartsLoader';
@@ -118,7 +118,7 @@ export const Tasks = () => {
   const [steps, setSteps] = React.useState<WizardStep[]>([]);
   React.useEffect(() => {
     const load = async () => {
-      const allQuickstarts = await loadJSONQuickstarts("/mosaic/cloud-tutorials");
+      const allQuickstarts = await loadJSONQuickstarts("/apps/cloud-tutorials");
       // debugger;
       setQuickstarts(allQuickstarts);
     };
@@ -200,7 +200,7 @@ export const Tasks = () => {
                                   e.preventDefault();
                                   console.log(`nav to ${fullUrl}`);
                                   localStorage.setItem('quickStartCrossDomain', JSON.stringify({
-                                    host: `${window.location.origin}/mosaic/cloud-tutorials`,
+                                    host: `${window.location.origin}/apps/cloud-tutorials`,
                                     // the current tutorial name
                                     tutorial: taskName,
                                     // the current task step

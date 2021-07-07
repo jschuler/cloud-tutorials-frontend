@@ -43,7 +43,7 @@ const AppEntry = () => {
 
   React.useEffect(() => {
     const load = async () => {
-      const allTutorials = await loadJSONTutorials("/mosaic/cloud-tutorials");
+      const allTutorials = await loadJSONTutorials("/apps/cloud-tutorials");
       setTutorials(allTutorials);
     };
     load();
@@ -62,25 +62,27 @@ const AppEntry = () => {
   });
   // qs emd
   return (
-    <QuickStartContext.Provider value={valuesForQuickstartContext}>
-    <Router basename="/mosaic/cloud-tutorials">
-      <Route exact path="/">
-        <App>
-          <Catalog />
-        </App>
-      </Route>
-      <Route exact path="/:name">
-        <App>
-          <Tutorial />
-        </App>
-      </Route>
-      <Route exact path="/:name/:task">
-        <App>
-          <Tasks />
-        </App>
-      </Route>
-    </Router>
-    </QuickStartContext.Provider>
+    <div className="cloud-tutorials">
+      <QuickStartContext.Provider value={valuesForQuickstartContext}>
+        <Router basename="/docs/cloud-tutorials">
+          <Route exact path="/">
+            <App>
+              <Catalog />
+            </App>
+          </Route>
+          <Route exact path="/:name">
+            <App>
+              <Tutorial />
+            </App>
+          </Route>
+          <Route exact path="/:name/:task">
+            <App>
+              <Tasks />
+            </App>
+          </Route>
+        </Router>
+      </QuickStartContext.Provider>
+    </div>
 )};
 
 export default AppEntry;
