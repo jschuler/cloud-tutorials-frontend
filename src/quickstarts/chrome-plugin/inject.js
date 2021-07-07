@@ -9,13 +9,13 @@ function injectStylesheet(href) {
 }
 
 function injectQuickStarts() {
-  // injectStylesheet("http://localhost:1337/apps/cloud-tutorials/plugin.css");
-  // // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/src_launcher_bootstrap_tsx.css');
-  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/patternfly.min.css');
-  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/patternfly-addons.css');
-  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/accessibility.css');
-  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/react-catalog-view-extension.css');
-  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/quickstarts.min.css');
+  injectStylesheet("http://localhost:1337/apps/cloud-tutorials/plugin.css");
+  // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/src_launcher_bootstrap_tsx.css');
+  injectStylesheet('http://localhost:1337/apps/cloud-tutorials/patternfly.min.css');
+  injectStylesheet('http://localhost:1337/apps/cloud-tutorials/patternfly-addons.css');
+  injectStylesheet('http://localhost:1337/apps/cloud-tutorials/accessibility.css');
+  injectStylesheet('http://localhost:1337/apps/cloud-tutorials/react-catalog-view-extension.css');
+  injectStylesheet('http://localhost:1337/apps/cloud-tutorials/quickstarts.min.css');
 
   console.log('adding quickstarts.js to <head> (webpack build of entrypoint qsEntry.ts)');
   // const quickstart = document.createElement("script");
