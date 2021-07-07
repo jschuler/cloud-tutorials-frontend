@@ -18,17 +18,17 @@ function injectQuickStarts() {
   // injectStylesheet('http://localhost:1337/apps/cloud-tutorials/quickstarts.min.css');
 
   console.log('adding quickstarts.js to <head> (webpack build of entrypoint qsEntry.ts)');
-  const quickstart = document.createElement("script");
-  quickstart.setAttribute("type", "module");
-  quickstart.setAttribute(
-    "src",
-    "http://localhost:1337/apps/cloud-tutorials/quickstarts.js"
-  );
-  document.body.appendChild(quickstart);
+  // const quickstart = document.createElement("script");
+  // quickstart.setAttribute("type", "module");
+  // quickstart.setAttribute(
+  //   "src",
+  //   "http://localhost:1337/apps/cloud-tutorials/quickstarts.js"
+  // );
+  // document.body.appendChild(quickstart);
 
   const script = document.createElement('script');
   script.setAttribute("type", "module");
-  script.setAttribute("src", chrome.extension.getURL('test.js'));
+  script.setAttribute("src", chrome.extension.getURL('quickstarts.js'));
   const head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
   head.insertBefore(script, head.lastChild);
 

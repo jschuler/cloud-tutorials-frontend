@@ -28,5 +28,5 @@
     ],
     "js": ["inject.js"]
   }],
-  "web_accessible_resources": ["test.js", "my-script.js"]
+  "web_accessible_resources": ["quickstarts.js", "test.js", "my-script.js"]
 }
