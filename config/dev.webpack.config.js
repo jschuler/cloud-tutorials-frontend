@@ -14,6 +14,7 @@ const { config: webpackConfig, plugins } = config({
 webpackConfig.entry['quickstarts'] = {
   import: join(srcDir, 'quickstarts/qsEntry.ts'),
   filename: 'quickstarts.js',
+  publicPath: '/hello',
   library: {
     name: 'quickstarts',
     type: 'window'
